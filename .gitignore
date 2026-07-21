@@ -1,15 +1,11 @@
-# Dependencies
-node_modules/
+# This repo holds a PRE-BUILT static artifact — the committed files ARE what the
+# BlueStep GitSite serves under /spa/. The build output (index.html, _next/,
+# *.txt RSC payloads, favicon, per-route folders) MUST stay committed — do not
+# add any of it here.
 
-# Logs / editor cruft
-*.log
+# OS / editor cruft only
 .DS_Store
+Thumbs.db
+*.log
 .vscode/
 .idea/
-
-# TS build info
-*.tsbuildinfo
-
-# NOTE: the built SPA artifact (/index.html and /assets/) is intentionally
-# NOT ignored — the committed build output at the repo root IS the GitSite
-# deploy artifact. Do not add it here.
