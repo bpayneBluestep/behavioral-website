@@ -1,31 +1,22 @@
-import { NavLink, Route, Routes } from 'react-router-dom'
-import Home from './routes/Home'
-import Status from './routes/Status'
-
 export default function App() {
   return (
-    <div className="shell">
-      <header className="topbar">
-        <span className="brand">GitSite SPA Starter</span>
-        <nav>
-          <NavLink to="/" end>
-            Home
-          </NavLink>
-          <NavLink to="/status">Status</NavLink>
-        </nav>
-      </header>
-
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/status" element={<Status />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </main>
-
-      <footer className="footer">
-        Served under <code>/spa/</code> from a GitHub-backed BlueStep GitSite.
-      </footer>
-    </div>
+    <main className="uc">
+      <div className="uc__card">
+        <span className="uc__eyebrow">BlueStep Behavioral</span>
+        <h1 className="uc__title">We're building something for you.</h1>
+        <p className="uc__lead">
+          A new home for behavioral health leaders is on the way — built by
+          people who've lived the work you do every day.
+        </p>
+        <div className="uc__badge">
+          <span className="uc__dot" aria-hidden="true" />
+          Site under construction
+        </div>
+        <p className="uc__contact">
+          Questions in the meantime?{' '}
+          <a href="mailto:info@bluestep.net">info@bluestep.net</a>
+        </p>
+      </div>
+    </main>
   )
 }
