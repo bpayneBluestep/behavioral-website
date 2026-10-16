@@ -5,9 +5,9 @@ import { BRAND } from '../site'
 import { Container, asset, useTitle } from '../ui'
 
 // If FORM_ENDPOINT is reset to a REPLACE_ME placeholder, the form opens a pre-filled email instead.
-// FormSubmit relays each request to this inbox. No account; the address is activated
-// once by clicking the confirmation link FormSubmit emails on the first submission.
-const FORM_ENDPOINT = 'https://formsubmit.co/ajax/bpayne@bluestep.net'
+// FormSubmit relays each request to bpayne@bluestep.net. The id is FormSubmit's alias for that
+// address (activated 2026-10-16), so the email isn't scrapeable from the bundle.
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/633006af458489a48ebf5f7491a3c3e3'
 const ENDPOINT_READY = !FORM_ENDPOINT.startsWith('REPLACE_ME')
 
 const PATHS = [
