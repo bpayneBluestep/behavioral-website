@@ -5,7 +5,7 @@ const TEAM = [
   {
     name: 'Brandon Payne',
     role: 'Executive Director',
-    bio: 'Started at Havenwood Academy as an intern and taught himself to build on BlueStep. Leads the behavioral health division.',
+    bio: 'Started as an intern at Havenwood Academy, a residential treatment center, before joining BlueStep. Leads the behavioral health division.',
   },
   {
     name: 'Roy',
@@ -13,7 +13,7 @@ const TEAM = [
     bio: 'Leads the architecture of the BlueStep platform that every program and builder runs on.',
   },
   {
-    name: 'Noelle',
+    name: 'Noel',
     role: 'Director of Program Success',
     bio: 'Worked direct care for years and served as a program director before joining BlueStep. Now works with programs from onboarding through every rollout.',
   },
@@ -39,7 +39,7 @@ export default function About() {
       <PageHero
         kicker="About"
         title="We know how programs run."
-        sub="BlueStep Behavioral started inside a residential treatment center. 15 years later, we still build alongside the programs we serve."
+        sub="Some of us worked in treatment programs before we worked on software for them. We build alongside the programs we serve."
       />
 
       <section className="py-24 md:py-32">
@@ -54,9 +54,8 @@ export default function About() {
           </Reveal>
           <Reveal delay={100} className="space-y-6 text-lg leading-relaxed text-muted lg:pt-8">
             <p>
-              Brandon started at Havenwood Academy, a residential treatment center in Utah, as an intern. The software
-              there didn't fit how the program ran, so he started building on the BlueStep platform. That work grew
-              into the behavioral health division.
+              Brandon and Noel both started in residential treatment before joining BlueStep. Brandon was an intern at
+              Havenwood Academy in Utah. Noel worked direct care for years and went on to be a program director.
             </p>
             <p>
               Our team includes people who have worked direct care and run programs, and most of what we build starts

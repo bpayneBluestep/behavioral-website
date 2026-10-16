@@ -7,7 +7,7 @@ import { CTA } from '../site'
 import { Button, ClosingCTA, Container, Heading, OnAccentButton, Reveal, asset, useTitle } from '../ui'
 
 const WHY = [
-  { icon: Buildings, t: 'Started inside a treatment center', b: "BlueStep Behavioral began at Havenwood Academy, a residential program in Utah, because the software there didn't fit how the program ran." },
+  { icon: Buildings, t: 'People who have worked in programs', b: 'Members of our team started in residential treatment, in direct care and program leadership. That perspective shapes what we build.' },
   { icon: Timer, t: '15 years of clinical workflow depth', b: 'Our team includes former direct care staff and program leaders. We know the documentation, the audits, and the shift-change handoffs.' },
   { icon: ChatsCircle, t: 'You reach a person, not a ticket queue', b: 'Call with a question and you reach someone who knows your program by name. There is no tier-1 support layer.' },
   { icon: ShieldCheck, t: 'Built for compliance, not workarounds', b: 'Behavioral health compliance is its own thing. BlueStep is built around the documentation, incidents, and outcomes you actually face.' },

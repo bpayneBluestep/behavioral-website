@@ -179,7 +179,7 @@ function Compare() {
 
 function EitherWay() {
   const items = [
-    { icon: Timer, t: '15 years in behavioral health', b: 'Started inside a residential treatment center. Our team includes former direct care staff and program leaders.' },
+    { icon: Timer, t: '15 years in behavioral health', b: 'Our team includes people who worked in residential treatment, in direct care and program leadership.' },
     { icon: Stack, t: 'One record', b: 'EHR, CRM, Outcomes, and BlueIQ share one database. Nothing gets entered twice.' },
     { icon: ShieldCheck, t: 'HIPAA hosting and a BAA', b: 'Every plan, every path. Every change is logged and every push is a restorable snapshot.' },
   ]
@@ -218,8 +218,8 @@ function Origin() {
             We know how programs run.
           </h2>
           <p className="prose-body mt-6 max-w-[52ch]">
-            BlueStep Behavioral started inside a residential treatment center in Utah. Our team includes former direct
-            care staff and program leaders, and most of what we build starts with a problem a program brought to us.
+            Members of our team started in residential treatment, in direct care and program leadership. Most of what
+            we build starts with a problem a program brought to us.
           </p>
           <Link to="/about" className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-accent">
             Our story
