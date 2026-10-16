@@ -6,7 +6,9 @@ import { Container, asset, useTitle } from '../ui'
 
 // Formspree endpoint. Still a placeholder (carried over from the previous site).
 // While it is, the form opens a pre-filled email instead of failing silently.
-const FORM_ENDPOINT = 'REPLACE_ME_WITH_FORMSPREE_ENDPOINT'
+// FormSubmit relays each request to this inbox. No account; the address is activated
+// once by clicking the confirmation link FormSubmit emails on the first submission.
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/bpayne@bluestep.net'
 const ENDPOINT_READY = !FORM_ENDPOINT.startsWith('REPLACE_ME')
 
 const PATHS = [
@@ -103,10 +105,14 @@ export default function Demo() {
           email: values.email,
           phone: values.phone || undefined,
           message: values.message,
-          _gotcha: '',
+          _subject: `Website: ${pathLabel} request from ${values.facility}`,
+          _replyto: values.email,
+          _template: 'table',
+          _honey: '',
         }),
       })
-      setStatus(res.ok ? 'sent' : 'error')
+      const data = await res.json().catch(() => ({}))
+      setStatus(res.ok && String(data.success) === 'true' ? 'sent' : 'error')
     } catch {
       setStatus('error')
     }
