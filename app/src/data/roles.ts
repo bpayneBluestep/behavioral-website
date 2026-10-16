@@ -135,7 +135,7 @@ export const ROLES: Role[] = [
       { icon: ShieldCheck, name: 'Compliance reporting', body: 'Accreditation-ready reports, incident trends, and state extracts from one source of truth.' },
       { icon: PresentationChart, name: 'Operational dashboards', body: 'Census, pipeline, staffing, and outcomes. Live, not last week\'s export.' },
     ],
-    build: 'Want a report nobody sells? On a Builder plan your team describes it and has it the same day.',
+    build: 'Want a report nobody sells? On Blueprint your team describes it and has it the same day.',
     closing: { headline: 'See the visibility your program has been missing.', body: "Talk to someone who has managed the same reporting pressures you're navigating." },
   },
   {

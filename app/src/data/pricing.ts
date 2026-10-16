@@ -1,7 +1,7 @@
 // Pricing: single source of truth for /pricing.
 //
 // Full-service numbers mirror the internal pricing calculator spreadsheet (unchanged
-// from the previous site). Builder and Slate numbers are PILOT HYPOTHESES from
+// from the previous site). Blueprint and Slate numbers are PILOT HYPOTHESES from
 // the 2026-10-15 strategy session and are labeled as pilot pricing on the page.
 // Change them here.
 
@@ -24,10 +24,10 @@ export const PLANS = [
   },
   {
     id: 'builder',
-    name: 'Builder',
+    name: 'Blueprint',
     price: 750,
     unit: 'per program / month',
-    pitch: 'Our full EHR, yours to change.',
+    pitch: 'The full suite, already built. Build on top of it.',
     includes: [
       'Everything in Slate',
       'The complete EHR: clinical, eMAR, CRM, outcomes',

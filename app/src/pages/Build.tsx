@@ -61,10 +61,10 @@ const STARTS = [
   {
     to: '/pricing',
     icon: Code,
-    name: 'Builder',
+    name: 'Blueprint',
     price: `${price('builder')} per program / month`,
-    t: 'Start from our EHR.',
-    b: 'The complete behavioral health EHR, with builder access. Change anything.',
+    t: 'Start with the full suite.',
+    b: 'EHR, CRM, Outcomes, and BlueIQ, already built. Change anything on top of it.',
   },
   {
     to: '/marketplace',

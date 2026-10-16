@@ -205,7 +205,7 @@ function Extras() {
             <span className="text-base font-normal text-muted"> / hour</span>
           </p>
           <p className="mt-4 leading-relaxed text-muted">
-            For Builder and Slate plans. When you want our team to fix, finish, or build something for you.
+            For Blueprint and Slate plans. When you want our team to fix, finish, or build something for you.
             Platform issues are always on us.
           </p>
           <Link to="/build" className="mt-6 inline-block text-sm font-medium text-accent">
@@ -233,8 +233,8 @@ function Extras() {
 
 const FAQ = [
   [
-    'What is the difference between Builder and Full-service?',
-    'Same EHR. On Full-service, our team configures it, trains your staff, and builds what you ask for. On Builder, your team builds with its own AI tools and we support the platform.',
+    'What is the difference between Blueprint and Full-service?',
+    'Same EHR. On Full-service, our team configures it, trains your staff, and builds what you ask for. On Blueprint, your team builds with its own AI tools and we support the platform.',
   ],
   [
     'Do we need a developer?',
@@ -246,7 +246,7 @@ const FAQ = [
   ],
   [
     'Why is it pilot pricing?',
-    'Builder and Slate are new. We are starting with a small group of programs, and pricing may change as we learn.',
+    'Blueprint and Slate are new. We are starting with a small group of programs, and pricing may change as we learn.',
   ],
 ]
 

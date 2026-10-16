@@ -1,7 +1,7 @@
 # behavioral-website
 
 The BlueStep Behavioral marketing site: an AI-first rebuild around the builder strategy
-(Builder, Blank Slate, Full-service, and a curated behavioral health marketplace).
+(Blueprint, Slate, Full-service, and a curated behavioral health marketplace).
 
 Static SPA deployed as a BlueStep GitSite at `https://behavioralweb.bluestep.net/`.
 Vite + React 18 + React Router + Tailwind 3. Same layout as `cobalt-gitsite`:
@@ -41,7 +41,7 @@ checking the `assets/index-*.js` hash matches the repo, not by webhook status.
 | What | File |
 |---|---|
 | Brand name, nav, CTA labels (rebrand = edit here) | `app/src/site.ts` |
-| Plans and prices (Builder/Blank Slate are pilot numbers) | `app/src/data/pricing.ts` |
+| Plans and prices (Blueprint/Slate are pilot numbers) | `app/src/data/pricing.ts` |
 | Marketplace listings | `app/src/data/marketplace.ts` |
 | Product pages (EHR, CRM, Outcomes, BlueIQ) | `app/src/data/products.ts` |
 | Who-we-help role pages | `app/src/data/roles.ts` |
@@ -53,7 +53,7 @@ checking the `assets/index-*.js` hash matches the repo, not by webhook status.
 - **Contact form endpoint is still a placeholder** (it was on the old site too, so the old
   demo form never delivered). Until it is set, the form opens a pre-filled email to
   `bpayne@bluestep.net` instead of failing.
-- **Builder ($750) and Blank Slate ($500) prices are pilot hypotheses** and are labeled
+- **Blueprint ($750) and Slate ($300) prices are pilot hypotheses** and are labeled
   "Pilot pricing" on the page.
-- **Census sync** is described as "In development" on `/blank-slate`.
+- **Census sync** is described as "In development" on `/slate`.
 - Brand name is `BlueStep Behavioral` pending the rebrand.
