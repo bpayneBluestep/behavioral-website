@@ -13,8 +13,8 @@ export default function NotFound() {
           <Button to="/" arrow>
             Go home
           </Button>
-          <Button to={CTA.talk.href} variant="ghost">
-            {CTA.talk.label}
+          <Button to={CTA.demo.href} variant="ghost">
+            {CTA.demo.label}
           </Button>
         </div>
       </Container>

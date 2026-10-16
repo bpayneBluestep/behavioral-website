@@ -1,14 +1,9 @@
 import { Link } from 'react-router-dom'
-import {
-  ArrowRight,
-  ArrowUpRight,
-  ClockCounterClockwise,
-  FileLock,
-  ShieldCheck,
-  Trash,
-} from '@phosphor-icons/react'
+import { ArrowRight, ArrowUpRight, Buildings, ChatsCircle, ShieldCheck, Timer } from '@phosphor-icons/react'
 import BuildLog from '../components/BuildLog'
 import { LISTINGS } from '../data/marketplace'
+import { PRODUCTS } from '../data/products'
+import { ROLES } from '../data/roles'
 import { CTA } from '../site'
 import { Button, ClosingCTA, Container, Heading, OnAccentButton, Reveal, asset, useTitle } from '../ui'
 
@@ -19,33 +14,43 @@ const CLIENTS = [
   { name: 'Velocity Health Group', file: 'velocity-health-group.png' },
 ]
 
+const WHY = [
+  { icon: Buildings, t: 'Built inside a behavioral health facility', b: 'Brandon built the first version while working at Havenwood Academy, because nothing on the market fit how residential programs run.' },
+  { icon: Timer, t: '15 years of clinical workflow depth', b: "We've lived the documentation burden, the audits, and the shift-change handoffs. That experience is in the product." },
+  { icon: ChatsCircle, t: 'You reach a person, not a ticket queue', b: 'Call with a question and you reach someone who knows your program by name. There is no tier-1 support layer.' },
+  { icon: ShieldCheck, t: 'Built for compliance, not workarounds', b: 'Behavioral health compliance is its own thing. BlueStep is built around the documentation, incidents, and outcomes you actually face.' },
+]
+
 function Hero() {
   return (
     <section className="relative overflow-hidden">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(60%_60%_at_75%_10%,rgb(var(--accent)/0.10),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(60%_60%_at_80%_10%,rgb(var(--accent)/0.10),transparent_70%)]"
       />
-      <Container className="relative grid items-center gap-12 pb-20 pt-12 md:pt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pb-28">
+      <Container className="relative grid items-center gap-12 pb-20 pt-12 md:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pb-24">
         <div className="rise">
-          <h1 className="text-[2.75rem] font-semibold leading-[1.02] tracking-tightest sm:text-6xl lg:text-7xl">
-            The EHR you build by asking.
+          <h1 className="text-[2.6rem] font-semibold leading-[1.03] tracking-tightest sm:text-6xl lg:text-[4.1rem]">
+            The EHR built inside behavioral health.
           </h1>
-          <p className="prose-body mt-6 max-w-[44ch]">
-            Start from a proven behavioral health EHR. Describe what your program needs, and Claude builds it.
+          <p className="prose-body mt-6 max-w-[46ch]">
+            Clinical, nursing, admissions, and outcomes in one record. Run it as we built it, or build on it with
+            Claude.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
-            <Button to={CTA.build.href} arrow>
-              {CTA.build.label}
+            <Button to={CTA.demo.href} arrow>
+              {CTA.demo.label}
             </Button>
             <Button to={CTA.how.href} variant="ghost">
               {CTA.how.label}
             </Button>
           </div>
         </div>
-        <div className="rise [animation-delay:120ms]">
-          <BuildLog />
-        </div>
+        <img
+          src={asset('images/heroes/homepage.jpg')}
+          alt="A clinician taking notes during a session"
+          className="rise aspect-[5/4] w-full rounded-2xl object-cover [animation-delay:120ms]"
+        />
       </Container>
     </section>
   )
@@ -68,190 +73,163 @@ function Clients() {
   )
 }
 
-function WaysIn() {
+function Why() {
   return (
     <section className="py-24 md:py-32">
-      <Container>
-        <Heading
-          title="Three ways to run BlueStep."
-          sub="Same platform underneath. Pick how much you want to build yourself."
-        />
-        <div className="mt-14 grid gap-4 lg:grid-cols-[1.35fr_1fr] lg:grid-rows-2">
-          <Reveal className="lg:row-span-2">
-            <Link
-              to="/build"
-              className="group relative flex h-full min-h-[440px] flex-col justify-end overflow-hidden rounded-2xl panel-dark p-8 md:p-10"
-            >
-              <img
-                src={asset('images/heroes/demo.jpg')}
-                alt="A program director building on a laptop"
-                className="absolute inset-0 h-full w-full object-cover opacity-45 transition duration-700 group-hover:scale-[1.03]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d12] via-[#0a0d12]/60 to-transparent" />
-              <div className="relative text-white">
-                <p className="text-sm font-medium text-white/70">Builder</p>
-                <h3 className="mt-2 max-w-md text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-                  Start from our EHR. Change anything.
-                </h3>
-                <p className="mt-4 max-w-md leading-relaxed text-white/75">
-                  The full behavioral health EHR, plus builder access. Your team and Claude shape it to your
-                  program.
-                </p>
-                <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium">
-                  How building works
-                  <ArrowRight size={16} weight="bold" className="transition-transform group-hover:translate-x-1" />
-                </span>
-              </div>
-            </Link>
-          </Reveal>
-
-          <Reveal delay={80}>
-            <Link to="/ehr" className="card group flex h-full flex-col p-8 transition-colors hover:border-faint">
-              <p className="text-sm font-medium text-muted">Full-service</p>
-              <h3 className="mt-2 text-2xl font-semibold tracking-tight">We run it. You run your program.</h3>
-              <p className="mt-3 leading-relaxed text-muted">
-                Onboarding, training, and support from people who have worked the floor.
-              </p>
-              <ArrowUpRight size={20} className="mt-auto self-end pt-4 text-faint transition group-hover:text-accent" />
-            </Link>
-          </Reveal>
-
-          <Reveal delay={160}>
-            <Link
-              to="/blank-slate"
-              className="group flex h-full flex-col rounded-2xl border border-accent/25 bg-accent-soft p-8 transition-colors hover:border-accent/50"
-            >
-              <p className="text-sm font-medium text-accent">Blank Slate</p>
-              <h3 className="mt-2 text-2xl font-semibold tracking-tight">Keep your EHR. Build what it can't do.</h3>
-              <p className="mt-3 leading-relaxed text-muted">
-                A HIPAA-ready workspace for the apps your current system never got around to.
-              </p>
-              <ArrowUpRight size={20} className="mt-auto self-end pt-4 text-accent/60 transition group-hover:text-accent" />
-            </Link>
-          </Reveal>
+      <Container className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <Heading
+            title="Four things a generic EHR vendor can't say."
+            sub="Every feature started as a problem one of us had on the floor."
+          />
+          <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent">
+            Our story
+            <ArrowRight size={16} weight="bold" />
+          </Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {WHY.map((w, i) => (
+            <Reveal key={w.t} delay={i * 60} className={`rounded-2xl p-7 ${i === 0 ? 'bg-accent-soft' : 'card'}`}>
+              <w.icon size={26} className="text-accent" />
+              <h3 className="mt-8 text-lg font-semibold leading-snug tracking-tight">{w.t}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{w.b}</p>
+            </Reveal>
+          ))}
         </div>
       </Container>
     </section>
   )
 }
 
-function Proof() {
+function WhoWeHelp() {
   return (
     <section className="border-y border-line bg-surface py-24 md:py-32">
-      <Container className="grid gap-12 lg:grid-cols-[auto_1fr] lg:gap-24">
-        <Reveal>
-          <p className="kicker">Why now</p>
-          <p className="mt-4 text-[7rem] font-semibold leading-[0.85] tracking-tightest text-accent md:text-[10rem]">
-            20
-          </p>
-          <p className="mt-3 text-xl font-medium tracking-tight">minutes</p>
-        </Reveal>
-        <Reveal delay={100} className="max-w-2xl self-end">
-          <h2 className="text-3xl font-semibold leading-[1.15] tracking-tightest md:text-4xl">
-            That is how long Claude took to rebuild our e-signature feature for a program set up nothing like ours.
-          </h2>
-          <p className="prose-body mt-6">
-            For 15 years, every program's setup drifted a little further from everyone else's. Sharing a feature
-            meant weeks of custom work. Now Claude reads both systems and rebuilds the feature to fit yours.
-          </p>
-          <div className="mt-10 grid gap-6 border-t border-line pt-8 sm:grid-cols-3">
-            {[
-              ['Pick a feature', 'From the marketplace, or describe your own.'],
-              ['Claude reads your system', 'Your forms, roles, and workflows. Not a generic template.'],
-              ['You review and ship', 'Every change is saved as a snapshot you can roll back.'],
-            ].map(([t, b]) => (
-              <div key={t}>
-                <h3 className="font-medium">{t}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{b}</p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
+      <Container>
+        <Heading title="Software that fits how your team works." />
+        <div className="mt-12 grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          {ROLES.slice(0, 4).map((r, i) => (
+            <Reveal key={r.slug} delay={i * 60}>
+              <Link to={`/${r.slug}`} className="group block">
+                <div className="overflow-hidden rounded-2xl">
+                  <img
+                    src={asset(r.image)}
+                    alt={r.alt}
+                    loading="lazy"
+                    className="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+                  />
+                </div>
+                <p className="mt-4 flex items-center justify-between font-semibold">
+                  For {r.nav.toLowerCase()}
+                  <ArrowUpRight size={18} className="text-faint transition group-hover:text-accent" />
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-muted">{r.headline}</p>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+        <Link to="/for-referral-partners" className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-accent">
+          Educational consultant? See BlueStep for referral partners
+          <ArrowRight size={16} weight="bold" />
+        </Link>
       </Container>
     </section>
   )
 }
 
-function MarketplaceRail() {
-  const picks = LISTINGS.slice(0, 8)
+function Products() {
   return (
     <section className="py-24 md:py-32">
       <Container>
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <Heading
-            title="Take what other programs built."
-            sub="Every feature in the marketplace was built for a real program. Take it, and Claude fits it to yours."
-          />
-          <Button to={CTA.market.href} variant="ghost" arrow className="self-start md:self-auto">
-            {CTA.market.label}
-          </Button>
+        <Heading
+          title="One record. Every part of the stay."
+          sub="Pick the products you need. They share one database, so nothing gets entered twice."
+        />
+        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {PRODUCTS.map((p, i) => (
+            <Reveal key={p.slug} delay={i * 60}>
+              <Link
+                to={`/products/${p.slug}`}
+                className={`group flex h-full min-h-[240px] flex-col rounded-2xl p-7 transition ${
+                  i === 0 ? 'bg-accent text-accent-ink hover:brightness-110' : 'card hover:border-faint'
+                }`}
+              >
+                <p.icon size={28} className={i === 0 ? '' : 'text-accent'} />
+                <h3 className="mt-auto pt-10 text-xl font-semibold tracking-tight">{p.name}</h3>
+                <p className={`mt-2 text-sm leading-relaxed ${i === 0 ? 'opacity-85' : 'text-muted'}`}>{p.card}</p>
+              </Link>
+            </Reveal>
+          ))}
         </div>
       </Container>
-      <div className="rail mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 scroll-px-5 md:px-8 md:scroll-px-8 xl:px-[calc((100vw_-_1240px)/2_+_2rem)] xl:scroll-px-[calc((100vw_-_1240px)/2_+_2rem)]">
-        {picks.map((l, i) => (
-          <Reveal key={l.slug} delay={i * 50} className="w-[280px] shrink-0 snap-start md:w-[320px]">
-            <Link
-              to={`/marketplace#${l.slug}`}
-              className="card group flex h-full flex-col p-6 transition hover:-translate-y-0.5 hover:border-faint"
-            >
-              <div className="flex items-center justify-between text-xs">
-                <span className="rounded-full bg-raised px-2.5 py-1 font-medium text-muted">{l.category}</span>
-                <span className="font-medium text-accent">{l.price}</span>
-              </div>
-              <h3 className="mt-6 text-lg font-semibold tracking-tight">{l.name}</h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{l.summary}</p>
-              <p className="mt-6 text-xs text-faint">by {l.publisher}</p>
-            </Link>
-          </Reveal>
-        ))}
-      </div>
     </section>
   )
 }
 
-function Guardrails() {
+/** The highlight: the one dark band on the page. */
+function BuildOnIt() {
   return (
-    <section className="border-t border-line bg-surface py-24 md:py-32">
+    <section className="panel-dark py-24 md:py-32 dark:border-x-0">
+      <Container className="grid items-center gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
+        <div>
+          <span className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium">New</span>
+          <h2 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tightest md:text-6xl">
+            Now you can build on it.
+          </h2>
+          <p className="mt-6 max-w-[48ch] text-lg leading-relaxed opacity-75">
+            Describe what your program needs and Claude builds it inside your EHR. Same platform, same guardrails,
+            done the same day.
+          </p>
+          <dl className="mt-10 grid gap-6 border-t border-white/10 pt-8 sm:grid-cols-3">
+            {[
+              ['20 min', 'to rebuild our e-signature feature for a program set up nothing like ours'],
+              [String(LISTINGS.length), 'features free in the marketplace, each built for a real program'],
+              ['0', 'things Claude can delete. That always takes a person.'],
+            ].map(([n, d]) => (
+              <div key={n}>
+                <dt className="text-3xl font-semibold tracking-tightest text-[#60a5eb]">{n}</dt>
+                <dd className="mt-2 text-sm leading-relaxed opacity-70">{d}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Link to={CTA.how.href} className="btn bg-white text-[#0e1116] hover:bg-white/90">
+              {CTA.how.label}
+              <ArrowRight size={16} weight="bold" />
+            </Link>
+            <Link to={CTA.market.href} className="btn border border-white/25 text-white hover:bg-white/10">
+              {CTA.market.label}
+            </Link>
+          </div>
+        </div>
+        <div className="text-ink">
+          <BuildLog />
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+function WaysToRun() {
+  const ways = [
+    { to: '/products/ehr', name: 'Full-service', t: 'We set it up and stay on call.', b: 'Configuration, clinical onboarding, training, and a person who knows your program.' },
+    { to: '/build', name: 'Builder', t: 'Our EHR, yours to change.', b: 'The full EHR plus builder access. Your team and Claude shape it to your program.' },
+    { to: '/blank-slate', name: 'Blank Slate', t: "Keep your EHR. Build what it can't.", b: 'A HIPAA-ready workspace for the apps your current system never got around to.' },
+  ]
+  return (
+    <section className="py-24 md:py-32">
       <Container>
-        <Heading
-          title="Freedom to build. Not freedom to break."
-          sub="Builders get real access. The platform keeps the guardrails your compliance team expects."
-        />
-        <div className="mt-14 grid gap-4 md:grid-cols-6">
-          <Reveal className="md:col-span-4">
-            <div className="relative h-full overflow-hidden rounded-2xl panel-dark p-8 md:p-10">
-              <Trash size={40} weight="duotone" className="text-accent" />
-              <h3 className="mt-16 text-3xl font-semibold tracking-tight md:text-4xl">Claude can't delete.</h3>
-              <p className="mt-3 max-w-md leading-relaxed opacity-70">
-                Not a field, not a form, not a record. Removing anything takes a person, on purpose.
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={80} className="md:col-span-2">
-            <div className="card h-full p-8">
-              <ClockCounterClockwise size={28} className="text-accent" />
-              <h3 className="mt-10 text-xl font-semibold tracking-tight">Every push is a snapshot.</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">Roll any change back to the version before it.</p>
-            </div>
-          </Reveal>
-          <Reveal delay={120} className="md:col-span-3">
-            <div className="card h-full p-8">
-              <FileLock size={28} className="text-accent" />
-              <h3 className="mt-10 text-xl font-semibold tracking-tight">Every change is logged.</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                Who changed what, and when. Deleted entries stay recoverable from change history.
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={160} className="md:col-span-3">
-            <div className="h-full rounded-2xl border border-accent/25 bg-accent-soft p-8">
-              <ShieldCheck size={28} className="text-accent" />
-              <h3 className="mt-10 text-xl font-semibold tracking-tight">HIPAA hosting and a BAA.</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                Your data stays on BlueStep's healthcare platform, whatever you build on top of it.
-              </p>
-            </div>
-          </Reveal>
+        <Heading title="However much you want to build." sub="Same platform underneath. Switch as your team changes." />
+        <div className="mt-12 divide-y divide-line border-y border-line">
+          {ways.map((w, i) => (
+            <Reveal key={w.name} delay={i * 60}>
+              <Link to={w.to} className="group grid items-baseline gap-2 py-7 md:grid-cols-[160px_1fr_1.2fr_auto] md:gap-8">
+                <span className="text-sm font-medium text-accent">{w.name}</span>
+                <span className="text-xl font-semibold tracking-tight">{w.t}</span>
+                <span className="text-muted">{w.b}</span>
+                <ArrowUpRight size={20} className="hidden text-faint transition group-hover:text-accent md:block" />
+              </Link>
+            </Reveal>
+          ))}
         </div>
       </Container>
     </section>
@@ -260,12 +238,12 @@ function Guardrails() {
 
 function Origin() {
   return (
-    <section className="py-24 md:py-32">
+    <section className="border-t border-line bg-surface py-24 md:py-32">
       <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <Reveal>
           <img
-            src={asset('images/heroes/for-clinicians.jpg')}
-            alt="A therapist leading a group session"
+            src={asset('images/heroes/about.jpg')}
+            alt="Two staff members in conversation at a treatment program"
             className="aspect-[4/3] w-full rounded-2xl object-cover"
             loading="lazy"
           />
@@ -279,13 +257,9 @@ function Origin() {
             <footer className="mt-8 text-sm text-muted">
               <span className="font-medium text-ink">Brandon Payne</span>
               <br />
-              Former floor staff at Havenwood Academy. Still builds.
+              Executive Director. Former floor staff at Havenwood Academy.
             </footer>
           </blockquote>
-          <Link to="/about" className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-accent">
-            Our story
-            <ArrowRight size={16} weight="bold" />
-          </Link>
         </Reveal>
       </Container>
     </section>
@@ -298,19 +272,20 @@ export default function Home() {
     <>
       <Hero />
       <Clients />
-      <WaysIn />
-      <Proof />
-      <MarketplaceRail />
-      <Guardrails />
+      <Why />
+      <WhoWeHelp />
+      <Products />
+      <BuildOnIt />
+      <WaysToRun />
       <Origin />
       <ClosingCTA
-        title="Build the EHR your program actually runs on."
-        sub="We are opening builder access to a small group of programs first. Tell us what you would build."
+        title="See BlueStep with your own workflows."
+        sub="Talk to someone who understands your world. Bring your hardest documentation problem."
       >
-        <OnAccentButton to={CTA.build.href} solid>
-          {CTA.build.label}
+        <OnAccentButton to={CTA.demo.href} solid>
+          {CTA.demo.label}
         </OnAccentButton>
-        <OnAccentButton to={CTA.pricing.href}>{CTA.pricing.label}</OnAccentButton>
+        <OnAccentButton to={CTA.build.href}>{CTA.build.label}</OnAccentButton>
       </ClosingCTA>
     </>
   )

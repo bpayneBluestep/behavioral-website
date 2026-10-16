@@ -21,8 +21,8 @@ The previous site was a Next.js multi-page export. GitSite never serves those pe
 HTML files, so every deep link (e.g. `/spa/pricing/`) rendered the homepage. That is why
 this rebuild is a client-routed SPA.
 
-Old URLs (`/demo`, `/products/*`, `/for-*`, `/values`) redirect to their new homes. See
-`LEGACY` in `app/src/App.tsx`.
+Every URL from the previous site still works (`/demo`, `/products/*`, `/for-*`); `/values`
+and short aliases redirect. See `REDIRECTS` in `app/src/App.tsx`.
 
 ## Develop and deploy
 
@@ -43,8 +43,10 @@ checking the `assets/index-*.js` hash matches the repo, not by webhook status.
 | Brand name, nav, CTA labels (rebrand = edit here) | `app/src/site.ts` |
 | Plans and prices (Builder/Blank Slate are pilot numbers) | `app/src/data/pricing.ts` |
 | Marketplace listings | `app/src/data/marketplace.ts` |
+| Product pages (EHR, CRM, Outcomes, BlueIQ) | `app/src/data/products.ts` |
+| Who-we-help role pages | `app/src/data/roles.ts` |
 | Colors (light + dark tokens) | `app/src/styles.css` |
-| Contact form endpoint | `FORM_ENDPOINT` in `app/src/pages/Talk.tsx` |
+| Contact form endpoint | `FORM_ENDPOINT` in `app/src/pages/Demo.tsx` |
 
 ## Open items
 

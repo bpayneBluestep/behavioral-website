@@ -27,7 +27,7 @@ export default function BlankSlate() {
         title="Keep your EHR. Build everything around it."
         sub="A HIPAA-ready workspace for the apps your EHR never got around to. Describe one, and Claude builds it."
       >
-        <Button to="/talk?path=blank-slate" arrow>
+        <Button to="/demo?path=blank-slate" arrow>
           Start a blank slate
         </Button>
         <Button to={CTA.pricing.href} variant="ghost">
@@ -111,7 +111,7 @@ export default function BlankSlate() {
               short step, not a migration project.
             </p>
             <div className="mt-9 flex justify-center">
-              <Button to="/ehr" variant="ghost" arrow>
+              <Button to="/products/ehr" variant="ghost" arrow>
                 Explore the EHR
               </Button>
             </div>
@@ -123,7 +123,7 @@ export default function BlankSlate() {
         title="What would your staff stop doing on paper?"
         sub="Tell us the first thing you would build. We will set up your blank slate."
       >
-        <OnAccentButton to="/talk?path=blank-slate" solid>
+        <OnAccentButton to="/demo?path=blank-slate" solid>
           Start a blank slate
         </OnAccentButton>
         <OnAccentButton to={CTA.market.href}>{CTA.market.label}</OnAccentButton>

@@ -1,15 +1,68 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
-import { List, X } from '@phosphor-icons/react'
-import { BRAND, CTA, NAV } from './site'
+import { CaretDown, List, X } from '@phosphor-icons/react'
+import { BRAND, CTA, NAV, isGroup, type NavGroup } from './site'
 import { Container, Logo } from './ui'
+
+/** Desktop dropdown. Opens on hover or click, closes on outside click, Escape, or navigation. */
+function Dropdown({ group }: { group: NavGroup }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const { pathname } = useLocation()
+  const active = group.items.some((i) => pathname.startsWith(i.href))
+  useEffect(() => setOpen(false), [pathname])
+  useEffect(() => {
+    if (!open) return
+    const onDown = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false)
+    }
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    document.addEventListener('mousedown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  return (
+    <div ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm transition-colors ${
+          active ? 'bg-raised text-ink' : 'text-muted hover:text-ink'
+        }`}
+      >
+        {group.label}
+        {group.badge && (
+          <span className="rounded-full bg-accent px-1.5 py-px text-[10px] font-semibold leading-4 text-accent-ink">
+            {group.badge}
+          </span>
+        )}
+        <CaretDown size={12} weight="bold" className={`transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+      {open && (
+        <div className="absolute left-0 top-full pt-2">
+          <div className="rise card w-72 p-2 shadow-[0_20px_50px_-20px_rgb(var(--ink)/0.25)]">
+            {group.items.map((i) => (
+              <Link key={i.href} to={i.href} className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-raised">
+                <span className="block text-sm font-medium text-ink">{i.label}</span>
+                {i.hint && <span className="block text-xs text-muted">{i.hint}</span>}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 function Header() {
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
   useEffect(() => setOpen(false), [pathname])
-
-  // Lock page scroll while the mobile menu is open.
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
     return () => {
@@ -17,7 +70,11 @@ function Header() {
     }
   }, [open])
 
+  // The mobile menu renders as a sibling of <header>, not a child: the header's
+  // backdrop-filter makes it the containing block for fixed children, which would
+  // collapse a fixed full-screen menu to the header's 64px.
   return (
+    <>
     <header className="sticky top-0 z-40 border-b border-line/80 bg-bg/80 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between gap-6">
         <Link to="/" className="flex shrink-0 items-center gap-2.5" aria-label={`${BRAND.name} home`}>
@@ -25,28 +82,29 @@ function Header() {
           <span className="border-l border-line pl-2.5 text-sm font-medium text-muted">{BRAND.short}</span>
         </Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
-          {NAV.map((n) => (
-            <NavLink
-              key={n.href}
-              to={n.href}
-              className={({ isActive }) =>
-                `rounded-full px-3 py-1.5 text-sm transition-colors ${
-                  isActive ? 'bg-raised text-ink' : 'text-muted hover:text-ink'
-                }`
-              }
-            >
-              {n.label}
-            </NavLink>
-          ))}
+        <nav aria-label="Main" className="hidden items-center gap-0.5 lg:flex">
+          {NAV.map((n) =>
+            isGroup(n) ? (
+              <Dropdown key={n.label} group={n} />
+            ) : (
+              <NavLink
+                key={n.href}
+                to={n.href}
+                className={({ isActive }) =>
+                  `rounded-full px-3 py-1.5 text-sm transition-colors ${
+                    isActive ? 'bg-raised text-ink' : 'text-muted hover:text-ink'
+                  }`
+                }
+              >
+                {n.label}
+              </NavLink>
+            ),
+          )}
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link to={CTA.talk.href} className="hidden text-sm text-muted hover:text-ink md:inline lg:hidden xl:inline">
-            {CTA.talk.label}
-          </Link>
-          <Link to={CTA.build.href} className="btn-primary hidden px-4 py-2 sm:inline-flex">
-            {CTA.build.label}
+          <Link to={CTA.demo.href} className="btn-primary hidden px-4 py-2 sm:inline-flex">
+            {CTA.demo.label}
           </Link>
           <button
             type="button"
@@ -60,82 +118,73 @@ function Header() {
           </button>
         </div>
       </Container>
+    </header>
 
       {open && (
         <div id="mobile-nav" className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-bg lg:hidden">
-          <Container className="flex flex-col gap-1 py-6">
-            {NAV.map((n, i) => (
-              <NavLink
-                key={n.href}
-                to={n.href}
-                className="rise border-b border-line py-4 text-2xl font-medium tracking-tight"
-                style={{ animationDelay: `${i * 40}ms` }}
-              >
-                {n.label}
-              </NavLink>
-            ))}
+          <Container className="py-6">
+            {NAV.map((n) =>
+              isGroup(n) ? (
+                <details key={n.label} className="group border-b border-line" open={n.badge !== undefined}>
+                  <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-xl font-medium tracking-tight">
+                    <span className="flex items-center gap-2">
+                      {n.label}
+                      {n.badge && (
+                        <span className="rounded-full bg-accent px-2 py-0.5 text-xs font-semibold text-accent-ink">{n.badge}</span>
+                      )}
+                    </span>
+                    <CaretDown size={16} className="transition-transform group-open:rotate-180" />
+                  </summary>
+                  <div className="pb-4">
+                    {n.items.map((i) => (
+                      <Link key={i.href} to={i.href} className="block py-2 pl-1 text-base text-muted">
+                        {i.label}
+                      </Link>
+                    ))}
+                  </div>
+                </details>
+              ) : (
+                <NavLink key={n.href} to={n.href} className="block border-b border-line py-4 text-xl font-medium tracking-tight">
+                  {n.label}
+                </NavLink>
+              ),
+            )}
             <div className="mt-8 flex flex-col gap-3">
-              <Link to={CTA.build.href} className="btn-primary py-3 text-base">
-                {CTA.build.label}
+              <Link to={CTA.demo.href} className="btn-primary py-3 text-base">
+                {CTA.demo.label}
               </Link>
-              <Link to={CTA.talk.href} className="btn-ghost py-3 text-base">
-                {CTA.talk.label}
+              <Link to={CTA.build.href} className="btn-ghost py-3 text-base">
+                {CTA.build.label}
               </Link>
             </div>
           </Container>
         </div>
       )}
-    </header>
+    </>
   )
 }
 
-const FOOTER_COLUMNS = [
-  {
-    title: 'Ways in',
-    links: [
-      { to: '/build', label: 'Builder' },
-      { to: '/ehr', label: 'Full-service EHR' },
-      { to: '/blank-slate', label: 'Blank Slate' },
-      { to: '/pricing', label: 'Pricing' },
-    ],
-  },
-  {
-    title: 'Product',
-    links: [
-      { to: '/ehr', label: 'EHR' },
-      { to: '/ehr#crm', label: 'CRM' },
-      { to: '/ehr#outcomes', label: 'Outcomes' },
-      { to: '/ehr#blueiq', label: 'BlueIQ' },
-      { to: '/marketplace', label: 'Marketplace' },
-    ],
-  },
-  {
-    title: 'Company',
-    links: [
-      { to: '/about', label: 'About' },
-      { to: '/build#trust', label: 'Security' },
-      { to: '/talk', label: 'Contact' },
-    ],
-  },
-]
-
 function Footer() {
+  const groups = NAV.filter(isGroup)
   return (
     <footer className="border-t border-line bg-surface">
-      <Container className="grid gap-12 py-16 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+      <Container className="grid gap-12 py-16 md:grid-cols-[1.4fr_repeat(4,1fr)]">
         <div>
           <Logo className="h-7" />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
-            Behavioral health software, built by people who worked inside it.
+            Behavioral health software, built by people who&apos;ve been there.
           </p>
+          <Link to={CTA.demo.href} className="btn-primary mt-6">
+            {CTA.demo.label}
+          </Link>
         </div>
-        {FOOTER_COLUMNS.map((col) => (
-          <div key={col.title}>
-            <h3 className="text-sm font-medium text-ink">{col.title}</h3>
+        {groups.map((g) => (
+          <div key={g.label}>
+            <h3 className="text-sm font-medium text-ink">{g.label}</h3>
             <ul className="mt-4 space-y-2.5">
-              {col.links.map((l) => (
-                <li key={l.label}>
-                  <Link to={l.to} className="text-sm text-muted transition-colors hover:text-ink">
+              {g.items.map((l) => (
+                <li key={l.href}>
+                  <Link to={l.href} className="text-sm text-muted transition-colors hover:text-ink">
                     {l.label}
                   </Link>
                 </li>
@@ -143,9 +192,29 @@ function Footer() {
             </ul>
           </div>
         ))}
+        <div>
+          <h3 className="text-sm font-medium text-ink">Company</h3>
+          <ul className="mt-4 space-y-2.5">
+            {[
+              ['/about', 'About'],
+              ['/about#values', 'Values'],
+              ['/pricing', 'Pricing'],
+              ['/build#trust', 'Security'],
+              ['/demo', 'Contact'],
+            ].map(([to, label]) => (
+              <li key={label}>
+                <Link to={to} className="text-sm text-muted transition-colors hover:text-ink">
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Container>
       <Container className="flex flex-col gap-2 border-t border-line py-6 text-xs text-faint sm:flex-row sm:justify-between">
-        <span>&copy; {new Date().getFullYear()} {BRAND.legal}. All rights reserved.</span>
+        <span>
+          &copy; {new Date().getFullYear()} {BRAND.legal}. All rights reserved.
+        </span>
         <span>HIPAA-ready hosting. We sign a BAA with every program.</span>
       </Container>
     </footer>

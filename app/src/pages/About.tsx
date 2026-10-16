@@ -70,7 +70,7 @@ export default function About() {
         </Container>
       </section>
 
-      <section className="border-y border-line bg-surface py-24 md:py-32">
+      <section id="values" className="scroll-mt-20 border-y border-line bg-surface py-24 md:py-32">
         <Container>
           <Heading
             title="AI builds the software. People stay at the center."
@@ -110,8 +110,8 @@ export default function About() {
       </section>
 
       <ClosingCTA title="Talk to people who have been there." sub="A real person reads every message. No sales drip.">
-        <OnAccentButton to={CTA.talk.href} solid>
-          {CTA.talk.label}
+        <OnAccentButton to={CTA.demo.href} solid>
+          {CTA.demo.label}
         </OnAccentButton>
         <OnAccentButton to={CTA.build.href}>{CTA.build.label}</OnAccentButton>
       </ClosingCTA>

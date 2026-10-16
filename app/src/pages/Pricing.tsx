@@ -76,7 +76,7 @@ function Plans() {
 }
 
 function Calculator() {
-  const [plan, setPlan] = useState<PlanId>('builder')
+  const [plan, setPlan] = useState<PlanId>('full-service')
   const [programs, setPrograms] = useState(2)
   const [sel, setSel] = useState<Selection>({ ehr: true, crm: true, outcomes: false })
 
@@ -222,8 +222,8 @@ function Extras() {
             For consultants and placement teams. Add BlueIQ document intelligence and dictation for $
             {REFERRAL.blueIqPerSeat} per user.
           </p>
-          <Link to={CTA.talk.href} className="mt-6 inline-block text-sm font-medium text-accent">
-            {CTA.talk.label}
+          <Link to={CTA.demo.href} className="mt-6 inline-block text-sm font-medium text-accent">
+            {CTA.demo.label}
           </Link>
         </Reveal>
       </Container>
@@ -256,7 +256,7 @@ export default function Pricing() {
     <>
       <PageHero
         title="Priced per program. Your whole team is covered."
-        sub="No per-seat math for treatment programs. Pick how much you want to build yourself."
+        sub="No per-seat math for treatment programs. Pick the products you need, or build on the platform yourself."
       />
       <div className="h-12" />
       <Plans />
@@ -279,8 +279,8 @@ export default function Pricing() {
         </Container>
       </section>
       <ClosingCTA title="Get a quote for your programs." sub="Tell us what you run. We will put together pricing that fits.">
-        <OnAccentButton to={CTA.talk.href} solid>
-          {CTA.talk.label}
+        <OnAccentButton to={CTA.demo.href} solid>
+          {CTA.demo.label}
         </OnAccentButton>
         <OnAccentButton to={CTA.build.href}>{CTA.build.label}</OnAccentButton>
       </ClosingCTA>

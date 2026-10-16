@@ -10,10 +10,10 @@ const FORM_ENDPOINT = 'REPLACE_ME_WITH_FORMSPREE_ENDPOINT'
 const ENDPOINT_READY = !FORM_ENDPOINT.startsWith('REPLACE_ME')
 
 const PATHS = [
-  { id: 'builder', label: 'Builder', hint: 'Our EHR, shaped by your team', icon: Hammer },
-  { id: 'full-service', label: 'Full-service', hint: 'We set it up and support it', icon: UsersThree },
-  { id: 'blank-slate', label: 'Blank Slate', hint: 'Apps next to your current EHR', icon: SquaresFour },
-  { id: 'publish', label: 'Publish', hint: 'Sell a feature in the marketplace', icon: Package },
+  { id: 'full-service', label: 'A demo', hint: 'See the EHR, CRM, and outcomes', icon: UsersThree },
+  { id: 'builder', label: 'Building on it', hint: 'Our EHR, shaped by your team', icon: Hammer },
+  { id: 'blank-slate', label: 'A blank slate', hint: 'Apps next to your current EHR', icon: SquaresFour },
+  { id: 'publish', label: 'Publishing', hint: 'Sell a feature in the marketplace', icon: Package },
 ] as const
 
 type PathId = (typeof PATHS)[number]['id']
@@ -32,11 +32,11 @@ const EMPTY: Values = { name: '', role: '', facility: '', email: '', phone: '', 
 
 const isPath = (v: string | null): v is PathId => PATHS.some((p) => p.id === v)
 
-export default function Talk() {
-  useTitle('Talk to us')
+export default function Demo() {
+  useTitle('Request a demo')
   const [params] = useSearchParams()
   const initial = params.get('path')
-  const [path, setPath] = useState<PathId>(isPath(initial) ? initial : 'builder')
+  const [path, setPath] = useState<PathId>(isPath(initial) ? initial : 'full-service')
   const [values, setValues] = useState<Values>(EMPTY)
   const [errors, setErrors] = useState<Partial<Record<keyof Values, string>>>({})
   const [status, setStatus] = useState<Status>('idle')
@@ -124,9 +124,9 @@ export default function Talk() {
     <section className="py-14 md:py-20">
       <Container className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="rise lg:pt-6">
-          <h1 className="text-4xl font-semibold leading-[1.05] tracking-tightest md:text-6xl">Talk to us.</h1>
+          <h1 className="text-4xl font-semibold leading-[1.05] tracking-tightest md:text-6xl">Request a demo.</h1>
           <p className="prose-body mt-6 max-w-[40ch]">
-            Brandon or Carlos reads every message and replies within a few business days. No sales drip.
+            You'll talk to someone who has worked inside a residential program. Brandon or Carlos reads every message. No sales drip.
           </p>
           <img
             src={asset("images/heroes/homepage.jpg")}
@@ -159,7 +159,7 @@ export default function Talk() {
           ) : (
             <form onSubmit={submit} noValidate>
               <fieldset>
-                <legend className="text-sm font-medium">I am interested in</legend>
+                <legend className="text-sm font-medium">I'm interested in</legend>
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
                   {PATHS.map((p) => (
                     <label
@@ -212,7 +212,7 @@ export default function Talk() {
                 ))}
                 <div className="sm:col-span-2">
                   <label htmlFor="f-message" className="text-sm font-medium">
-                    {path === 'publish' ? 'What did you build?' : 'What would you build first?'}
+                    {path === 'publish' ? 'What did you build?' : path === 'full-service' ? 'What are you looking for?' : 'What would you build first?'}
                   </label>
                   <textarea
                     id="f-message"

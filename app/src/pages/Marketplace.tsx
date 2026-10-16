@@ -90,7 +90,7 @@ function Catalog() {
             {filter === 'All' && !q && (
               <li>
                 <Link
-                  to="/talk?path=publish"
+                  to="/demo?path=publish"
                   className="flex h-full min-h-[260px] flex-col items-center justify-center rounded-2xl border border-dashed border-line p-6 text-center transition-colors hover:border-accent"
                 >
                   <span className="flex h-11 w-11 items-center justify-center rounded-full bg-accent-soft text-accent">
@@ -166,7 +166,7 @@ export default function Marketplace() {
         <OnAccentButton to={CTA.build.href} solid>
           {CTA.build.label}
         </OnAccentButton>
-        <OnAccentButton to="/talk?path=publish">Publish a feature</OnAccentButton>
+        <OnAccentButton to="/demo?path=publish">Publish a feature</OnAccentButton>
       </ClosingCTA>
     </>
   )
