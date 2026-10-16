@@ -2,6 +2,7 @@ import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from '@phosphor-icons/react'
 import { BRAND } from './site'
+import Mark from './components/Mark'
 
 /** Public asset URL. Assets live under /spa/ in production (see vite.config.ts). */
 export const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
@@ -62,12 +63,17 @@ export function Container({ children, className = '' }: { children: ReactNode; c
   return <div className={`mx-auto w-full max-w-page px-5 md:px-8 ${className}`}>{children}</div>
 }
 
-/** The BlueStep logo, swapped for the reversed wordmark in dark mode. */
-export function Logo({ className = 'h-7' }: { className?: string }) {
+/**
+ * The Attune Health logo (brand kit, 2x file), swapped for the reversed version in
+ * dark mode. The guide wants 160-200px wide in a header: h-7 renders about 176px.
+ * `reversed` forces the navy-background version, for navy sections.
+ */
+export function Logo({ className = 'h-7', reversed = false }: { className?: string; reversed?: boolean }) {
+  if (reversed) return <img src={asset('brand/logo-reversed.png')} alt="Attune Health" className={`w-auto ${className}`} />
   return (
     <>
-      <img src={asset('images/logo-light.png')} alt="BlueStep" className={`w-auto dark:hidden ${className}`} />
-      <img src={asset('images/logo-dark.png')} alt="BlueStep" className={`hidden w-auto dark:block ${className}`} />
+      <img src={asset('brand/logo.png')} alt="Attune Health" className={`w-auto dark:hidden ${className}`} />
+      <img src={asset('brand/logo-reversed.png')} alt="Attune Health" className={`hidden w-auto dark:block ${className}`} />
     </>
   )
 }
@@ -130,7 +136,7 @@ export function PageHero({
       <Container className="pb-16 pt-14 md:pb-24 md:pt-20">
         <div className="rise max-w-3xl">
           {kicker && <p className="kicker mb-5">{kicker}</p>}
-          <h1 className="text-4xl font-semibold leading-[1.05] tracking-tightest md:text-6xl">{title}</h1>
+          <h1 className="text-4xl font-bold leading-[1.05] tracking-tightest md:text-6xl">{title}</h1>
           <p className="prose-body mt-6 max-w-[56ch]">{sub}</p>
           {children && <div className="mt-9 flex flex-wrap gap-3">{children}</div>}
         </div>
@@ -151,7 +157,7 @@ export function Heading({
 }) {
   return (
     <div className={`max-w-2xl ${className}`}>
-      <h2 className="text-3xl font-semibold leading-[1.1] tracking-tightest md:text-5xl">{title}</h2>
+      <h2 className="text-3xl font-bold leading-[1.1] tracking-tightest md:text-5xl">{title}</h2>
       {sub && <p className="prose-body mt-5 max-w-[58ch]">{sub}</p>}
     </div>
   )
@@ -171,13 +177,11 @@ export function ClosingCTA({
     <section className="py-24 md:py-32">
       <Container>
         <Reveal className="relative overflow-hidden rounded-2xl band px-6 py-16 md:px-16 md:py-20">
-          <img
-            src={asset('images/mark.png')}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute -bottom-16 -right-10 w-72 opacity-[0.12] mix-blend-luminosity md:w-96"
+          <Mark
+            variant="reversed"
+            className="pointer-events-none absolute -bottom-24 -right-16 w-[420px] opacity-25 md:-right-10 md:w-[560px]"
           />
-          <h2 className="relative max-w-2xl text-3xl font-semibold leading-[1.1] tracking-tightest md:text-5xl">
+          <h2 className="relative max-w-2xl text-3xl font-bold leading-[1.1] tracking-tightest md:text-5xl">
             {title}
           </h2>
           <p className="relative mt-5 max-w-[50ch] text-base leading-relaxed opacity-85 md:text-lg">{sub}</p>
@@ -203,7 +207,7 @@ export function OnAccentButton({
       to={to}
       className={
         solid
-          ? 'btn bg-white text-[#1263a8] hover:bg-white/90'
+          ? 'btn bg-white text-[#0c335f] hover:bg-white/90'
           : 'btn border border-white/40 text-white hover:bg-white/10'
       }
     >

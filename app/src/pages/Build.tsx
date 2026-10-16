@@ -43,11 +43,11 @@ const KIT = [
   {
     icon: PlugsConnected,
     title: 'A standard connection to the platform',
-    body: 'BlueStep exposes your forms, fields, permissions, and screens over MCP, the open standard modern AI tools speak.',
+    body: 'Attune exposes your forms, fields, permissions, and screens over MCP, the open standard modern AI tools speak.',
   },
   {
     icon: BookOpenText,
-    title: 'The BlueStep reference',
+    title: 'The Attune reference',
     body: '15 years of platform knowledge and every known trap, written down so your AI reads it before it builds.',
   },
   {
@@ -70,7 +70,7 @@ const STARTS = [
     to: '/marketplace',
     icon: Storefront,
     name: 'Marketplace',
-    price: 'Free features from BlueStep',
+    price: 'Free features from Attune',
     t: 'Take what others built.',
     b: 'Features built for real programs. Your AI fits them to your system.',
   },
@@ -126,11 +126,11 @@ export default function Build() {
         <Container className="grid items-center gap-12 pb-16 pt-10 md:pt-14 lg:grid-cols-[1fr_1.05fr] lg:gap-16 lg:pb-24">
           <div className="rise">
             <p className="kicker mb-5">Build</p>
-            <h1 className="text-4xl font-semibold leading-[1.04] tracking-tightest md:text-6xl">
+            <h1 className="text-4xl font-bold leading-[1.04] tracking-tightest md:text-6xl">
               The EHR you build by asking.
             </h1>
             <p className="prose-body mt-6 max-w-[48ch]">
-              Bring your own AI tools. Describe what your program needs, and it gets built on BlueStep, the same way our
+              Bring your own AI tools. Describe what your program needs, and it gets built on Attune, the same way our
               own team builds.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
@@ -161,10 +161,10 @@ export default function Build() {
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <s.icon size={26} className={i === 0 ? 'text-[#60a5eb]' : 'text-accent'} />
+                    <s.icon size={26} className={i === 0 ? 'text-[#8bbfe9]' : 'text-accent'} />
                     <ArrowUpRight size={20} className="opacity-40 transition group-hover:opacity-100" />
                   </div>
-                  <p className={`mt-10 text-sm font-medium ${i === 0 ? 'text-[#60a5eb]' : 'text-accent'}`}>{s.name}</p>
+                  <p className={`mt-10 text-sm font-medium ${i === 0 ? 'text-[#8bbfe9]' : 'text-accent'}`}>{s.name}</p>
                   <h3 className="mt-1 text-2xl font-semibold tracking-tight">{s.t}</h3>
                   <p className={`mt-3 leading-relaxed ${i === 0 ? 'opacity-75' : 'text-muted'}`}>{s.b}</p>
                   <p className={`mt-auto pt-8 text-sm ${i === 0 ? 'opacity-60' : 'text-faint'}`}>{s.price}</p>
@@ -201,7 +201,7 @@ export default function Build() {
 
       <section className="py-24 md:py-32">
         <Container>
-          <Heading title="What builders get." sub="The same tooling BlueStep engineers use every day. It works with any AI tool that speaks MCP." />
+          <Heading title="What builders get." sub="The same tooling our engineers use every day. It works with any AI tool that speaks MCP." />
           <div className="mt-14 grid gap-x-12 gap-y-12 md:grid-cols-2">
             {KIT.map((k, i) => (
               <Reveal key={k.title} delay={i * 70} className="flex gap-5">

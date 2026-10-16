@@ -36,7 +36,7 @@ export const PRODUCTS: Product[] = [
     sections: [
       {
         heading: 'Clinical documentation',
-        pain: 'Residential clinicians document the same clinical picture three times a week: session note, weekly summary, utilization review. BlueStep captures it once and reuses it everywhere.',
+        pain: 'Residential clinicians document the same clinical picture three times a week: session note, weekly summary, utilization review. Attune captures it once and reuses it everywhere.',
         bullets: [
           'Individual, family, group, and psychiatrist notes with fields that match how the session runs',
           'Medical and nursing notes in the same record. No parallel chart.',
@@ -63,7 +63,7 @@ export const PRODUCTS: Product[] = [
       },
       {
         heading: 'Lock, unlock, and cosignature',
-        pain: 'Cosignature rules vary by licensure, state, and payer. Surveyors want every unlock time-stamped and visible. BlueStep captures all of it.',
+        pain: 'Cosignature rules vary by licensure, state, and payer. Surveyors want every unlock time-stamped and visible. Attune captures all of it.',
         bullets: [
           'Notes lock the moment the clinician signs',
           'Admin unlock with a captured reason and a full audit trail',

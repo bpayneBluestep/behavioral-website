@@ -3,50 +3,66 @@
 @tailwind utilities;
 
 /* ── Tokens ────────────────────────────────────────────────────────────────
-   One accent (BlueStep logo blue, #1263A8). Neutrals are cool grays.
-   Theme = data-theme on <html>, set before paint by the script in index.html:
-   the visitor's saved choice, else the OS setting. See components/ThemeToggle. */
+   Attune Health brand (guidelines v1.0, Oct 2026): navy #0C335F for text and dark
+   sections, blue #3180C3 and teal #1D9999 as accents, mostly white and paper.
+   Blue = the platform (Build), teal = the people (Full-service), as in the mark.
+   Text-sized blue and teal are deepened slightly so they pass WCAG AA on white;
+   the exact brand values are used for fills (see the brand-* colors in tailwind).
+   Dark mode is deep navy; on it, teal shifts to light teal #72D0D0, per the guide.
+   Theme = data-theme on <html>, set before paint by the script in index.html. */
 :root {
-  --bg: 250 250 251;
+  --bg: 251 251 251;
   --surface: 255 255 255;
-  --raised: 243 245 248;
-  --ink: 14 17 22;
-  --muted: 82 91 104;
-  --faint: 128 137 150;
-  --line: 226 230 236;
-  --accent: 18 99 168;
+  --raised: 243 246 250;
+  --ink: 12 51 95;
+  --muted: 43 71 102;
+  --faint: 122 139 160;
+  --line: 229 234 240;
+  --accent: 37 108 168;
   --accent-ink: 255 255 255;
-  --accent-soft: 232 240 249;
+  --accent-soft: 233 242 250;
+  --teal: 22 128 128;
+  --teal-soft: 228 245 245;
+  --primary: 12 51 95;
+  --primary-ink: 255 255 255;
   color-scheme: light;
 }
 
 :root[data-theme='dark'] {
-  --bg: 10 13 18;
-  --surface: 17 21 28;
-  --raised: 24 29 38;
-  --ink: 237 240 245;
-  --muted: 160 169 182;
-  --faint: 118 128 142;
-  --line: 36 42 53;
-  --accent: 96 165 235;
-  --accent-ink: 8 20 36;
-  --accent-soft: 16 35 58;
+  --bg: 6 22 41;
+  --surface: 10 32 58;
+  --raised: 15 42 74;
+  --ink: 240 245 250;
+  --muted: 176 195 216;
+  --faint: 124 146 172;
+  --line: 28 55 88;
+  --accent: 116 176 230;
+  --accent-ink: 6 22 41;
+  --accent-soft: 14 44 78;
+  --teal: 114 208 208;
+  --teal-soft: 10 50 60;
+  --primary: 114 208 208;
+  --primary-ink: 12 51 95;
   color-scheme: dark;
 }
 
 /* No-JS fallback: before the theme script runs (or without JS), follow the OS. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --bg: 10 13 18;
-    --surface: 17 21 28;
-    --raised: 24 29 38;
-    --ink: 237 240 245;
-    --muted: 160 169 182;
-    --faint: 118 128 142;
-    --line: 36 42 53;
-    --accent: 96 165 235;
-    --accent-ink: 8 20 36;
-    --accent-soft: 16 35 58;
+    --bg: 6 22 41;
+    --surface: 10 32 58;
+    --raised: 15 42 74;
+    --ink: 240 245 250;
+    --muted: 176 195 216;
+    --faint: 124 146 172;
+    --line: 28 55 88;
+    --accent: 116 176 230;
+    --accent-ink: 6 22 41;
+    --accent-soft: 14 44 78;
+    --teal: 114 208 208;
+    --teal-soft: 10 50 60;
+    --primary: 114 208 208;
+    --primary-ink: 12 51 95;
     color-scheme: dark;
   }
 }
@@ -58,7 +74,6 @@
   }
   body {
     @apply bg-bg text-ink antialiased;
-    font-feature-settings: 'ss01', 'cv11';
   }
   :focus-visible {
     outline: 2px solid rgb(var(--accent));
@@ -72,10 +87,10 @@
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition duration-200 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition duration-200 active:scale-[0.98];
   }
   .btn-primary {
-    @apply btn bg-accent text-accent-ink hover:brightness-110;
+    @apply btn bg-primary text-primary-ink hover:brightness-110 dark:hover:brightness-105;
   }
   .btn-ghost {
     @apply btn border border-line bg-surface text-ink hover:border-faint;
@@ -83,20 +98,19 @@
   .card {
     @apply rounded-2xl border border-line bg-surface;
   }
-  /* Fixed dark surface, the same in both themes. Used for the one featured panel
-     per section. In dark mode it gets a hairline so it separates from the page. */
+  /* Fixed navy surface, the same in both themes ("navy for dark sections"). */
   .panel-dark {
-    @apply bg-[#0e1116] text-[#eef1f5] dark:border dark:border-line dark:bg-[#151a22];
+    @apply bg-[#0c335f] text-white dark:ring-1 dark:ring-inset dark:ring-white/10;
   }
-  /* Closing band: always the logo blue, white text, in both themes. */
+  /* Closing band: navy, white text, in both themes. Carries the mark (see ClosingCTA). */
   .band {
-    @apply bg-[#1263a8] text-white;
+    @apply bg-[#0c335f] text-white;
   }
   .prose-body {
     @apply text-base leading-relaxed text-muted md:text-lg;
   }
   .kicker {
-    @apply font-mono text-xs uppercase tracking-[0.14em] text-accent;
+    @apply text-[13px] font-semibold leading-[18px] text-teal;
   }
 }
 

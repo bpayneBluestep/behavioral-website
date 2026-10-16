@@ -62,7 +62,7 @@ export default function BuildLog() {
       <div className="flex items-center justify-between border-b border-line pb-4">
         <div className="flex items-center gap-2 text-sm font-medium">
           <Sparkle size={16} weight="fill" className="text-accent" />
-          Your AI on BlueStep
+          Your AI on Attune
         </div>
         <span className="font-mono text-[11px] text-faint">Example build</span>
       </div>

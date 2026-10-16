@@ -18,11 +18,11 @@ export default function ProductPage() {
       <section className="border-b border-line">
         <Container className="grid items-center gap-12 pb-16 pt-12 md:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pb-24">
           <div className="rise">
-            <p className="mb-5 flex items-center gap-2 text-sm font-medium text-accent">
+            <p className="mb-5 flex items-center gap-2 text-sm font-medium text-teal">
               <Icon size={18} weight="bold" />
               {product.name}
             </p>
-            <h1 className="text-4xl font-semibold leading-[1.05] tracking-tightest md:text-[3.4rem]">{product.headline}</h1>
+            <h1 className="text-4xl font-bold leading-[1.05] tracking-tightest md:text-[3.4rem]">{product.headline}</h1>
             <p className="prose-body mt-6 max-w-[52ch]">{product.sub}</p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <Button to={CTA.demo.href} arrow>
@@ -57,12 +57,12 @@ export default function ProductPage() {
           <div className="space-y-20">
             {product.sections.map((s, i) => (
               <Reveal key={s.heading} id={`s${i}`} className="scroll-mt-24">
-                <h2 className="text-2xl font-semibold tracking-tight md:text-4xl md:tracking-tightest">{s.heading}</h2>
+                <h2 className="text-2xl font-bold tracking-tight md:text-4xl md:tracking-tightest">{s.heading}</h2>
                 <p className="prose-body mt-4 max-w-[60ch]">{s.pain}</p>
                 <ul className="mt-7 grid gap-3 md:grid-cols-2">
                   {s.bullets.map((b) => (
                     <li key={b} className="card flex gap-3 p-5 text-[15px] leading-relaxed">
-                      <Check size={18} weight="bold" className="mt-0.5 shrink-0 text-accent" />
+                      <Check size={18} weight="bold" className="mt-0.5 shrink-0 text-teal" />
                       {b}
                     </li>
                   ))}
@@ -77,7 +77,7 @@ export default function ProductPage() {
         <section className="border-y border-line bg-surface py-24">
           <Container className="max-w-3xl text-center">
             <Reveal>
-              <p className="text-3xl font-semibold tracking-tightest md:text-5xl">{product.quote.headline}</p>
+              <p className="text-3xl font-bold tracking-tightest md:text-5xl">{product.quote.headline}</p>
               <p className="prose-body mx-auto mt-6 max-w-[54ch]">{product.quote.body}</p>
             </Reveal>
           </Container>
@@ -88,7 +88,7 @@ export default function ProductPage() {
         <Container className="grid gap-4 lg:grid-cols-[1.2fr_1fr]">
           <Reveal>
             <Link to="/build" className="group panel-dark flex h-full flex-col justify-between rounded-2xl p-8 md:p-10">
-              <Sparkle size={26} weight="fill" className="text-[#60a5eb]" />
+              <Sparkle size={26} weight="fill" className="text-[#8bbfe9]" />
               <div className="mt-10">
                 <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">Run it as-is, or make it yours.</h2>
                 <p className="mt-3 max-w-md leading-relaxed opacity-75">
@@ -105,7 +105,7 @@ export default function ProductPage() {
             {others.map((o, i) => (
               <Reveal key={o.slug} delay={i * 60}>
                 <Link to={`/products/${o.slug}`} className="card group flex h-full items-center gap-4 p-5 transition-colors hover:border-faint">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-soft text-teal">
                     <o.icon size={20} />
                   </span>
                   <span>

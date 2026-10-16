@@ -19,7 +19,7 @@ export default function RolePage() {
         <Container className="grid items-center gap-12 pb-16 pt-12 md:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pb-24">
           <div className="rise">
             <p className="kicker mb-5">{role.title}</p>
-            <h1 className="text-4xl font-semibold leading-[1.05] tracking-tightest md:text-[3.4rem]">{role.headline}</h1>
+            <h1 className="text-4xl font-bold leading-[1.05] tracking-tightest md:text-[3.4rem]">{role.headline}</h1>
             <p className="prose-body mt-6 max-w-[52ch]">{role.sub}</p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Button to={CTA.demo.href} arrow>
@@ -55,11 +55,11 @@ export default function RolePage() {
 
       <section className="border-y border-line bg-surface py-24 md:py-28">
         <Container>
-          <Heading title="What changes with BlueStep." />
+          <Heading title="What changes with Attune." />
           <div className={`mt-12 grid gap-x-12 gap-y-10 ${role.features.length > 4 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
             {role.features.map((f, i) => (
               <Reveal key={f.name} delay={i * 60} className="flex gap-5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teal-soft text-teal">
                   <f.icon size={22} />
                 </span>
                 <div>
@@ -78,16 +78,16 @@ export default function RolePage() {
             <Reveal>
               <Link
                 to="/build"
-                className="group flex flex-col gap-4 rounded-2xl border border-accent/25 bg-accent-soft p-7 transition-colors hover:border-accent/50 md:flex-row md:items-center md:justify-between md:p-8"
+                className="group flex flex-col gap-4 rounded-2xl border border-teal/25 bg-teal-soft p-7 transition-colors hover:border-teal/50 md:flex-row md:items-center md:justify-between md:p-8"
               >
                 <span className="flex items-start gap-4">
-                  <Sparkle size={22} weight="fill" className="mt-0.5 shrink-0 text-accent" />
+                  <Sparkle size={22} weight="fill" className="mt-0.5 shrink-0 text-teal" />
                   <span>
                     <span className="block font-semibold">Need something we didn&apos;t build?</span>
                     <span className="mt-1 block text-muted">{role.build}</span>
                   </span>
                 </span>
-                <span className="inline-flex shrink-0 items-center gap-2 text-sm font-medium text-accent">
+                <span className="inline-flex shrink-0 items-center gap-2 text-sm font-medium text-teal">
                   {CTA.how.label}
                   <ArrowRight size={16} weight="bold" className="transition-transform group-hover:translate-x-0.5" />
                 </span>

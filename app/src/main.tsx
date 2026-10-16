@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import '@fontsource-variable/geist'
+import '@fontsource-variable/plus-jakarta-sans'
 import '@fontsource-variable/geist-mono'
 import App from './App'
 import { initAnalytics } from './analytics'

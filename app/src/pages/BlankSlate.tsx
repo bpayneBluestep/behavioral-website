@@ -28,7 +28,7 @@ const IDEAS = [
 const IN_THE_BOX = [
   { icon: ShieldCheck, t: 'HIPAA hosting and a BAA', b: 'Store anything, including PHI, from day one.' },
   { icon: PlugsConnected, t: 'An MCP connection', b: 'Point your own AI tools at it and start building.' },
-  { icon: BookOpenText, t: 'The BlueStep reference', b: 'Patterns and known traps, so your AI builds it right the first time.' },
+  { icon: BookOpenText, t: 'The Attune reference', b: 'Patterns and known traps, so your AI builds it right the first time.' },
   { icon: Storefront, t: 'The marketplace', b: 'Start from a feature another program built instead of from zero.' },
 ]
 
@@ -66,7 +66,7 @@ export default function BlankSlate() {
                     className="absolute inset-0 h-full w-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d12]/90 via-[#0a0d12]/35 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#071a31]/90 via-[#071a31]/35 to-transparent" />
                   <div className="relative flex h-full min-h-[340px] flex-col justify-end p-8 text-white">
                     <idea.icon size={30} />
                     <h3 className="mt-4 text-2xl font-semibold tracking-tight">{idea.t}</h3>
@@ -109,12 +109,12 @@ export default function BlankSlate() {
         <Container className="max-w-3xl text-center">
           <Reveal>
             <Stack size={32} className="mx-auto text-accent" />
-            <h2 className="mt-6 text-3xl font-semibold leading-[1.15] tracking-tightest md:text-5xl">
+            <h2 className="mt-6 text-3xl font-bold leading-[1.15] tracking-tightest md:text-5xl">
               Every app shares one secure database.
             </h2>
             <p className="prose-body mx-auto mt-6 max-w-[54ch]">
               The dashboard sees what the tracker records. The portal shows what the forms collect. And when you want
-              clinical documentation, the BlueStep EHR runs on the same platform.
+              clinical documentation, the Attune EHR runs on the same platform.
             </p>
             <div className="mt-9 flex justify-center">
               <Button to="/products/ehr" variant="ghost" arrow>

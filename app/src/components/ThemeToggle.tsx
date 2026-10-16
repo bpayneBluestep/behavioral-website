@@ -12,7 +12,7 @@ const current = (): Theme => (document.documentElement.dataset.theme === 'dark' 
 
 function apply(t: Theme) {
   document.documentElement.dataset.theme = t
-  document.querySelector<HTMLMetaElement>('meta[name=theme-color]')?.setAttribute('content', t === 'dark' ? '#0a0d12' : '#fafafb')
+  document.querySelector<HTMLMetaElement>('meta[name=theme-color]')?.setAttribute('content', t === 'dark' ? '#061629' : '#0c335f')
 }
 
 function saved(): Theme | null {

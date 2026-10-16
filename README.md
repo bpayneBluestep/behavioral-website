@@ -1,6 +1,6 @@
 # behavioral-website
 
-The BlueStep Behavioral marketing site: an AI-first rebuild around the builder strategy
+The Attune Health marketing site (formerly BlueStep Behavioral): an AI-first rebuild around the builder strategy
 (Blueprint, Slate, Full-service, and a curated behavioral health marketplace).
 
 Static SPA deployed as a BlueStep GitSite at `https://behavioralweb.bluestep.net/`.
@@ -55,4 +55,4 @@ checking the `assets/index-*.js` hash matches the repo, not by webhook status.
   `bpayne@bluestep.net` instead of failing.
 - **Blueprint ($750) and Slate ($300) prices are pilot hypotheses** and are labeled
   "Pilot pricing" on the page.
-- Brand name is `BlueStep Behavioral` pending the rebrand.
+- Brand: Attune Health (guidelines v1.0, assets in app/public/brand + favicons). The pre-rebrand site is tagged `v-bluestep-behavioral-2026-10-16`.

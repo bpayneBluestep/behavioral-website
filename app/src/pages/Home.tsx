@@ -1,11 +1,13 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Check, Code, Lifebuoy, ShieldCheck, Stack, Timer } from '@phosphor-icons/react'
 import { PLANS, usd } from '../data/pricing'
 import { CTA } from '../site'
+import { MARK_LEFT, MARK_RIGHT, MARK_VIEWBOX } from '../components/Mark'
 import { ClosingCTA, Container, Heading, OnAccentButton, Reveal, asset, useTitle } from '../ui'
 
-// The homepage is a fork: two ways to run the same EHR. Each panel leads into its
-// own hub (/full-service and /build), where the detail lives.
+// The homepage is a fork: two ways to run the same EHR, told through the Attune
+// mark. Each path leads into its own hub (/full-service and /build).
 
 const CLIENTS = [
   { name: 'Alpine Academy', file: 'alpine-academy.svg' },
@@ -18,32 +20,104 @@ const price = (id: string) => usd(PLANS.find((p) => p.id === id)!.price)
 
 const COMPARE: [string, string, string][] = [
   ['Who changes it', 'Our team, when you ask', 'Your team, whenever you want'],
-  ['How changes get made', 'Feature requests to BlueStep', 'Your own AI tools, on the platform'],
+  ['How changes get made', 'Feature requests to Attune', 'Your own AI tools, on the platform'],
   ['Getting started', 'Configured and trained by us', 'Blueprint (the full suite) or Slate (a blank slate)'],
   ['Support', 'Clinical, training, and technical', 'Technical. Build help is hourly.'],
   ['New features', 'Built and rolled out by us', 'Take them from the marketplace'],
   ['Starting price', `${price('full-service')} per program / month`, `${price('blank-slate')} per program / month`],
 ]
 
-function Fork() {
+/**
+ * The hero is the brand mark, used as the fork. Blue circle = the platform (Build),
+ * teal circle = the people (Full-service), and the open overlap is where they meet:
+ * one shared record. Each circle is a link; hovering one quiets the other.
+ * Text inside the circles is large and bold so white on blue/teal passes AA-large;
+ * in dark mode the teal shifts to light teal (brand rule), so its text goes navy.
+ */
+function HeroMark() {
+  const [hover, setHover] = useState<'build' | 'full' | null>(null)
+  const shape = 'transition-[opacity,transform] duration-500 ease-out [transform-box:fill-box] [transform-origin:center]'
+  const on = (side: 'build' | 'full') => ({
+    onMouseEnter: () => setHover(side),
+    onMouseLeave: () => setHover(null),
+    onFocus: () => setHover(side),
+    onBlur: () => setHover(null),
+  })
   return (
-    <section className="relative overflow-hidden" data-track-section="home-fork">
-      <div
+    <div className="relative mx-auto aspect-[45.5/31.5] w-full max-w-[600px]">
+      <svg viewBox={MARK_VIEWBOX} className="absolute inset-0 h-full w-full overflow-visible" aria-hidden>
+        <path
+          d={MARK_LEFT}
+          className={`fill-brand-blue ${shape} ${hover === 'full' ? 'opacity-35' : ''} ${hover === 'build' ? 'scale-[1.025]' : ''}`}
+        />
+        <path
+          d={MARK_RIGHT}
+          className={`fill-brand-teal dark:fill-brand-light-teal ${shape} ${hover === 'build' ? 'opacity-35' : ''} ${
+            hover === 'full' ? 'scale-[1.025]' : ''
+          }`}
+        />
+      </svg>
+      <Link
+        to="/build"
+        {...on('build')}
+        className="absolute inset-y-[8%] left-[2%] flex w-[30%] flex-col items-center justify-center rounded-full text-center text-white focus-visible:outline-offset-8"
+      >
+        <span className="text-xl font-bold sm:whitespace-nowrap tracking-tightest sm:text-2xl lg:text-[1.65rem]">Build</span>
+        <span className="mt-1 hidden text-lg font-bold opacity-90 sm:block">You change it</span>
+      </Link>
+      <Link
+        to="/full-service"
+        {...on('full')}
+        className="absolute inset-y-[8%] right-[2%] flex w-[30%] flex-col items-center justify-center rounded-full text-center text-white focus-visible:outline-offset-8 dark:text-[#0c335f]"
+      >
+        <span className="text-xl font-bold sm:whitespace-nowrap tracking-tightest sm:text-2xl lg:text-[1.65rem]">Full-service</span>
+        <span className="mt-1 hidden text-lg font-bold opacity-90 sm:block">We run it</span>
+      </Link>
+      <p
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[460px] bg-[radial-gradient(50%_60%_at_50%_0%,rgb(var(--accent)/0.10),transparent_70%)]"
-      />
-      <Container className="relative pb-20 pt-12 md:pt-16">
-        <div className="rise mx-auto max-w-4xl text-center">
-          <h1 className="text-balance text-[2.6rem] font-semibold leading-[1.03] tracking-tightest sm:text-6xl lg:text-[4.2rem]">
-            One EHR. Two ways to run it.
-          </h1>
-          <p className="prose-body mx-auto mt-6 max-w-[52ch]">
-            Built for behavioral health. Let our team run it for you, or build on it yourself with the AI tools
-            you already use.
-          </p>
-        </div>
+        className="pointer-events-none absolute left-1/2 top-1/2 w-[18%] -translate-x-1/2 -translate-y-1/2 text-center text-[11px] font-semibold leading-tight text-ink sm:text-sm"
+      >
+        One record
+      </p>
+    </div>
+  )
+}
 
-        <div className="mt-14 grid gap-4 lg:grid-cols-2">
+function Hero() {
+  return (
+    <section className="relative overflow-hidden" data-track-section="home-hero">
+      <Container className="grid items-center gap-12 pb-20 pt-12 md:pt-16 lg:grid-cols-[1fr_1.05fr] lg:gap-10 lg:pb-28 lg:pt-20">
+        <div className="rise">
+          <p className="kicker mb-5">Behavioral health EHR</p>
+          <h1 className="text-balance text-[2.6rem] font-bold leading-[1.06] tracking-tightest sm:text-6xl lg:text-[3.6rem]">
+            Attuned to your operations, and to you.
+          </h1>
+          <p className="prose-body mt-6 max-w-[48ch]">
+            One EHR, two ways to run it. Build it yourself with the AI tools you already use, or let a team that knows
+            how programs run do it for you.
+          </p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link to={CTA.demo.href} className="btn-primary">
+              {CTA.demo.label}
+            </Link>
+            <a href="#paths" className="btn-ghost">
+              Compare the two paths
+            </a>
+          </div>
+        </div>
+        <div className="rise [animation-delay:150ms]">
+          <HeroMark />
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+function Paths() {
+  return (
+    <section id="paths" className="scroll-mt-20 pb-24 md:pb-32" data-track-section="home-fork">
+      <Container>
+        <div className="grid gap-4 lg:grid-cols-2">
           <Reveal>
             <article className="card flex h-full flex-col overflow-hidden">
               <img
@@ -52,17 +126,17 @@ function Fork() {
                 className="aspect-[16/8] w-full object-cover"
               />
               <div className="flex flex-1 flex-col p-8 md:p-10">
-                <p className="flex items-center gap-2 text-sm font-medium text-accent">
+                <p className="flex items-center gap-2 text-sm font-semibold text-teal">
                   <Lifebuoy size={18} weight="bold" />
                   Full-service
                 </p>
-                <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-tightest md:text-4xl">
+                <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tightest md:text-4xl">
                   We run it. You run your program.
                 </h2>
                 <ul className="mt-6 space-y-3">
                   {['Configured for your program by our team', 'Clinical onboarding and training for every role', 'A person who knows your program by name'].map((b) => (
-                    <li key={b} className="flex gap-3 text-[15px]">
-                      <Check size={18} weight="bold" className="mt-0.5 shrink-0 text-accent" />
+                    <li key={b} className="flex gap-3 text-[15px] text-muted">
+                      <Check size={18} weight="bold" className="mt-0.5 shrink-0 text-teal" />
                       {b}
                     </li>
                   ))}
@@ -86,33 +160,33 @@ function Fork() {
                   alt="A program director building on a laptop"
                   className="h-full w-full object-cover opacity-55"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0e1116] to-transparent dark:from-[#151a22]" />
-                <span className="absolute right-5 top-5 rounded-full bg-[#1263a8] px-2.5 py-1 text-xs font-semibold text-white">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0c335f] to-transparent" />
+                <span className="absolute right-5 top-5 rounded-full bg-brand-blue px-2.5 py-1 text-xs font-semibold text-white">
                   New
                 </span>
               </div>
               <div className="flex flex-1 flex-col p-8 md:p-10">
-                <p className="flex items-center gap-2 text-sm font-medium text-[#60a5eb]">
+                <p className="flex items-center gap-2 text-sm font-semibold text-[#8bbfe9]">
                   <Code size={18} weight="bold" />
                   Build
                 </p>
-                <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-tightest md:text-4xl">
+                <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tightest md:text-4xl">
                   Our EHR. Yours to change.
                 </h2>
                 <ul className="mt-6 space-y-3">
                   {['Blueprint: the full suite, ready to build on', 'Slate: a blank slate to build anything', 'Describe a change. Your AI builds it the same day.'].map((b) => (
                     <li key={b} className="flex gap-3 text-[15px] opacity-90">
-                      <Check size={18} weight="bold" className="mt-0.5 shrink-0 text-[#60a5eb]" />
+                      <Check size={18} weight="bold" className="mt-0.5 shrink-0 text-[#8bbfe9]" />
                       {b}
                     </li>
                   ))}
                 </ul>
                 <div className="mt-auto flex flex-wrap items-center gap-3 pt-9">
-                  <Link to={CTA.how.href} className="btn group bg-white text-[#0e1116] hover:bg-white/90">
+                  <Link to={CTA.how.href} className="btn group bg-white text-[#0c335f] hover:bg-white/90">
                     {CTA.how.label}
                     <ArrowRight size={16} weight="bold" className="transition-transform group-hover:translate-x-0.5" />
                   </Link>
-                  <span className="text-sm opacity-70">From {price('blank-slate')} per program / month</span>
+                  <span className="text-sm opacity-75">From {price('blank-slate')} per program / month</span>
                 </div>
               </div>
             </article>
@@ -125,7 +199,7 @@ function Fork() {
 
 function Clients() {
   return (
-    <section aria-label="Programs running on BlueStep" className="border-y border-line bg-surface">
+    <section aria-label="Programs running on Attune" className="border-y border-line bg-surface">
       <Container className="flex flex-wrap items-center justify-center gap-x-14 gap-y-8 py-10">
         {CLIENTS.map((c) => (
           <img
@@ -179,7 +253,7 @@ function Compare() {
 
 function EitherWay() {
   const items = [
-    { icon: Timer, t: '15 years in behavioral health', b: 'Our team includes people who worked in residential treatment, in direct care and program leadership.' },
+    { icon: Timer, t: 'Built on BlueStep', b: 'Attune runs on the BlueStep platform, 15 years in behavioral health. Our team includes people who worked in residential treatment.' },
     { icon: Stack, t: 'One record', b: 'EHR, CRM, Outcomes, and BlueIQ share one database. Nothing gets entered twice.' },
     { icon: ShieldCheck, t: 'HIPAA hosting and a BAA', b: 'Every plan, every path. Every change is logged and every push is a restorable snapshot.' },
   ]
@@ -214,7 +288,7 @@ function Origin() {
           />
         </Reveal>
         <Reveal delay={100}>
-          <h2 className="text-3xl font-semibold leading-[1.1] tracking-tightest md:text-5xl">
+          <h2 className="text-3xl font-bold leading-[1.1] tracking-tightest md:text-5xl">
             We know how programs run.
           </h2>
           <p className="prose-body mt-6 max-w-[52ch]">
@@ -235,7 +309,8 @@ export default function Home() {
   useTitle()
   return (
     <>
-      <Fork />
+      <Hero />
+      <Paths />
       <Clients />
       <Compare />
       <EitherWay />

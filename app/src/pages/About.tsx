@@ -5,12 +5,12 @@ const TEAM = [
   {
     name: 'Brandon Payne',
     role: 'Executive Director',
-    bio: 'Started as an intern at Havenwood Academy, a residential treatment center, before joining BlueStep. Leads the behavioral health division.',
+    bio: 'Started as an intern at Havenwood Academy, a residential treatment center, before joining BlueStep. Leads Attune Health.',
   },
   {
     name: 'Roy',
     role: 'Chief Technology Officer',
-    bio: 'Leads the architecture of the BlueStep platform that every program and builder runs on.',
+    bio: 'Leads the architecture of the BlueStep platform that Attune and every builder runs on.',
   },
   {
     name: 'Noel',

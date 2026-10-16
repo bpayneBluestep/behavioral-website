@@ -93,9 +93,9 @@ export default function Privacy() {
           <p>To see or delete anything you've sent us, email {mail}.</p>
         </Section>
 
-        <Section title="BlueStep products">
+        <Section title="Attune products">
           <p>
-            This page covers this website only. Data in the BlueStep EHR, CRM, Outcomes, and BlueIQ is governed by your
+            This page covers this website only. Data in the Attune EHR, CRM, Outcomes, and BlueIQ is governed by your
             program's agreement with {BRAND.legal} and our Business Associate Agreement.
           </p>
         </Section>

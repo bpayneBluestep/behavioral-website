@@ -10,7 +10,7 @@ const WHY = [
   { icon: Buildings, t: 'People who have worked in programs', b: 'Members of our team started in residential treatment, in direct care and program leadership. That perspective shapes what we build.' },
   { icon: Timer, t: '15 years of clinical workflow depth', b: 'Our team includes former direct care staff and program leaders. We know the documentation, the audits, and the shift-change handoffs.' },
   { icon: ChatsCircle, t: 'You reach a person, not a ticket queue', b: 'Call with a question and you reach someone who knows your program by name. There is no tier-1 support layer.' },
-  { icon: ShieldCheck, t: 'Built for compliance, not workarounds', b: 'Behavioral health compliance is its own thing. BlueStep is built around the documentation, incidents, and outcomes you actually face.' },
+  { icon: ShieldCheck, t: 'Built for compliance, not workarounds', b: 'Behavioral health compliance is its own thing. Attune is built around the documentation, incidents, and outcomes you actually face.' },
 ]
 
 const INCLUDED = [
@@ -29,7 +29,7 @@ export default function FullService() {
         <Container className="grid items-center gap-12 pb-16 pt-10 md:pt-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pb-24">
           <div className="rise">
             <p className="kicker mb-5">Full-service</p>
-            <h1 className="text-4xl font-semibold leading-[1.04] tracking-tightest md:text-6xl">
+            <h1 className="text-4xl font-bold leading-[1.04] tracking-tightest md:text-6xl">
               We run it. You run your program.
             </h1>
             <p className="prose-body mt-6 max-w-[50ch]">
@@ -58,7 +58,7 @@ export default function FullService() {
           <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {INCLUDED.map(([t, b], i) => (
               <Reveal key={t} delay={i * 60} className="bg-surface p-7">
-                <span className="text-sm font-medium text-accent">{i + 1}</span>
+                <span className="text-sm font-medium text-teal">{i + 1}</span>
                 <h3 className="mt-6 font-semibold">{t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{b}</p>
               </Reveal>
@@ -79,10 +79,10 @@ export default function FullService() {
                 <Link
                   to={`/products/${p.slug}`}
                   className={`group flex h-full min-h-[240px] flex-col rounded-2xl p-7 transition ${
-                    i === 0 ? 'bg-accent text-accent-ink hover:brightness-110' : 'card hover:border-faint'
+                    i === 0 ? 'panel-dark hover:brightness-110' : 'card hover:border-faint'
                   }`}
                 >
-                  <p.icon size={28} className={i === 0 ? '' : 'text-accent'} />
+                  <p.icon size={28} className={i === 0 ? 'text-brand-light-teal' : 'text-teal'} />
                   <h3 className="mt-auto pt-10 text-xl font-semibold tracking-tight">{p.name}</h3>
                   <p className={`mt-2 text-sm leading-relaxed ${i === 0 ? 'opacity-85' : 'text-muted'}`}>{p.card}</p>
                   <p className={`mt-4 text-xs ${i === 0 ? 'opacity-75' : 'text-faint'}`}>{p.price}</p>
@@ -110,15 +110,15 @@ export default function FullService() {
                   </div>
                   <p className="mt-4 flex items-center justify-between font-semibold">
                     For {r.nav.toLowerCase()}
-                    <ArrowUpRight size={18} className="text-faint transition group-hover:text-accent" />
+                    <ArrowUpRight size={18} className="text-faint transition group-hover:text-teal" />
                   </p>
                   <p className="mt-1 text-sm leading-relaxed text-muted">{r.headline}</p>
                 </Link>
               </Reveal>
             ))}
           </div>
-          <Link to="/for-referring-professionals" className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-accent">
-            Educational consultant? See BlueStep for referring professionals
+          <Link to="/for-referring-professionals" className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-teal">
+            Educational consultant? See Attune for referring professionals
             <ArrowRight size={16} weight="bold" />
           </Link>
         </Container>
@@ -131,15 +131,15 @@ export default function FullService() {
               title="Four things a generic EHR vendor can't say."
               sub="Most of what we build starts with a problem a program brought to us."
             />
-            <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent">
+            <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-teal">
               Our story
               <ArrowRight size={16} weight="bold" />
             </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {WHY.map((w, i) => (
-              <Reveal key={w.t} delay={i * 60} className={`rounded-2xl p-7 ${i === 0 ? 'bg-accent-soft' : 'card'}`}>
-                <w.icon size={26} className="text-accent" />
+              <Reveal key={w.t} delay={i * 60} className={`rounded-2xl p-7 ${i === 0 ? 'bg-teal-soft' : 'card'}`}>
+                <w.icon size={26} className="text-teal" />
                 <h3 className="mt-8 text-lg font-semibold leading-snug tracking-tight">{w.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{w.b}</p>
               </Reveal>

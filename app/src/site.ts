@@ -1,13 +1,14 @@
-// Brand + navigation in one place. The behavioral division is being rebranded
-// this quarter: change BRAND here and every page follows.
+// Brand + navigation in one place. Attune Health is the rebrand of BlueStep
+// Behavioral; it runs on the BlueStep platform, and BlueStep Systems is the legal entity.
+// Name rule (brand guide): "Attune Health" on first mention, "Attune" after.
 //
 // The site is organized as two paths from the homepage:
 //   Full-service  we run it (products, roles, clinical onboarding)
 //   Build         you change it with your own AI tools (builder, marketplace, Slate)
 
 export const BRAND = {
-  name: 'BlueStep Behavioral',
-  short: 'Behavioral',
+  name: 'Attune Health',
+  short: 'Attune',
   legal: 'BlueStep Systems',
   email: 'bpayne@bluestep.net',
 }

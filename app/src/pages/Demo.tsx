@@ -133,7 +133,7 @@ export default function Demo() {
     <section className="py-14 md:py-20">
       <Container className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="rise lg:pt-6">
-          <h1 className="text-4xl font-semibold leading-[1.05] tracking-tightest md:text-6xl">Request a demo.</h1>
+          <h1 className="text-4xl font-bold leading-[1.05] tracking-tightest md:text-6xl">Request a demo.</h1>
           <p className="prose-body mt-6 max-w-[40ch]">
             You'll talk to someone who knows how residential programs run. Brandon or Carlos reads every message. No sales drip.
           </p>

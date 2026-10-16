@@ -76,7 +76,7 @@ export const ROLES: Role[] = [
     nav: 'Nurses',
     title: 'For Nurses',
     headline: 'One shift. One workflow. Not four systems.',
-    sub: 'A med pass across 30 residents, an incident to document, and a paper trail three bodies will audit. BlueStep puts all of it in one workflow.',
+    sub: 'A med pass across 30 residents, an incident to document, and a paper trail three bodies will audit. Attune puts all of it in one workflow.',
     image: 'images/heroes/for-nurses.jpg',
     alt: 'A nurse at a residential program',
     pains: [
@@ -121,7 +121,7 @@ export const ROLES: Role[] = [
     nav: 'Executives',
     title: 'For Executives',
     headline: 'Your program runs in real time. Your data should too.',
-    sub: "Payers want outcomes. Accreditors want proof, not binders. BlueStep gives leaders live operational data and compliance documentation that doesn't cost a weekend.",
+    sub: "Payers want outcomes. Accreditors want proof, not binders. Attune gives leaders live operational data and compliance documentation that doesn't cost a weekend.",
     image: 'images/heroes/for-executives.jpg',
     alt: 'Leaders reviewing outcome charts',
     pains: [
@@ -153,7 +153,7 @@ export const ROLES: Role[] = [
       { icon: SquaresFour, heading: 'Tools that fight the work', body: 'Sales CRMs assume a one-and-done deal. Your work is a long relationship with many placements.' },
     ],
     features: [
-      { icon: ArrowsLeftRight, name: 'One-click referral', body: "Refer a student and the full file lands in the program's BlueStep system. You choose what's included. Personal notes stay yours." },
+      { icon: ArrowsLeftRight, name: 'One-click referral', body: "Refer a student and the full file lands in the program's Attune system. You choose what's included. Personal notes stay yours." },
       { icon: Signature, name: 'Sign without the paper chase', body: 'Parents sign on their phone, you countersign, and the audit-trailed PDF files itself to the family record.' },
       { icon: Buildings, name: 'A program directory', body: 'A searchable library of programs across the country, with your own private ratings and tour notes on top.' },
       { icon: Sparkle, name: 'BlueIQ for the whole file', body: 'A summary, an organized profile, and cited answers from a student\'s documents. Dictate a note and it is filed for review.' },

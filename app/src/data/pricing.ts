@@ -31,7 +31,7 @@ export const PLANS = [
     includes: [
       'Everything in Slate',
       'The complete EHR: clinical, eMAR, CRM, outcomes',
-      'Every marketplace feature from BlueStep',
+      'Every marketplace feature from Attune',
       'Snapshot history on every change',
       'Technical support',
     ],

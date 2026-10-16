@@ -47,7 +47,7 @@ function Plans() {
                 </div>
                 <p className={`mt-2 text-sm ${featured ? 'opacity-70' : 'text-muted'}`}>{p.pitch}</p>
                 <p className="mt-8 flex items-baseline gap-2">
-                  <span className="text-5xl font-semibold tracking-tightest">{usd(p.price)}</span>
+                  <span className="text-5xl font-bold tracking-tightest">{usd(p.price)}</span>
                 </p>
                 <p className={`mt-1 text-sm ${featured ? 'opacity-70' : 'text-muted'}`}>{p.unit}</p>
                 <ul className="mt-8 space-y-3 text-sm">
@@ -192,7 +192,7 @@ function Calculator() {
             <div className="mt-4 flex items-end justify-between border-t border-line pt-4">
               <div>
                 <p className="text-sm text-muted">Estimated monthly</p>
-                <p className="text-4xl font-semibold tracking-tightest tabular-nums">{usd(monthly)}</p>
+                <p className="text-4xl font-bold tracking-tightest tabular-nums">{usd(monthly)}</p>
               </div>
               <p className="text-sm text-muted tabular-nums">{usd(monthly * 12)} / year</p>
             </div>
@@ -211,7 +211,7 @@ function Extras() {
       <Container className="grid gap-4 md:grid-cols-2">
         <Reveal className="card p-8">
           <h2 className="text-2xl font-semibold tracking-tight">Build help</h2>
-          <p className="mt-2 text-5xl font-semibold tracking-tightest">
+          <p className="mt-2 text-5xl font-bold tracking-tightest">
             ${BUILD_HELP_RATE}
             <span className="text-base font-normal text-muted"> / hour</span>
           </p>
@@ -225,7 +225,7 @@ function Extras() {
         </Reveal>
         <Reveal id="referring-professionals" delay={80} className="card scroll-mt-24 p-8">
           <h2 className="text-2xl font-semibold tracking-tight">Referring professionals</h2>
-          <p className="mt-2 text-5xl font-semibold tracking-tightest">
+          <p className="mt-2 text-5xl font-bold tracking-tightest">
             ${REFERRAL.perSeat}
             <span className="text-base font-normal text-muted"> / user / month</span>
           </p>

@@ -91,9 +91,8 @@ function Header() {
     <>
     <header className="sticky top-0 z-40 border-b border-line/80 bg-bg/80 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between gap-6">
-        <Link to="/" className="flex shrink-0 items-center gap-2.5" aria-label={`${BRAND.name} home`}>
-          <Logo className="h-6" />
-          <span className="border-l border-line pl-2.5 text-sm font-medium text-muted">{BRAND.short}</span>
+        <Link to="/" className="flex shrink-0 items-center" aria-label={`${BRAND.name} home`}>
+          <Logo className="h-[26px] md:h-7" />
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-0.5 lg:flex">
@@ -193,7 +192,8 @@ function Footer() {
         <div>
           <Logo className="h-7" />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
-            Behavioral health software from a team that knows how programs run.
+            Attuned to your operations, and to you. Behavioral health software from a team that knows how programs
+            run.
           </p>
           <Link to={CTA.demo.href} className="btn-primary mt-6">
             {CTA.demo.label}
@@ -234,7 +234,8 @@ function Footer() {
       </Container>
       <Container className="flex flex-col gap-2 border-t border-line py-6 text-xs text-faint sm:flex-row sm:justify-between">
         <span>
-          &copy; {new Date().getFullYear()} {BRAND.legal}. All rights reserved.
+          &copy; {new Date().getFullYear()} {BRAND.legal}. All rights reserved. {BRAND.name} runs on the BlueStep
+          platform.
         </span>
         <span className="flex flex-wrap gap-x-5 gap-y-2">
           <span>HIPAA-ready hosting. We sign a BAA with every program.</span>
