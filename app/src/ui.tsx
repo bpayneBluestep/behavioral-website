@@ -65,10 +65,10 @@ export function Container({ children, className = '' }: { children: ReactNode; c
 /** The BlueStep logo, swapped for the reversed wordmark in dark mode. */
 export function Logo({ className = 'h-7' }: { className?: string }) {
   return (
-    <picture>
-      <source srcSet={asset('images/logo-dark.png')} media="(prefers-color-scheme: dark)" />
-      <img src={asset('images/logo-light.png')} alt="BlueStep" className={`w-auto ${className}`} />
-    </picture>
+    <>
+      <img src={asset('images/logo-light.png')} alt="BlueStep" className={`w-auto dark:hidden ${className}`} />
+      <img src={asset('images/logo-dark.png')} alt="BlueStep" className={`hidden w-auto dark:block ${className}`} />
+    </>
   )
 }
 

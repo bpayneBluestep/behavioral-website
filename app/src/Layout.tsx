@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { CaretDown, List, X } from '@phosphor-icons/react'
 import { BRAND, CTA, NAV, isGroup, type NavGroup } from './site'
 import { Container, Logo } from './ui'
+import ThemeToggle from './components/ThemeToggle'
 
 /** Desktop dropdown. Opens on hover or click, closes on outside click, Escape, or navigation. */
 function Dropdown({ group }: { group: NavGroup }) {
@@ -114,6 +115,7 @@ function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <Link to={CTA.demo.href} className="btn-primary hidden px-4 py-2 sm:inline-flex">
             {CTA.demo.label}
           </Link>
@@ -165,7 +167,8 @@ function Header() {
                 </NavLink>
               ),
             )}
-            <div className="mt-8 flex flex-col gap-3">
+            <ThemeToggle withLabel className="mt-6 -ml-2" />
+            <div className="mt-6 flex flex-col gap-3">
               <Link to={CTA.demo.href} className="btn-primary py-3 text-base">
                 {CTA.demo.label}
               </Link>

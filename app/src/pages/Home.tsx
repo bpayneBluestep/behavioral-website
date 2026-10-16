@@ -38,7 +38,7 @@ function Fork() {
             One EHR. Two ways to run it.
           </h1>
           <p className="prose-body mx-auto mt-6 max-w-[52ch]">
-            Built inside behavioral health. Let our team run it for you, or build on it yourself with the AI tools
+            Built for behavioral health. Let our team run it for you, or build on it yourself with the AI tools
             you already use.
           </p>
         </div>

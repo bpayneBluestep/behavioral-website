@@ -5,6 +5,8 @@ import type { Config } from 'tailwindcss'
 const token = (name: string) => `rgb(var(--${name}) / <alpha-value>)`
 
 const config: Config = {
+  // dark: variants follow data-theme on <html> (set by the theme script / toggle).
+  darkMode: ['selector', '[data-theme="dark"]'],
   content: ['./app/index.html', './app/src/**/*.{ts,tsx}'],
   theme: {
     extend: {
