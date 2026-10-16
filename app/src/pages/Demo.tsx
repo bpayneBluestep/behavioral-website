@@ -4,7 +4,6 @@ import { CheckCircle, Hammer, Package, SquaresFour, UsersThree } from '@phosphor
 import { BRAND } from '../site'
 import { Container, asset, useTitle } from '../ui'
 
-// Formspree endpoint. Still a placeholder (carried over from the previous site).
 // While it is, the form opens a pre-filled email instead of failing silently.
 // FormSubmit relays each request to this inbox. No account; the address is activated
 // once by clicking the confirmation link FormSubmit emails on the first submission.
