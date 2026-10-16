@@ -26,6 +26,7 @@ const REDIRECTS: Record<string, string> = {
   '/blueiq': '/products/blueiq',
   '/products': '/full-service',
   '/supported': '/full-service',
+  '/for-referral-partners': '/for-referring-professionals',
 }
 
 export default function App() {

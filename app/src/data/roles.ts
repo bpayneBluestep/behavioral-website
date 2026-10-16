@@ -139,9 +139,9 @@ export const ROLES: Role[] = [
     closing: { headline: 'See the visibility your program has been missing.', body: "Talk to someone who has managed the same reporting pressures you're navigating." },
   },
   {
-    slug: 'for-referral-partners',
-    nav: 'Referral partners',
-    title: 'For Referral Partners',
+    slug: 'for-referring-professionals',
+    nav: 'Referring professionals',
+    title: 'For Referring Professionals',
     headline: 'You guide families through the hardest decision of their lives.',
     sub: "Your tools should carry the whole journey: assessment, placement, and every step after. Ours hands a student's full record straight to the programs you trust.",
     image: 'images/heroes/demo.jpg',

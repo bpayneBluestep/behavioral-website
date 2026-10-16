@@ -48,7 +48,7 @@ export const NAV: (NavGroup | NavLinkItem)[] = [
           { href: '/for-nurses', label: 'Nurses' },
           { href: '/for-admissions', label: 'Admissions' },
           { href: '/for-executives', label: 'Executives' },
-          { href: '/for-referral-partners', label: 'Referral partners' },
+          { href: '/for-referring-professionals', label: 'Referring professionals' },
         ],
       },
     ],

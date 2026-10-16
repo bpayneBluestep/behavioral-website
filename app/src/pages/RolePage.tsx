@@ -11,7 +11,7 @@ export default function RolePage() {
   useTitle(role?.title ?? 'Page not found')
   if (!role) return <NotFound />
   const others = ROLES.filter((r) => r.slug !== role.slug)
-  const isPartner = role.slug === 'for-referral-partners'
+  const isPartner = role.slug === 'for-referring-professionals'
 
   return (
     <>
@@ -25,7 +25,7 @@ export default function RolePage() {
               <Button to={CTA.demo.href} arrow>
                 {CTA.demo.label}
               </Button>
-              <Button to={isPartner ? '/pricing#referral-partners' : CTA.pricing.href} variant="ghost">
+              <Button to={isPartner ? '/pricing#referring-professionals' : CTA.pricing.href} variant="ghost">
                 {CTA.pricing.label}
               </Button>
             </div>

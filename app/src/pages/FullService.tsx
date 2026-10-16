@@ -117,8 +117,8 @@ export default function FullService() {
               </Reveal>
             ))}
           </div>
-          <Link to="/for-referral-partners" className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-accent">
-            Educational consultant? See BlueStep for referral partners
+          <Link to="/for-referring-professionals" className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-accent">
+            Educational consultant? See BlueStep for referring professionals
             <ArrowRight size={16} weight="bold" />
           </Link>
         </Container>

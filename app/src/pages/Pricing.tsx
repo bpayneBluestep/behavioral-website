@@ -212,8 +212,8 @@ function Extras() {
             Where support starts and stops
           </Link>
         </Reveal>
-        <Reveal id="referral-partners" delay={80} className="card scroll-mt-24 p-8">
-          <h2 className="text-2xl font-semibold tracking-tight">Referral partners</h2>
+        <Reveal id="referring-professionals" delay={80} className="card scroll-mt-24 p-8">
+          <h2 className="text-2xl font-semibold tracking-tight">Referring professionals</h2>
           <p className="mt-2 text-5xl font-semibold tracking-tightest">
             ${REFERRAL.perSeat}
             <span className="text-base font-normal text-muted"> / user / month</span>
