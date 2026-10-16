@@ -11,7 +11,7 @@ export interface Listing {
   category: Category
   publisher: string
   price: 'Free' | string
-  /** Which starting point the listing was built on. Claude adapts it to either. */
+  /** Which starting point the listing was built on. Your AI adapts it to either. */
   builtOn: 'EHR template' | 'Blank Slate'
   uses: string[]
 }
@@ -25,7 +25,7 @@ export const LISTINGS: Listing[] = [
     summary: 'Send admission packets, collect signatures on any device, and file the signed PDF to the chart.',
     category: 'Admissions',
     publisher: 'BlueStep',
-    price: 'Free',
+    price: 'Included with CRM',
     builtOn: 'EHR template',
     uses: ['Signature placement', 'Signed PDF filed automatically', 'Full audit trail'],
   },
@@ -143,7 +143,7 @@ export const LISTINGS: Listing[] = [
 
 /** What ships with every listing, first-party or builder-published. */
 export const LISTING_CONTENTS = [
-  { title: 'The spec', body: 'What it does and why, written so Claude can rebuild it on your system.' },
+  { title: 'The spec', body: 'What it does and why, written so any AI tool can rebuild it on your system.' },
   { title: 'A reference build', body: 'The working code from the program it was built for.' },
   { title: 'Acceptance checks', body: 'A list of things that must be true when it works. You run them before you go live.' },
   { title: 'Known traps', body: 'What went wrong the first time, so it does not go wrong for you.' },

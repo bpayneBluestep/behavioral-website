@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, ArrowUpRight, Buildings, ChatsCircle, ShieldCheck, Timer } from '@phosphor-icons/react'
-import BuildLog from '../components/BuildLog'
-import { LISTINGS } from '../data/marketplace'
-import { PRODUCTS } from '../data/products'
-import { ROLES } from '../data/roles'
+import { ArrowRight, Check, Code, Lifebuoy, ShieldCheck, Stack, Timer } from '@phosphor-icons/react'
+import { PLANS, usd } from '../data/pricing'
 import { CTA } from '../site'
-import { Button, ClosingCTA, Container, Heading, OnAccentButton, Reveal, asset, useTitle } from '../ui'
+import { ClosingCTA, Container, Heading, OnAccentButton, Reveal, asset, useTitle } from '../ui'
+
+// The homepage is a fork: two ways to run the same EHR. Each panel leads into its
+// own hub (/full-service and /build), where the detail lives.
 
 const CLIENTS = [
   { name: 'Alpine Academy', file: 'alpine-academy.svg' },
@@ -14,43 +14,110 @@ const CLIENTS = [
   { name: 'Velocity Health Group', file: 'velocity-health-group.png' },
 ]
 
-const WHY = [
-  { icon: Buildings, t: 'Built inside a behavioral health facility', b: 'Brandon built the first version while working at Havenwood Academy, because nothing on the market fit how residential programs run.' },
-  { icon: Timer, t: '15 years of clinical workflow depth', b: "We've lived the documentation burden, the audits, and the shift-change handoffs. That experience is in the product." },
-  { icon: ChatsCircle, t: 'You reach a person, not a ticket queue', b: 'Call with a question and you reach someone who knows your program by name. There is no tier-1 support layer.' },
-  { icon: ShieldCheck, t: 'Built for compliance, not workarounds', b: 'Behavioral health compliance is its own thing. BlueStep is built around the documentation, incidents, and outcomes you actually face.' },
+const price = (id: string) => usd(PLANS.find((p) => p.id === id)!.price)
+
+const COMPARE: [string, string, string][] = [
+  ['Who changes it', 'Our team, when you ask', 'Your team, whenever you want'],
+  ['How changes get made', 'Feature requests to BlueStep', 'Your own AI tools, on the platform'],
+  ['Getting started', 'Configured and trained by us', 'Our EHR template, or a blank slate'],
+  ['Support', 'Clinical, training, and technical', 'Technical. Build help is hourly.'],
+  ['New features', 'Built and rolled out by us', 'Take them from the marketplace'],
+  ['Starting price', `${price('full-service')} per program / month`, `${price('blank-slate')} per program / month`],
 ]
 
-function Hero() {
+function Fork() {
   return (
     <section className="relative overflow-hidden">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(60%_60%_at_80%_10%,rgb(var(--accent)/0.10),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[460px] bg-[radial-gradient(50%_60%_at_50%_0%,rgb(var(--accent)/0.10),transparent_70%)]"
       />
-      <Container className="relative grid items-center gap-12 pb-20 pt-12 md:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pb-24">
-        <div className="rise">
-          <h1 className="text-[2.6rem] font-semibold leading-[1.03] tracking-tightest sm:text-6xl lg:text-[4.1rem]">
-            The EHR built inside behavioral health.
+      <Container className="relative pb-20 pt-12 md:pt-16">
+        <div className="rise mx-auto max-w-4xl text-center">
+          <h1 className="text-balance text-[2.6rem] font-semibold leading-[1.03] tracking-tightest sm:text-6xl lg:text-[4.2rem]">
+            One EHR. Two ways to run it.
           </h1>
-          <p className="prose-body mt-6 max-w-[46ch]">
-            Clinical, nursing, admissions, and outcomes in one record. Run it as we built it, or build on it with
-            Claude.
+          <p className="prose-body mx-auto mt-6 max-w-[52ch]">
+            Built inside behavioral health. Let our team run it for you, or build on it yourself with the AI tools
+            you already use.
           </p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Button to={CTA.demo.href} arrow>
-              {CTA.demo.label}
-            </Button>
-            <Button to={CTA.how.href} variant="ghost">
-              {CTA.how.label}
-            </Button>
-          </div>
         </div>
-        <img
-          src={asset('images/heroes/homepage.jpg')}
-          alt="A clinician taking notes during a session"
-          className="rise aspect-[5/4] w-full rounded-2xl object-cover [animation-delay:120ms]"
-        />
+
+        <div className="mt-14 grid gap-4 lg:grid-cols-2">
+          <Reveal>
+            <article className="card flex h-full flex-col overflow-hidden">
+              <img
+                src={asset('images/heroes/for-clinicians.jpg')}
+                alt="A therapist leading a group session"
+                className="aspect-[16/8] w-full object-cover"
+              />
+              <div className="flex flex-1 flex-col p-8 md:p-10">
+                <p className="flex items-center gap-2 text-sm font-medium text-accent">
+                  <Lifebuoy size={18} weight="bold" />
+                  Full-service
+                </p>
+                <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-tightest md:text-4xl">
+                  We run it. You run your program.
+                </h2>
+                <ul className="mt-6 space-y-3">
+                  {['Configured for your program by our team', 'Clinical onboarding and training for every role', 'A person who knows your program by name'].map((b) => (
+                    <li key={b} className="flex gap-3 text-[15px]">
+                      <Check size={18} weight="bold" className="mt-0.5 shrink-0 text-accent" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto flex flex-wrap items-center gap-3 pt-9">
+                  <Link to={CTA.fullService.href} className="btn-primary group">
+                    {CTA.fullService.label}
+                    <ArrowRight size={16} weight="bold" className="transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                  <span className="text-sm text-muted">From {price('full-service')} per program / month</span>
+                </div>
+              </div>
+            </article>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <article className="panel-dark relative flex h-full flex-col overflow-hidden rounded-2xl">
+              <div className="relative aspect-[16/8] w-full overflow-hidden">
+                <img
+                  src={asset('images/heroes/demo.jpg')}
+                  alt="A program director building on a laptop"
+                  className="h-full w-full object-cover opacity-55"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0e1116] to-transparent dark:from-[#151a22]" />
+                <span className="absolute right-5 top-5 rounded-full bg-[#1263a8] px-2.5 py-1 text-xs font-semibold text-white">
+                  New
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col p-8 md:p-10">
+                <p className="flex items-center gap-2 text-sm font-medium text-[#60a5eb]">
+                  <Code size={18} weight="bold" />
+                  Build
+                </p>
+                <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-tightest md:text-4xl">
+                  Our EHR. Yours to change.
+                </h2>
+                <ul className="mt-6 space-y-3">
+                  {['Describe a change. Your AI builds it the same day.', 'Take features other programs built from the marketplace', 'Or start with a blank slate next to your current EHR'].map((b) => (
+                    <li key={b} className="flex gap-3 text-[15px] opacity-90">
+                      <Check size={18} weight="bold" className="mt-0.5 shrink-0 text-[#60a5eb]" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto flex flex-wrap items-center gap-3 pt-9">
+                  <Link to={CTA.how.href} className="btn group bg-white text-[#0e1116] hover:bg-white/90">
+                    {CTA.how.label}
+                    <ArrowRight size={16} weight="bold" className="transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                  <span className="text-sm opacity-70">From {price('blank-slate')} per program / month</span>
+                </div>
+              </div>
+            </article>
+          </Reveal>
+        </div>
       </Container>
     </section>
   )
@@ -73,161 +140,59 @@ function Clients() {
   )
 }
 
-function Why() {
+function Compare() {
   return (
     <section className="py-24 md:py-32">
-      <Container className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-        <div className="lg:sticky lg:top-28 lg:self-start">
-          <Heading
-            title="Four things a generic EHR vendor can't say."
-            sub="Every feature started as a problem one of us had on the floor."
-          />
-          <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent">
-            Our story
-            <ArrowRight size={16} weight="bold" />
-          </Link>
+      <Container className="max-w-5xl">
+        <Heading title="Side by side." sub="Same platform, same record, same security. The difference is who makes the changes." />
+        <div className="mt-12 overflow-x-auto rounded-2xl border border-line">
+          <table className="w-full min-w-[620px] border-collapse text-left text-[15px]">
+            <thead>
+              <tr className="bg-surface">
+                <th scope="col" className="w-[28%] px-6 py-4 text-sm font-medium text-muted" />
+                <th scope="col" className="px-6 py-4 font-semibold">
+                  <Link to="/full-service" className="hover:text-accent">Full-service</Link>
+                </th>
+                <th scope="col" className="px-6 py-4 font-semibold">
+                  <Link to="/build" className="hover:text-accent">Build</Link>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {COMPARE.map(([k, a, b]) => (
+                <tr key={k} className="border-t border-line">
+                  <th scope="row" className="px-6 py-4 text-sm font-medium text-muted">{k}</th>
+                  <td className="px-6 py-4">{a}</td>
+                  <td className="px-6 py-4">{b}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {WHY.map((w, i) => (
-            <Reveal key={w.t} delay={i * 60} className={`rounded-2xl p-7 ${i === 0 ? 'bg-accent-soft' : 'card'}`}>
-              <w.icon size={26} className="text-accent" />
-              <h3 className="mt-8 text-lg font-semibold leading-snug tracking-tight">{w.t}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{w.b}</p>
-            </Reveal>
-          ))}
-        </div>
+        <p className="mt-5 text-sm text-muted">
+          Programs can switch paths as their team changes. <Link to="/pricing" className="text-accent">See full pricing</Link>
+        </p>
       </Container>
     </section>
   )
 }
 
-function WhoWeHelp() {
+function EitherWay() {
+  const items = [
+    { icon: Timer, t: 'Built inside behavioral health', b: '15 years inside residential programs. Every feature started as a problem one of us had on the floor.' },
+    { icon: Stack, t: 'One record', b: 'EHR, CRM, Outcomes, and BlueIQ share one database. Nothing gets entered twice.' },
+    { icon: ShieldCheck, t: 'HIPAA hosting and a BAA', b: 'Every plan, every path. Every change is logged and every push is a restorable snapshot.' },
+  ]
   return (
     <section className="border-y border-line bg-surface py-24 md:py-32">
       <Container>
-        <Heading title="Software that fits how your team works." />
-        <div className="mt-12 grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-          {ROLES.slice(0, 4).map((r, i) => (
-            <Reveal key={r.slug} delay={i * 60}>
-              <Link to={`/${r.slug}`} className="group block">
-                <div className="overflow-hidden rounded-2xl">
-                  <img
-                    src={asset(r.image)}
-                    alt={r.alt}
-                    loading="lazy"
-                    className="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-[1.04]"
-                  />
-                </div>
-                <p className="mt-4 flex items-center justify-between font-semibold">
-                  For {r.nav.toLowerCase()}
-                  <ArrowUpRight size={18} className="text-faint transition group-hover:text-accent" />
-                </p>
-                <p className="mt-1 text-sm leading-relaxed text-muted">{r.headline}</p>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-        <Link to="/for-referral-partners" className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-accent">
-          Educational consultant? See BlueStep for referral partners
-          <ArrowRight size={16} weight="bold" />
-        </Link>
-      </Container>
-    </section>
-  )
-}
-
-function Products() {
-  return (
-    <section className="py-24 md:py-32">
-      <Container>
-        <Heading
-          title="One record. Every part of the stay."
-          sub="Pick the products you need. They share one database, so nothing gets entered twice."
-        />
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {PRODUCTS.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 60}>
-              <Link
-                to={`/products/${p.slug}`}
-                className={`group flex h-full min-h-[240px] flex-col rounded-2xl p-7 transition ${
-                  i === 0 ? 'bg-accent text-accent-ink hover:brightness-110' : 'card hover:border-faint'
-                }`}
-              >
-                <p.icon size={28} className={i === 0 ? '' : 'text-accent'} />
-                <h3 className="mt-auto pt-10 text-xl font-semibold tracking-tight">{p.name}</h3>
-                <p className={`mt-2 text-sm leading-relaxed ${i === 0 ? 'opacity-85' : 'text-muted'}`}>{p.card}</p>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </Container>
-    </section>
-  )
-}
-
-/** The highlight: the one dark band on the page. */
-function BuildOnIt() {
-  return (
-    <section className="panel-dark py-24 md:py-32 dark:border-x-0">
-      <Container className="grid items-center gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
-        <div>
-          <span className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium">New</span>
-          <h2 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tightest md:text-6xl">
-            Now you can build on it.
-          </h2>
-          <p className="mt-6 max-w-[48ch] text-lg leading-relaxed opacity-75">
-            Describe what your program needs and Claude builds it inside your EHR. Same platform, same guardrails,
-            done the same day.
-          </p>
-          <dl className="mt-10 grid gap-6 border-t border-white/10 pt-8 sm:grid-cols-3">
-            {[
-              ['20 min', 'to rebuild our e-signature feature for a program set up nothing like ours'],
-              [String(LISTINGS.length), 'features free in the marketplace, each built for a real program'],
-              ['0', 'things Claude can delete. That always takes a person.'],
-            ].map(([n, d]) => (
-              <div key={n}>
-                <dt className="text-3xl font-semibold tracking-tightest text-[#60a5eb]">{n}</dt>
-                <dd className="mt-2 text-sm leading-relaxed opacity-70">{d}</dd>
-              </div>
-            ))}
-          </dl>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link to={CTA.how.href} className="btn bg-white text-[#0e1116] hover:bg-white/90">
-              {CTA.how.label}
-              <ArrowRight size={16} weight="bold" />
-            </Link>
-            <Link to={CTA.market.href} className="btn border border-white/25 text-white hover:bg-white/10">
-              {CTA.market.label}
-            </Link>
-          </div>
-        </div>
-        <div className="text-ink">
-          <BuildLog />
-        </div>
-      </Container>
-    </section>
-  )
-}
-
-function WaysToRun() {
-  const ways = [
-    { to: '/products/ehr', name: 'Full-service', t: 'We set it up and stay on call.', b: 'Configuration, clinical onboarding, training, and a person who knows your program.' },
-    { to: '/build', name: 'Builder', t: 'Our EHR, yours to change.', b: 'The full EHR plus builder access. Your team and Claude shape it to your program.' },
-    { to: '/blank-slate', name: 'Blank Slate', t: "Keep your EHR. Build what it can't.", b: 'A HIPAA-ready workspace for the apps your current system never got around to.' },
-  ]
-  return (
-    <section className="py-24 md:py-32">
-      <Container>
-        <Heading title="However much you want to build." sub="Same platform underneath. Switch as your team changes." />
-        <div className="mt-12 divide-y divide-line border-y border-line">
-          {ways.map((w, i) => (
-            <Reveal key={w.name} delay={i * 60}>
-              <Link to={w.to} className="group grid items-baseline gap-2 py-7 md:grid-cols-[160px_1fr_1.2fr_auto] md:gap-8">
-                <span className="text-sm font-medium text-accent">{w.name}</span>
-                <span className="text-xl font-semibold tracking-tight">{w.t}</span>
-                <span className="text-muted">{w.b}</span>
-                <ArrowUpRight size={20} className="hidden text-faint transition group-hover:text-accent md:block" />
-              </Link>
+        <Heading title="Either way, you get the same foundation." />
+        <div className="mt-12 grid gap-10 md:grid-cols-3">
+          {items.map((it, i) => (
+            <Reveal key={it.t} delay={i * 70}>
+              <it.icon size={28} className="text-accent" />
+              <h3 className="mt-6 text-lg font-semibold tracking-tight">{it.t}</h3>
+              <p className="mt-2 leading-relaxed text-muted">{it.b}</p>
             </Reveal>
           ))}
         </div>
@@ -238,7 +203,7 @@ function WaysToRun() {
 
 function Origin() {
   return (
-    <section className="border-t border-line bg-surface py-24 md:py-32">
+    <section className="py-24 md:py-32">
       <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <Reveal>
           <img
@@ -260,6 +225,10 @@ function Origin() {
               Executive Director. Former floor staff at Havenwood Academy.
             </footer>
           </blockquote>
+          <Link to="/about" className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-accent">
+            Our story
+            <ArrowRight size={16} weight="bold" />
+          </Link>
         </Reveal>
       </Container>
     </section>
@@ -270,22 +239,16 @@ export default function Home() {
   useTitle()
   return (
     <>
-      <Hero />
+      <Fork />
       <Clients />
-      <Why />
-      <WhoWeHelp />
-      <Products />
-      <BuildOnIt />
-      <WaysToRun />
+      <Compare />
+      <EitherWay />
       <Origin />
-      <ClosingCTA
-        title="See BlueStep with your own workflows."
-        sub="Talk to someone who understands your world. Bring your hardest documentation problem."
-      >
+      <ClosingCTA title="Not sure which path fits?" sub="Tell us how your program runs today. We'll tell you honestly which one we'd pick.">
         <OnAccentButton to={CTA.demo.href} solid>
           {CTA.demo.label}
         </OnAccentButton>
-        <OnAccentButton to={CTA.build.href}>{CTA.build.label}</OnAccentButton>
+        <OnAccentButton to={CTA.pricing.href}>{CTA.pricing.label}</OnAccentButton>
       </ClosingCTA>
     </>
   )

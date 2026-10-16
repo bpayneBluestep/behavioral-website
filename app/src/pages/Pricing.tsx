@@ -234,11 +234,11 @@ function Extras() {
 const FAQ = [
   [
     'What is the difference between Builder and Full-service?',
-    'Same EHR. On Full-service, our team configures it, trains your staff, and builds what you ask for. On Builder, your team builds with Claude and we support the platform.',
+    'Same EHR. On Full-service, our team configures it, trains your staff, and builds what you ask for. On Builder, your team builds with its own AI tools and we support the platform.',
   ],
   [
     'Do we need a developer?',
-    'No. You need someone who likes to build and can describe what the program needs. Claude does the platform work.',
+    'No. You need someone who likes to build and can describe what the program needs. Your AI does the platform work.',
   ],
   [
     'Can we switch plans later?',

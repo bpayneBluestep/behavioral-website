@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './Layout'
 import { ROLES } from './data/roles'
 import Home from './pages/Home'
+import FullService from './pages/FullService'
 import Build from './pages/Build'
 import Marketplace from './pages/Marketplace'
 import ProductPage from './pages/ProductPage'
@@ -23,7 +24,8 @@ const REDIRECTS: Record<string, string> = {
   '/crm': '/products/crm',
   '/outcomes': '/products/outcomes',
   '/blueiq': '/products/blueiq',
-  '/products': '/products/ehr',
+  '/products': '/full-service',
+  '/supported': '/full-service',
 }
 
 export default function App() {
@@ -31,6 +33,7 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="full-service" element={<FullService />} />
         <Route path="products/:slug" element={<ProductPage />} />
         {ROLES.map((r) => (
           <Route key={r.slug} path={r.slug} element={<RolePage />} />

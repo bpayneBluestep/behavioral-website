@@ -25,7 +25,7 @@ export default function BlankSlate() {
       <PageHero
         kicker="Blank Slate"
         title="Keep your EHR. Build everything around it."
-        sub="A HIPAA-ready workspace for the apps your EHR never got around to. Describe one, and Claude builds it."
+        sub="A HIPAA-ready workspace for the apps your EHR never got around to. Describe one, and your AI builds it."
       >
         <Button to="/demo?path=blank-slate" arrow>
           Start a blank slate

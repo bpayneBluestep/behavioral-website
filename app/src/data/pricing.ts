@@ -42,12 +42,12 @@ export const PLANS = [
   {
     id: 'blank-slate',
     name: 'Blank Slate',
-    price: 500,
+    price: 300,
     unit: 'per program / month',
     pitch: "Keep your EHR. Build what it can't do.",
     includes: [
       'HIPAA-ready workspace and BAA',
-      'Claude builder access and toolkit',
+      'Builder access for your own AI tools',
       'Starter patterns for behavioral health',
       'Marketplace access',
       'Technical support',

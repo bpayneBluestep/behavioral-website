@@ -18,9 +18,9 @@ const TEAM = [
     bio: 'Works with facility teams from the first day of onboarding through every rollout, so the software gets used, not just installed.',
   },
   {
-    name: 'Tony Montiel',
-    role: 'Client Care Specialist',
-    bio: 'The person you reach when you call. Knows clients by name and by program, not by ticket number.',
+    name: 'Dan Scott',
+    role: 'Senior Engineer',
+    bio: 'Builds and maintains the platform features programs rely on every day, and the tooling builders use to extend them.',
   },
 ]
 
@@ -60,7 +60,7 @@ export default function About() {
             </p>
             <p>
               That is still how we work. When we build a feature, we are solving a problem one of us has had. Now we
-              build it with Claude, in hours instead of months.
+              build it with AI, in hours instead of months.
             </p>
             <p className="text-ink">
               The same tools are now yours. Programs that want to build can do what we do, on the same platform, with

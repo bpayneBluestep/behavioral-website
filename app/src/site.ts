@@ -1,5 +1,9 @@
 // Brand + navigation in one place. The behavioral division is being rebranded
 // this quarter: change BRAND here and every page follows.
+//
+// The site is organized as two paths from the homepage:
+//   Full-service  we run it (products, roles, clinical onboarding)
+//   Build         you change it with your own AI tools (builder, marketplace, blank slate)
 
 export const BRAND = {
   name: 'BlueStep Behavioral',
@@ -13,52 +17,68 @@ export interface NavLinkItem {
   label: string
   hint?: string
 }
+export interface NavColumn {
+  title: string
+  items: NavLinkItem[]
+}
 export interface NavGroup {
   label: string
-  items: NavLinkItem[]
   badge?: string
+  columns: NavColumn[]
 }
 
 export const NAV: (NavGroup | NavLinkItem)[] = [
   {
-    label: 'Products',
-    items: [
-      { href: '/products/ehr', label: 'EHR', hint: 'Clinical, nursing, and compliance' },
-      { href: '/products/crm', label: 'CRM', hint: 'Referrals, census, and intake' },
-      { href: '/products/outcomes', label: 'Outcomes', hint: 'Surveys and outcome analytics' },
-      { href: '/products/blueiq', label: 'BlueIQ', hint: 'AI inside every module' },
-    ],
-  },
-  {
-    label: 'Who we help',
-    items: [
-      { href: '/for-clinicians', label: 'Clinicians' },
-      { href: '/for-nurses', label: 'Nurses' },
-      { href: '/for-admissions', label: 'Admissions' },
-      { href: '/for-executives', label: 'Executives' },
-      { href: '/for-referral-partners', label: 'Referral partners' },
+    label: 'Full-service',
+    columns: [
+      {
+        title: 'Products',
+        items: [
+          { href: '/full-service', label: 'Overview', hint: 'We run it. You run your program.' },
+          { href: '/products/ehr', label: 'EHR', hint: 'Clinical, nursing, and compliance' },
+          { href: '/products/crm', label: 'CRM', hint: 'Referrals, census, and intake' },
+          { href: '/products/outcomes', label: 'Outcomes', hint: 'Surveys and outcome analytics' },
+          { href: '/products/blueiq', label: 'BlueIQ', hint: 'AI inside every module' },
+        ],
+      },
+      {
+        title: 'Who we help',
+        items: [
+          { href: '/for-clinicians', label: 'Clinicians' },
+          { href: '/for-nurses', label: 'Nurses' },
+          { href: '/for-admissions', label: 'Admissions' },
+          { href: '/for-executives', label: 'Executives' },
+          { href: '/for-referral-partners', label: 'Referral partners' },
+        ],
+      },
     ],
   },
   {
     label: 'Build',
     badge: 'New',
-    items: [
-      { href: '/build', label: 'Build with Claude', hint: 'Change anything in your EHR' },
-      { href: '/marketplace', label: 'Marketplace', hint: 'Features other programs built' },
-      { href: '/blank-slate', label: 'Blank Slate', hint: 'Apps next to your current EHR' },
+    columns: [
+      {
+        title: 'Build',
+        items: [
+          { href: '/build', label: 'Overview', hint: 'Change anything with your own AI tools' },
+          { href: '/marketplace', label: 'Marketplace', hint: 'Features other programs built' },
+          { href: '/blank-slate', label: 'Blank Slate', hint: 'Apps next to your current EHR' },
+        ],
+      },
     ],
   },
   { href: '/pricing', label: 'Pricing' },
   { href: '/about', label: 'About' },
 ]
 
-export const isGroup = (n: NavGroup | NavLinkItem): n is NavGroup => 'items' in n
+export const isGroup = (n: NavGroup | NavLinkItem): n is NavGroup => 'columns' in n
 
 // One label per intent, used everywhere.
 export const CTA = {
   demo: { href: '/demo', label: 'Request a demo' },
   build: { href: '/demo?path=builder', label: 'Start building' },
-  how: { href: '/build', label: 'See how building works' },
+  fullService: { href: '/full-service', label: 'Explore full-service' },
+  how: { href: '/build', label: 'Explore building' },
   market: { href: '/marketplace', label: 'Browse the marketplace' },
   pricing: { href: '/pricing', label: 'See pricing' },
 } as const

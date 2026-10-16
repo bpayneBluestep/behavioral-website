@@ -85,7 +85,7 @@ export const PRODUCTS: Product[] = [
     name: 'CRM',
     icon: Funnel,
     price: '$500 per program / month',
-    card: 'Referrals, leads, census, and pre-admissions.',
+    card: 'Referrals, leads, census, pre-admissions, and e-signatures.',
     headline: 'Empty beds are a revenue crisis.',
     sub: 'Leads land on sticky notes. Families fill out the same intake packet three times. So we built the admissions system residential programs need, in the same record as the chart.',
     image: 'images/heroes/for-admissions.jpg',
@@ -115,6 +115,15 @@ export const PRODUCTS: Product[] = [
           'Build your own pre-admissions form, without waiting on a vendor release',
           'Families save, return, and submit once',
           'BlueIQ drafts an admission summary from what they submitted',
+        ],
+      },
+      {
+        heading: 'E-signature agreements',
+        pain: 'Admission packets still go out to print, sign, scan, and send back. A family in crisis loses days to paperwork.',
+        bullets: [
+          'Send agreements and consents as a secure link. Families sign on any device.',
+          'The signed PDF files itself to the record, with a full audit trail',
+          'Included with the CRM. No separate e-signature vendor.',
         ],
       },
       {

@@ -9,7 +9,7 @@ function Dropdown({ group }: { group: NavGroup }) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const { pathname } = useLocation()
-  const active = group.items.some((i) => pathname.startsWith(i.href))
+  const active = group.columns.some((c) => c.items.some((i) => pathname.startsWith(i.href)))
   useEffect(() => setOpen(false), [pathname])
   useEffect(() => {
     if (!open) return
@@ -45,12 +45,23 @@ function Dropdown({ group }: { group: NavGroup }) {
       </button>
       {open && (
         <div className="absolute left-0 top-full pt-2">
-          <div className="rise card w-72 p-2 shadow-[0_20px_50px_-20px_rgb(var(--ink)/0.25)]">
-            {group.items.map((i) => (
-              <Link key={i.href} to={i.href} className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-raised">
-                <span className="block text-sm font-medium text-ink">{i.label}</span>
-                {i.hint && <span className="block text-xs text-muted">{i.hint}</span>}
-              </Link>
+          <div
+            className={`rise card grid gap-1 p-2 shadow-[0_20px_50px_-20px_rgb(var(--ink)/0.25)] ${
+              group.columns.length > 1 ? 'w-[520px] grid-cols-2' : 'w-72'
+            }`}
+          >
+            {group.columns.map((col) => (
+              <div key={col.title}>
+                {group.columns.length > 1 && (
+                  <p className="px-3 pb-1 pt-2 text-xs font-medium text-faint">{col.title}</p>
+                )}
+                {col.items.map((i) => (
+                  <Link key={i.href} to={i.href} className="block rounded-xl px-3 py-2 transition-colors hover:bg-raised">
+                    <span className="block text-sm font-medium text-ink">{i.label}</span>
+                    {i.hint && <span className="block text-xs text-muted">{i.hint}</span>}
+                  </Link>
+                ))}
+              </div>
             ))}
           </div>
         </div>
@@ -125,7 +136,7 @@ function Header() {
           <Container className="py-6">
             {NAV.map((n) =>
               isGroup(n) ? (
-                <details key={n.label} className="group border-b border-line" open={n.badge !== undefined}>
+                <details key={n.label} className="group border-b border-line">
                   <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-xl font-medium tracking-tight">
                     <span className="flex items-center gap-2">
                       {n.label}
@@ -136,10 +147,15 @@ function Header() {
                     <CaretDown size={16} className="transition-transform group-open:rotate-180" />
                   </summary>
                   <div className="pb-4">
-                    {n.items.map((i) => (
-                      <Link key={i.href} to={i.href} className="block py-2 pl-1 text-base text-muted">
-                        {i.label}
-                      </Link>
+                    {n.columns.map((col) => (
+                      <div key={col.title} className="mb-2">
+                        {n.columns.length > 1 && <p className="pb-1 pl-1 pt-2 text-xs font-medium text-faint">{col.title}</p>}
+                        {col.items.map((i) => (
+                          <Link key={i.href} to={i.href} className="block py-2 pl-1 text-base text-muted">
+                            {i.label}
+                          </Link>
+                        ))}
+                      </div>
                     ))}
                   </div>
                 </details>
@@ -165,7 +181,7 @@ function Header() {
 }
 
 function Footer() {
-  const groups = NAV.filter(isGroup)
+  const columns = NAV.filter(isGroup).flatMap((g) => g.columns)
   return (
     <footer className="border-t border-line bg-surface">
       <Container className="grid gap-12 py-16 md:grid-cols-[1.4fr_repeat(4,1fr)]">
@@ -178,9 +194,9 @@ function Footer() {
             {CTA.demo.label}
           </Link>
         </div>
-        {groups.map((g) => (
-          <div key={g.label}>
-            <h3 className="text-sm font-medium text-ink">{g.label}</h3>
+        {columns.map((g) => (
+          <div key={g.title}>
+            <h3 className="text-sm font-medium text-ink">{g.title}</h3>
             <ul className="mt-4 space-y-2.5">
               {g.items.map((l) => (
                 <li key={l.href}>

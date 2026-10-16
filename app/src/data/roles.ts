@@ -111,8 +111,9 @@ export const ROLES: Role[] = [
       { icon: UserPlus, name: 'CRM built for intake', body: 'One pipeline from inquiry to admission. It tracks families in crisis, not sales contacts.' },
       { icon: UsersThree, name: 'Referral network', body: "Referral sources, relationship history, and conversion rates in one place. Know who's sending patients and who needs a call." },
       { icon: ChartBar, name: 'Census tracking', body: "Live bed availability and room assignments. When a family asks if there's space, your team can answer." },
+      { icon: Signature, name: 'E-signature agreements', body: 'Admission packets and consents signed on any device. The signed PDF files itself to the record.' },
     ],
-    build: 'E-signature admission packets and an admissions dashboard are free in the marketplace.',
+    build: 'An admissions dashboard is free in the marketplace. Or describe the report you want and build it.',
     closing: { headline: 'See the admissions workflow built for your program.', body: 'Walk through the intake pipeline with someone who knows what a referral call looks like.' },
   },
   {

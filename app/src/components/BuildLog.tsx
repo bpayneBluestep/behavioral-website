@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { CheckCircle, CircleNotch, Sparkle } from '@phosphor-icons/react'
 
-// The hero's build log: a request typed in plain English, then the steps Claude
+// The hero's build log: a request typed in plain English, then the steps the AI
 // takes on the platform. This is an example build, labeled as one on screen.
 
 const REQUEST =
@@ -62,7 +62,7 @@ export default function BuildLog() {
       <div className="flex items-center justify-between border-b border-line pb-4">
         <div className="flex items-center gap-2 text-sm font-medium">
           <Sparkle size={16} weight="fill" className="text-accent" />
-          Claude on BlueStep
+          Your AI on BlueStep
         </div>
         <span className="font-mono text-[11px] text-faint">Example build</span>
       </div>

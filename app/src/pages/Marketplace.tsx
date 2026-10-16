@@ -59,7 +59,7 @@ function Catalog() {
             <Storefront size={32} className="mx-auto text-faint" />
             <p className="mt-4 font-medium">Nothing matches that yet.</p>
             <p className="mt-1 text-sm text-muted">
-              Describe it to Claude and build it yourself. Then publish it here for the next program.
+              Describe it to your AI and build it yourself. Then publish it here for the next program.
             </p>
           </div>
         ) : (
@@ -115,7 +115,7 @@ export default function Marketplace() {
       <PageHero
         kicker="Marketplace"
         title="Take a feature. Make it yours."
-        sub="Features built for real behavioral health programs. Pick one, and Claude rebuilds it to fit the way your program already works."
+        sub="Features built for real behavioral health programs. Pick one, and your AI rebuilds it to fit the way your program already works."
       />
 
       <Catalog />
@@ -124,7 +124,7 @@ export default function Marketplace() {
         <Container className="grid gap-14 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
           <Heading
             title="More than code."
-            sub="Code alone breaks on a system it was not written for. Every listing ships with what Claude needs to rebuild it on yours."
+            sub="Code alone breaks on a system it was not written for. Every listing ships with what your AI needs to rebuild it on yours."
           />
           <div className="grid gap-4 sm:grid-cols-2">
             {LISTING_CONTENTS.map((c, i) => (
