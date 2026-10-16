@@ -179,7 +179,7 @@ function Compare() {
 
 function EitherWay() {
   const items = [
-    { icon: Timer, t: 'Built inside behavioral health', b: '15 years inside residential programs. Every feature started as a problem one of us had on the floor.' },
+    { icon: Timer, t: '15 years in behavioral health', b: 'Started inside a residential treatment center. Our team includes former direct care staff and program leaders.' },
     { icon: Stack, t: 'One record', b: 'EHR, CRM, Outcomes, and BlueIQ share one database. Nothing gets entered twice.' },
     { icon: ShieldCheck, t: 'HIPAA hosting and a BAA', b: 'Every plan, every path. Every change is logged and every push is a restorable snapshot.' },
   ]
@@ -214,17 +214,13 @@ function Origin() {
           />
         </Reveal>
         <Reveal delay={100}>
-          <blockquote>
-            <p className="text-3xl font-semibold leading-[1.2] tracking-tightest md:text-[2.6rem]">
-              &ldquo;We didn't come to behavioral health from a software company. We came to software from behavioral
-              health.&rdquo;
-            </p>
-            <footer className="mt-8 text-sm text-muted">
-              <span className="font-medium text-ink">Brandon Payne</span>
-              <br />
-              Executive Director. Former floor staff at Havenwood Academy.
-            </footer>
-          </blockquote>
+          <h2 className="text-3xl font-semibold leading-[1.1] tracking-tightest md:text-5xl">
+            We know how programs run.
+          </h2>
+          <p className="prose-body mt-6 max-w-[52ch]">
+            BlueStep Behavioral started inside a residential treatment center in Utah. Our team includes former direct
+            care staff and program leaders, and most of what we build starts with a problem a program brought to us.
+          </p>
           <Link to="/about" className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-accent">
             Our story
             <ArrowRight size={16} weight="bold" />

@@ -53,7 +53,7 @@ export const ROLES: Role[] = [
     nav: 'Clinicians',
     title: 'For Clinicians',
     headline: 'Your clinical hours are for patients. Not paperwork.',
-    sub: 'Sessions all day. Notes, reviews, and compliance tracking all night. Our documentation tools were shaped by clinicians who lived that schedule.',
+    sub: 'Sessions all day. Notes, reviews, and compliance tracking all night. Our documentation tools were shaped with clinicians who work that schedule.',
     image: 'images/heroes/for-clinicians.jpg',
     alt: 'A therapist leading a group session',
     pains: [
@@ -69,7 +69,7 @@ export const ROLES: Role[] = [
       { icon: Lightning, name: 'Documentation that keeps up', body: "One clinical record, auto-populated fields, compliance rules in the workflow. The system surfaces what's due, so you don't have to remember." },
     ],
     build: 'Need a note type your program invented? Describe it, and it can be in the chart this afternoon.',
-    closing: { headline: 'See how it works for your clinical team.', body: "You'll talk to someone who has worked inside a residential facility. Not a sales rep with a feature list." },
+    closing: { headline: 'See how it works for your clinical team.', body: "You'll talk to someone who knows how residential programs run. Not a sales rep with a feature list." },
   },
   {
     slug: 'for-nurses',

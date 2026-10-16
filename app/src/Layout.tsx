@@ -188,7 +188,7 @@ function Footer() {
         <div>
           <Logo className="h-7" />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
-            Behavioral health software, built by people who&apos;ve been there.
+            Behavioral health software from a team that knows how programs run.
           </p>
           <Link to={CTA.demo.href} className="btn-primary mt-6">
             {CTA.demo.label}

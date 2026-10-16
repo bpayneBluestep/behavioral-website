@@ -119,7 +119,7 @@ export default function ProductPage() {
         </Container>
       </section>
 
-      <ClosingCTA title={`See ${product.name} with your own workflows.`} sub="You'll talk to someone who has worked inside a residential program.">
+      <ClosingCTA title={`See ${product.name} with your own workflows.`} sub="You'll talk to someone who knows how residential programs run.">
         <OnAccentButton to={CTA.demo.href} solid>
           {CTA.demo.label}
         </OnAccentButton>

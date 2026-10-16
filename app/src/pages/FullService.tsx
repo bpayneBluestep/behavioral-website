@@ -7,15 +7,15 @@ import { CTA } from '../site'
 import { Button, ClosingCTA, Container, Heading, OnAccentButton, Reveal, asset, useTitle } from '../ui'
 
 const WHY = [
-  { icon: Buildings, t: 'Built inside a behavioral health facility', b: 'Brandon built the first version while working at Havenwood Academy, because nothing on the market fit how residential programs run.' },
-  { icon: Timer, t: '15 years of clinical workflow depth', b: "We've lived the documentation burden, the audits, and the shift-change handoffs. That experience is in the product." },
+  { icon: Buildings, t: 'Started inside a treatment center', b: 'BlueStep Behavioral began at Havenwood Academy, a residential program in Utah, because the software there didn't fit how the program ran.' },
+  { icon: Timer, t: '15 years of clinical workflow depth', b: 'Our team includes former direct care staff and program leaders. We know the documentation, the audits, and the shift-change handoffs.' },
   { icon: ChatsCircle, t: 'You reach a person, not a ticket queue', b: 'Call with a question and you reach someone who knows your program by name. There is no tier-1 support layer.' },
   { icon: ShieldCheck, t: 'Built for compliance, not workarounds', b: 'Behavioral health compliance is its own thing. BlueStep is built around the documentation, incidents, and outcomes you actually face.' },
 ]
 
 const INCLUDED = [
   ['Configured for your program', 'Our team sets up your forms, roles, and workflows before go-live.'],
-  ['Clinical onboarding and training', 'Every role trained by people who have done the job.'],
+  ['Clinical onboarding and training', 'Training for every role, from people who know the workflows.'],
   ['Feature requests, built for you', 'Ask for a change. Our team builds it, tests it, and ships it.'],
   ['A person who knows your program', 'Call and reach someone who knows your staff and your census by name.'],
 ]
@@ -33,7 +33,7 @@ export default function FullService() {
               We run it. You run your program.
             </h1>
             <p className="prose-body mt-6 max-w-[50ch]">
-              The complete behavioral health EHR, set up, trained, and supported by people who have worked the floor.
+              The complete behavioral health EHR, set up, trained, and supported by a team that knows how programs run.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Button to={CTA.demo.href} arrow>
@@ -129,7 +129,7 @@ export default function FullService() {
           <div className="lg:sticky lg:top-28 lg:self-start">
             <Heading
               title="Four things a generic EHR vendor can't say."
-              sub="Every feature started as a problem one of us had on the floor."
+              sub="Most of what we build starts with a problem a program brought to us."
             />
             <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent">
               Our story
@@ -148,7 +148,7 @@ export default function FullService() {
         </Container>
       </section>
 
-      <ClosingCTA title="See it with your own workflows." sub="Bring your hardest documentation problem. You'll talk to someone who has worked inside a program.">
+      <ClosingCTA title="See it with your own workflows." sub="Bring your hardest documentation problem. You'll talk to someone who knows how programs run.">
         <OnAccentButton to={CTA.demo.href} solid>
           {CTA.demo.label}
         </OnAccentButton>
