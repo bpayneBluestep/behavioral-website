@@ -55,5 +55,4 @@ checking the `assets/index-*.js` hash matches the repo, not by webhook status.
   `bpayne@bluestep.net` instead of failing.
 - **Blueprint ($750) and Slate ($300) prices are pilot hypotheses** and are labeled
   "Pilot pricing" on the page.
-- **Census sync** is described as "In development" on `/slate`.
 - Brand name is `BlueStep Behavioral` pending the rebrand.
