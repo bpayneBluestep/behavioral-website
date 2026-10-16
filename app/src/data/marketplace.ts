@@ -1,0 +1,150 @@
+// Marketplace catalog. Every first-party listing below is a feature BlueStep built
+// for a real program. Publisher listings from builders get added here as they pass
+// review.
+
+export type Category = 'Clinical' | 'Nursing' | 'Admissions' | 'Compliance' | 'Family' | 'Operations'
+
+export interface Listing {
+  slug: string
+  name: string
+  summary: string
+  category: Category
+  publisher: string
+  price: 'Free' | string
+  /** Which starting point the listing was built on. Claude adapts it to either. */
+  builtOn: 'EHR template' | 'Blank Slate'
+  uses: string[]
+}
+
+export const CATEGORIES: Category[] = ['Clinical', 'Nursing', 'Admissions', 'Compliance', 'Family', 'Operations']
+
+export const LISTINGS: Listing[] = [
+  {
+    slug: 'agreements',
+    name: 'E-Signature Agreements',
+    summary: 'Send admission packets, collect signatures on any device, and file the signed PDF to the chart.',
+    category: 'Admissions',
+    publisher: 'BlueStep',
+    price: 'Free',
+    builtOn: 'EHR template',
+    uses: ['Signature placement', 'Signed PDF filed automatically', 'Full audit trail'],
+  },
+  {
+    slug: 'q15',
+    name: 'Q15 Safety Checks',
+    summary: 'Headcount rounds by unit. Staff tap a resident, log location and status, and missed rounds surface fast.',
+    category: 'Nursing',
+    publisher: 'BlueStep',
+    price: 'Free',
+    builtOn: 'EHR template',
+    uses: ['Tablet-friendly rounds', 'Per-unit roster', 'Missed-check visibility'],
+  },
+  {
+    slug: 'treatment-team-review',
+    name: 'Treatment Team Review',
+    summary: 'Dictate the weekly review. BlueIQ drafts all seven sections for the clinician to approve.',
+    category: 'Clinical',
+    publisher: 'BlueStep',
+    price: 'Free',
+    builtOn: 'EHR template',
+    uses: ['Dictation', 'Draft for review', 'Signed and locked'],
+  },
+  {
+    slug: 'incident-dashboard',
+    name: 'Incident Dashboard',
+    summary: 'Every incident by unit, type, and time of day. See patterns before the auditor does.',
+    category: 'Compliance',
+    publisher: 'BlueStep',
+    price: 'Free',
+    builtOn: 'EHR template',
+    uses: ['Live counts', 'Trend by unit', 'Drill to the report'],
+  },
+  {
+    slug: 'orthostatic-vitals',
+    name: 'Orthostatic Vitals',
+    summary: 'Lying, sitting, and standing readings in one entry, with waist measurement for metabolic monitoring.',
+    category: 'Nursing',
+    publisher: 'BlueStep',
+    price: 'Free',
+    builtOn: 'EHR template',
+    uses: ['Grouped readings', 'Metabolic tracking', 'Chart history'],
+  },
+  {
+    slug: 'psych-eval',
+    name: 'Psychological Evaluation',
+    summary: 'An evaluation that pulls diagnoses, meds, and history as of the encounter date. Nothing retyped.',
+    category: 'Clinical',
+    publisher: 'BlueStep',
+    price: 'Free',
+    builtOn: 'EHR template',
+    uses: ['Chart data by date', 'Structured sections', 'Co-sign'],
+  },
+  {
+    slug: 'family-connect',
+    name: 'Family Connect Portal',
+    summary: 'A portal where parents see what they need to, sign what they need to, and nothing more.',
+    category: 'Family',
+    publisher: 'BlueStep',
+    price: 'Free',
+    builtOn: 'Blank Slate',
+    uses: ['Parent sign-in', 'Shared documents', 'Scoped access'],
+  },
+  {
+    slug: 'academic-portal',
+    name: 'Academic Portal',
+    summary: 'Grades, credits, and transcripts for programs that run their own school.',
+    category: 'Family',
+    publisher: 'BlueStep',
+    price: 'Free',
+    builtOn: 'Blank Slate',
+    uses: ['Gradebook', 'Credit tracking', 'Printable transcript'],
+  },
+  {
+    slug: 'crm-dashboard',
+    name: 'Admissions Dashboard',
+    summary: 'Pipeline, follow-ups, and referral sources on one screen for the admissions team.',
+    category: 'Admissions',
+    publisher: 'BlueStep',
+    price: 'Free',
+    builtOn: 'EHR template',
+    uses: ['Follow-up queue', 'Referral source tracking', 'Census view'],
+  },
+  {
+    slug: 'bps-lock',
+    name: 'Assessment Lock and Unlock',
+    summary: 'Lock signed assessments. Unlocking takes a reason, and the reason is logged.',
+    category: 'Compliance',
+    publisher: 'BlueStep',
+    price: 'Free',
+    builtOn: 'EHR template',
+    uses: ['Lock on sign', 'Audited unlock', 'Role-based control'],
+  },
+  {
+    slug: 'pre-admission',
+    name: 'Pre-Admission Assessment',
+    summary: 'Screen a referral before they arrive, with tiered access for clinical and admissions staff.',
+    category: 'Admissions',
+    publisher: 'BlueStep',
+    price: 'Free',
+    builtOn: 'EHR template',
+    uses: ['Referral screening', 'Tiered permissions', 'Flows into intake'],
+  },
+  {
+    slug: 'eos',
+    name: 'Leadership Scorecard',
+    summary: 'Rocks, issues, and a weekly scorecard for the leadership team. Built on a blank slate.',
+    category: 'Operations',
+    publisher: 'BlueStep',
+    price: 'Free',
+    builtOn: 'Blank Slate',
+    uses: ['Weekly scorecard', 'Quarterly rocks', 'Issue tracking'],
+  },
+]
+
+/** What ships with every listing, first-party or builder-published. */
+export const LISTING_CONTENTS = [
+  { title: 'The spec', body: 'What it does and why, written so Claude can rebuild it on your system.' },
+  { title: 'A reference build', body: 'The working code from the program it was built for.' },
+  { title: 'Acceptance checks', body: 'A list of things that must be true when it works. You run them before you go live.' },
+  { title: 'Known traps', body: 'What went wrong the first time, so it does not go wrong for you.' },
+]

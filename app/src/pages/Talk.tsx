@@ -1,0 +1,254 @@
+import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { CheckCircle, Hammer, Package, SquaresFour, UsersThree } from '@phosphor-icons/react'
+import { BRAND } from '../site'
+import { Container, asset, useTitle } from '../ui'
+
+// Formspree endpoint. Still a placeholder (carried over from the previous site).
+// While it is, the form opens a pre-filled email instead of failing silently.
+const FORM_ENDPOINT = 'REPLACE_ME_WITH_FORMSPREE_ENDPOINT'
+const ENDPOINT_READY = !FORM_ENDPOINT.startsWith('REPLACE_ME')
+
+const PATHS = [
+  { id: 'builder', label: 'Builder', hint: 'Our EHR, shaped by your team', icon: Hammer },
+  { id: 'full-service', label: 'Full-service', hint: 'We set it up and support it', icon: UsersThree },
+  { id: 'blank-slate', label: 'Blank Slate', hint: 'Apps next to your current EHR', icon: SquaresFour },
+  { id: 'publish', label: 'Publish', hint: 'Sell a feature in the marketplace', icon: Package },
+] as const
+
+type PathId = (typeof PATHS)[number]['id']
+type Status = 'idle' | 'sending' | 'sent' | 'error'
+
+const FIELDS = [
+  { name: 'name', label: 'Your name', type: 'text', autoComplete: 'name', required: true },
+  { name: 'role', label: 'Role', type: 'text', autoComplete: 'organization-title', required: true },
+  { name: 'facility', label: 'Program or facility', type: 'text', autoComplete: 'organization', required: true },
+  { name: 'email', label: 'Work email', type: 'email', autoComplete: 'email', required: true },
+  { name: 'phone', label: 'Phone (optional)', type: 'tel', autoComplete: 'tel', required: false },
+] as const
+
+type Values = Record<(typeof FIELDS)[number]['name'] | 'message', string>
+const EMPTY: Values = { name: '', role: '', facility: '', email: '', phone: '', message: '' }
+
+const isPath = (v: string | null): v is PathId => PATHS.some((p) => p.id === v)
+
+export default function Talk() {
+  useTitle('Talk to us')
+  const [params] = useSearchParams()
+  const initial = params.get('path')
+  const [path, setPath] = useState<PathId>(isPath(initial) ? initial : 'builder')
+  const [values, setValues] = useState<Values>(EMPTY)
+  const [errors, setErrors] = useState<Partial<Record<keyof Values, string>>>({})
+  const [status, setStatus] = useState<Status>('idle')
+  const doneRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (isPath(initial)) setPath(initial)
+  }, [initial])
+  useEffect(() => {
+    if (status === 'sent') doneRef.current?.focus()
+  }, [status])
+
+  function validate(v: Values) {
+    const e: Partial<Record<keyof Values, string>> = {}
+    if (!v.name.trim()) e.name = 'Please enter your name.'
+    if (!v.role.trim()) e.role = 'Please enter your role.'
+    if (!v.facility.trim()) e.facility = 'Please enter your program.'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) e.email = 'Please enter a valid email.'
+    if (!v.message.trim()) e.message = 'Tell us a little about what you need.'
+    return e
+  }
+
+  async function submit(ev: FormEvent) {
+    ev.preventDefault()
+    const e = validate(values)
+    setErrors(e)
+    const first = Object.keys(e)[0]
+    if (first) {
+      document.getElementById(`f-${first}`)?.focus()
+      return
+    }
+    const pathLabel = PATHS.find((p) => p.id === path)!.label
+
+    if (!ENDPOINT_READY) {
+      const body = [
+        `Interested in: ${pathLabel}`,
+        `Name: ${values.name}`,
+        `Role: ${values.role}`,
+        `Program: ${values.facility}`,
+        `Email: ${values.email}`,
+        values.phone && `Phone: ${values.phone}`,
+        '',
+        values.message,
+      ]
+        .filter((l) => l !== '')
+        .join('\n')
+      window.location.href = `mailto:${BRAND.email}?subject=${encodeURIComponent(
+        `${pathLabel}: ${values.facility}`,
+      )}&body=${encodeURIComponent(body)}`
+      setStatus('sent')
+      return
+    }
+
+    setStatus('sending')
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          interest: pathLabel,
+          name: values.name,
+          'role/title': values.role,
+          'facility name': values.facility,
+          email: values.email,
+          phone: values.phone || undefined,
+          message: values.message,
+          _gotcha: '',
+        }),
+      })
+      setStatus(res.ok ? 'sent' : 'error')
+    } catch {
+      setStatus('error')
+    }
+  }
+
+  const set = (k: keyof Values) => (e: { target: { value: string } }) =>
+    setValues((v) => ({ ...v, [k]: e.target.value }))
+
+  const inputCls = (k: keyof Values) =>
+    `mt-2 w-full rounded-xl border bg-surface px-4 py-3 text-[15px] text-ink placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-accent/30 ${
+      errors[k] ? 'border-red-500' : 'border-line focus:border-accent'
+    }`
+
+  return (
+    <section className="py-14 md:py-20">
+      <Container className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+        <div className="rise lg:pt-6">
+          <h1 className="text-4xl font-semibold leading-[1.05] tracking-tightest md:text-6xl">Talk to us.</h1>
+          <p className="prose-body mt-6 max-w-[40ch]">
+            Brandon or Carlos reads every message and replies within a few business days. No sales drip.
+          </p>
+          <img
+            src={asset("images/heroes/homepage.jpg")}
+            alt="A clinician taking notes during a session"
+            className="mt-12 hidden aspect-[4/3] w-full rounded-2xl object-cover lg:block"
+          />
+        </div>
+
+        <div className="card p-6 md:p-10">
+          {status === 'sent' ? (
+            <div ref={doneRef} tabIndex={-1} className="py-16 text-center outline-none">
+              <CheckCircle size={44} weight="fill" className="mx-auto text-accent" />
+              <h2 className="mt-5 text-2xl font-semibold tracking-tight">
+                {ENDPOINT_READY ? 'Thanks. We will be in touch.' : 'Your email is ready to send.'}
+              </h2>
+              <p className="mx-auto mt-3 max-w-sm text-muted">
+                {ENDPOINT_READY ? (
+                  'A real person will read it and reply within a few business days.'
+                ) : (
+                  <>
+                    Your email app opened with everything filled in. If it did not, write to{' '}
+                    <a className="text-accent underline" href={`mailto:${BRAND.email}`}>
+                      {BRAND.email}
+                    </a>
+                    .
+                  </>
+                )}
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={submit} noValidate>
+              <fieldset>
+                <legend className="text-sm font-medium">I am interested in</legend>
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {PATHS.map((p) => (
+                    <label
+                      key={p.id}
+                      className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${
+                        path === p.id ? 'border-accent bg-accent-soft' : 'border-line hover:border-faint'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="path"
+                        value={p.id}
+                        checked={path === p.id}
+                        onChange={() => setPath(p.id)}
+                        className="sr-only"
+                      />
+                      <p.icon size={20} className={path === p.id ? 'text-accent' : 'text-muted'} />
+                      <span>
+                        <span className="block text-sm font-medium">{p.label}</span>
+                        <span className="block text-xs text-muted">{p.hint}</span>
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <div className="mt-8 grid gap-5 sm:grid-cols-2">
+                {FIELDS.map((f) => (
+                  <div key={f.name} className={f.name === 'phone' ? 'sm:col-span-2' : ''}>
+                    <label htmlFor={`f-${f.name}`} className="text-sm font-medium">
+                      {f.label}
+                    </label>
+                    <input
+                      id={`f-${f.name}`}
+                      name={f.name}
+                      type={f.type}
+                      autoComplete={f.autoComplete}
+                      value={values[f.name]}
+                      onChange={set(f.name)}
+                      aria-invalid={!!errors[f.name]}
+                      aria-describedby={errors[f.name] ? `e-${f.name}` : undefined}
+                      className={inputCls(f.name)}
+                    />
+                    {errors[f.name] && (
+                      <p id={`e-${f.name}`} className="mt-1.5 text-sm text-red-600 dark:text-red-400">
+                        {errors[f.name]}
+                      </p>
+                    )}
+                  </div>
+                ))}
+                <div className="sm:col-span-2">
+                  <label htmlFor="f-message" className="text-sm font-medium">
+                    {path === 'publish' ? 'What did you build?' : 'What would you build first?'}
+                  </label>
+                  <textarea
+                    id="f-message"
+                    name="message"
+                    rows={5}
+                    value={values.message}
+                    onChange={set('message')}
+                    aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? 'e-message' : undefined}
+                    className={inputCls('message')}
+                  />
+                  {errors.message && (
+                    <p id="e-message" className="mt-1.5 text-sm text-red-600 dark:text-red-400">
+                      {errors.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {status === 'error' && (
+                <p role="alert" className="mt-6 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm">
+                  Something went wrong on our end. Email{' '}
+                  <a className="underline" href={`mailto:${BRAND.email}`}>
+                    {BRAND.email}
+                  </a>{' '}
+                  and we will follow up directly.
+                </p>
+              )}
+
+              <button type="submit" disabled={status === 'sending'} className="btn-primary mt-8 w-full py-3.5 text-base disabled:opacity-60">
+                {status === 'sending' ? 'Sending' : 'Send'}
+              </button>
+            </form>
+          )}
+        </div>
+      </Container>
+    </section>
+  )
+}

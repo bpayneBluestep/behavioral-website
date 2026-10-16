@@ -1,0 +1,96 @@
+// Pricing: single source of truth for /pricing.
+//
+// Full-service numbers mirror the internal pricing calculator spreadsheet (unchanged
+// from the previous site). Builder and Blank Slate numbers are PILOT HYPOTHESES from
+// the 2026-10-15 strategy session and are labeled as pilot pricing on the page.
+// Change them here.
+
+export const PLANS = [
+  {
+    id: 'blank-slate',
+    name: 'Blank Slate',
+    price: 500,
+    unit: 'per program / month',
+    pitch: "Keep your EHR. Build what it can't do.",
+    includes: [
+      'HIPAA-ready workspace and BAA',
+      'Claude builder access and toolkit',
+      'Starter patterns for behavioral health',
+      'Marketplace access',
+      'Technical support',
+    ],
+    cta: { href: '/talk?path=blank-slate', label: 'Start a blank slate' },
+    pilot: true,
+  },
+  {
+    id: 'builder',
+    name: 'Builder',
+    price: 750,
+    unit: 'per program / month',
+    pitch: 'Our full EHR, yours to change.',
+    includes: [
+      'Everything in Blank Slate',
+      'The complete EHR: clinical, eMAR, CRM, outcomes',
+      'Every marketplace feature from BlueStep',
+      'Snapshot history on every change',
+      'Technical support',
+    ],
+    cta: { href: '/talk?path=builder', label: 'Start building' },
+    pilot: true,
+    featured: true,
+  },
+  {
+    id: 'full-service',
+    name: 'Full-service',
+    price: 1000,
+    unit: 'per program / month, from',
+    pitch: 'We set it up, train your team, and stay on call.',
+    includes: [
+      'The complete EHR, configured for you',
+      'Clinical onboarding and training',
+      'Feature requests built by our team',
+      'A person who knows your program by name',
+      'Pick the products you need',
+    ],
+    cta: { href: '/talk?path=full-service', label: 'Talk to us' },
+    pilot: false,
+  },
+] as const
+
+export const BUILD_HELP_RATE = 175
+
+// ─── Full-service calculator (per program, per month) ───────────────────────
+export const FACILITY_PRICES = { ehr: 1000, crm: 500, outcomes: 250 } as const
+export const BUNDLES = { ehrCrm: 1350, ehrOutcomes: 1125, all: 1500 } as const
+/** 1st program full price, 2nd program -15%, 3rd and beyond -25%. Applies to every plan. */
+export const VOLUME_DISCOUNTS = [0, 0.15, 0.25] as const
+
+export const REFERRAL = { perSeat: 25, blueIqPerSeat: 15 } as const
+
+export interface Selection {
+  ehr: boolean
+  crm: boolean
+  outcomes: boolean
+}
+
+export function basePerProgram({ ehr, crm, outcomes }: Selection): number {
+  if (ehr && crm && outcomes) return BUNDLES.all
+  if (ehr && crm) return BUNDLES.ehrCrm
+  if (ehr && outcomes) return BUNDLES.ehrOutcomes
+  return (ehr ? FACILITY_PRICES.ehr : 0) + (crm ? FACILITY_PRICES.crm : 0) + (outcomes ? FACILITY_PRICES.outcomes : 0)
+}
+
+export function discountFor(programIndex: number): number {
+  return VOLUME_DISCOUNTS[Math.min(programIndex, VOLUME_DISCOUNTS.length - 1)]
+}
+
+/** Monthly total for `programs` programs at `base` each, with volume discounts. */
+export function monthlyTotal(base: number, programs: number): number {
+  let total = 0
+  for (let i = 0; i < programs; i++) total += base * (1 - discountFor(i))
+  return total
+}
+
+export function usd(n: number): string {
+  return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+}

@@ -1,39 +1,57 @@
 # behavioral-website
 
-Published static artifact for the **BlueStep Behavioral Health marketing site**,
-served as a BlueStep GitSite under `/spa/` at
-`https://behavioralweb.bluestep.net/spa/`.
+The BlueStep Behavioral marketing site: an AI-first rebuild around the builder strategy
+(Builder, Blank Slate, Full-service, and a curated behavioral health marketplace).
 
-## ⚠️ This repo is build output, not source
+Static SPA deployed as a BlueStep GitSite at `https://behavioralweb.bluestep.net/`.
+Vite + React 18 + React Router + Tailwind 3. Same layout as `cobalt-gitsite`:
+source lives in `app/`, and the **committed build output at the repo root** (`index.html`,
+`assets/`, `images/`, `favicon.png`) is what GitSite serves. There is no server-side build.
 
-The site source is a **Next.js** app that lives separately at
-`C:\Users\payne\bluestep-bh` (GSD project; plans in `C:\Users\payne\.planning`).
-The files committed here are the exported static build (`index.html`, `_next/`,
-per-route folders). GitSite does **no** build — it serves these files as-is.
+## Routes at the root, assets under `/spa/`
 
-## Updating the deployed site
+GitSite serves this app's `index.html` for every extensionless route, and streams real
+files only under `/spa/`. So:
 
-From the Next.js source repo (`bluestep-bh`), build for the `/spa/` subpath and
-copy the export into this repo's root, then commit + push:
+- Routes have no prefix: `/pricing`, `/marketplace`, `/build`. Deep links work.
+- Vite's `base` is `/spa/` for the build only. Never use it as a router basename.
+- Public images go through `asset()` in `app/src/ui.tsx`.
+
+The previous site was a Next.js multi-page export. GitSite never serves those per-route
+HTML files, so every deep link (e.g. `/spa/pricing/`) rendered the homepage. That is why
+this rebuild is a client-routed SPA.
+
+Old URLs (`/demo`, `/products/*`, `/for-*`, `/values`) redirect to their new homes. See
+`LEGACY` in `app/src/App.tsx`.
+
+## Develop and deploy
 
 ```bash
-# in bluestep-bh
-NEXT_PUBLIC_BASE_PATH=/spa npm run build    # -> out/
-# copy out/* into this repo root (replacing the previous artifact), then:
+npm install
+npm run dev        # http://localhost:5173, routes match production
+npm run build      # cleans old artifact, typechecks, builds to repo root
 git add -A && git commit -m "Deploy: <what changed>" && git push
 ```
 
-`NEXT_PUBLIC_BASE_PATH=/spa` is required: it drives Next's `basePath` **and** the
-`asset()` helper (`src/lib/asset.ts`) so image `src`s / CSS `url()`s resolve
-under `/spa/` (Next does not apply `basePath` to raw image srcs, only to
-`<Link>`).
+On push to `main` the GitSite webhook pulls. Verify by fetching the live `index.html` and
+checking the `assets/index-*.js` hash matches the repo, not by webhook status.
 
-On push, the GitSite webhook auto-deploys (if the site's Webhook Secret matches);
-otherwise hit **Pull** on the Git Site admin page. Git Ref is `main`,
-Index Path `index.html`.
+## Where things live
 
-## Known cosmetic note
+| What | File |
+|---|---|
+| Brand name, nav, CTA labels (rebrand = edit here) | `app/src/site.ts` |
+| Plans and prices (Builder/Blank Slate are pilot numbers) | `app/src/data/pricing.ts` |
+| Marketplace listings | `app/src/data/marketplace.ts` |
+| Colors (light + dark tokens) | `app/src/styles.css` |
+| Contact form endpoint | `FORM_ENDPOINT` in `app/src/pages/Talk.tsx` |
 
-Next 16 App-Router hover-prefetch requests a per-route RSC `.txt` payload that
-isn't emitted for static export, so you'll see occasional `__next.*.txt` 404s in
-the console. They're harmless — link clicks fall back to a full page load.
+## Open items
+
+- **Contact form endpoint is still a placeholder** (it was on the old site too, so the old
+  demo form never delivered). Until it is set, the form opens a pre-filled email to
+  `bpayne@bluestep.net` instead of failing.
+- **Builder ($750) and Blank Slate ($500) prices are pilot hypotheses** and are labeled
+  "Pilot pricing" on the page.
+- **Census sync** is described as "In development" on `/blank-slate`.
+- Brand name is `BlueStep Behavioral` pending the rebrand.

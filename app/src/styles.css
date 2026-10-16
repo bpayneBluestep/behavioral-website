@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Tokens ────────────────────────────────────────────────────────────────
+   One accent (BlueStep logo blue, #1263A8). Neutrals are cool grays.
+   Dark mode follows the OS setting. */
+:root {
+  --bg: 250 250 251;
+  --surface: 255 255 255;
+  --raised: 243 245 248;
+  --ink: 14 17 22;
+  --muted: 82 91 104;
+  --faint: 128 137 150;
+  --line: 226 230 236;
+  --accent: 18 99 168;
+  --accent-ink: 255 255 255;
+  --accent-soft: 232 240 249;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: 10 13 18;
+    --surface: 17 21 28;
+    --raised: 24 29 38;
+    --ink: 237 240 245;
+    --muted: 160 169 182;
+    --faint: 118 128 142;
+    --line: 36 42 53;
+    --accent: 96 165 235;
+    --accent-ink: 8 20 36;
+    --accent-soft: 16 35 58;
+    color-scheme: dark;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-bg text-ink antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: rgb(var(--accent) / 0.2);
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition duration-200 active:scale-[0.98];
+  }
+  .btn-primary {
+    @apply btn bg-accent text-accent-ink hover:brightness-110;
+  }
+  .btn-ghost {
+    @apply btn border border-line bg-surface text-ink hover:border-faint;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-surface;
+  }
+  /* Fixed dark surface, the same in both themes. Used for the one featured panel
+     per section. In dark mode it gets a hairline so it separates from the page. */
+  .panel-dark {
+    @apply bg-[#0e1116] text-[#eef1f5] dark:border dark:border-line dark:bg-[#151a22];
+  }
+  /* Closing band: always the logo blue, white text, in both themes. */
+  .band {
+    @apply bg-[#1263a8] text-white;
+  }
+  .prose-body {
+    @apply text-base leading-relaxed text-muted md:text-lg;
+  }
+  .kicker {
+    @apply font-mono text-xs uppercase tracking-[0.14em] text-accent;
+  }
+}
+
+/* ── Motion ────────────────────────────────────────────────────────────────
+   Reveal-on-scroll (see components/ui/Reveal.tsx) and the hero build log.
+   Everything collapses to static under reduced motion. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--delay, 0ms);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+.caret {
+  animation: caret 1s steps(1) infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .caret,
+  .rise {
+    animation: none;
+  }
+}
+
+/* Horizontal rails: hide the scrollbar but keep native scroll + snap. */
+.rail {
+  scrollbar-width: none;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
