@@ -82,7 +82,7 @@ function Catalog() {
                     ))}
                   </ul>
                   <p className="mt-auto pt-6 text-xs text-faint">
-                    by {l.publisher}. Built on the {l.builtOn}.
+                    by {l.publisher}. Built on {l.builtOn === 'Slate' ? 'Slate' : 'the EHR template'}.
                   </p>
                 </article>
               </Reveal>

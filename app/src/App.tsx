@@ -26,6 +26,7 @@ const REDIRECTS: Record<string, string> = {
   '/blueiq': '/products/blueiq',
   '/products': '/full-service',
   '/supported': '/full-service',
+  '/blank-slate': '/slate',
   '/for-referral-partners': '/for-referring-professionals',
 }
 
@@ -41,7 +42,7 @@ export default function App() {
         ))}
         <Route path="build" element={<Build />} />
         <Route path="marketplace" element={<Marketplace />} />
-        <Route path="blank-slate" element={<BlankSlate />} />
+        <Route path="slate" element={<BlankSlate />} />
         <Route path="pricing" element={<Pricing />} />
         <Route path="about" element={<About />} />
         <Route path="demo" element={<Demo />} />

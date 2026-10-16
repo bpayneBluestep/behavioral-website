@@ -1,7 +1,7 @@
 // Pricing: single source of truth for /pricing.
 //
 // Full-service numbers mirror the internal pricing calculator spreadsheet (unchanged
-// from the previous site). Builder and Blank Slate numbers are PILOT HYPOTHESES from
+// from the previous site). Builder and Slate numbers are PILOT HYPOTHESES from
 // the 2026-10-15 strategy session and are labeled as pilot pricing on the page.
 // Change them here.
 
@@ -29,7 +29,7 @@ export const PLANS = [
     unit: 'per program / month',
     pitch: 'Our full EHR, yours to change.',
     includes: [
-      'Everything in Blank Slate',
+      'Everything in Slate',
       'The complete EHR: clinical, eMAR, CRM, outcomes',
       'Every marketplace feature from BlueStep',
       'Snapshot history on every change',
@@ -41,10 +41,10 @@ export const PLANS = [
   },
   {
     id: 'blank-slate',
-    name: 'Blank Slate',
+    name: 'Slate',
     price: 300,
     unit: 'per program / month',
-    pitch: "A blank canvas. Build anything.",
+    pitch: 'A blank slate. Build anything.',
     includes: [
       'HIPAA-ready workspace and BAA',
       'Builder access for your own AI tools',
@@ -52,7 +52,7 @@ export const PLANS = [
       'Marketplace access',
       'Technical support',
     ],
-    cta: { href: '/demo?path=blank-slate', label: 'Start a blank slate' },
+    cta: { href: '/demo?path=blank-slate', label: 'Start with Slate' },
     pilot: true,
   },
 ] as const

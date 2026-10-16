@@ -3,7 +3,7 @@
 //
 // The site is organized as two paths from the homepage:
 //   Full-service  we run it (products, roles, clinical onboarding)
-//   Build         you change it with your own AI tools (builder, marketplace, blank slate)
+//   Build         you change it with your own AI tools (builder, marketplace, Slate)
 
 export const BRAND = {
   name: 'BlueStep Behavioral',
@@ -62,7 +62,7 @@ export const NAV: (NavGroup | NavLinkItem)[] = [
         items: [
           { href: '/build', label: 'Overview', hint: 'Change anything with your own AI tools' },
           { href: '/marketplace', label: 'Marketplace', hint: 'Features other programs built' },
-          { href: '/blank-slate', label: 'Blank Slate', hint: 'A blank canvas to build anything' },
+          { href: '/slate', label: 'Slate', hint: 'A blank slate to build anything' },
         ],
       },
     ],

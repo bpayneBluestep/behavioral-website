@@ -19,7 +19,7 @@ const price = (id: string) => usd(PLANS.find((p) => p.id === id)!.price)
 const COMPARE: [string, string, string][] = [
   ['Who changes it', 'Our team, when you ask', 'Your team, whenever you want'],
   ['How changes get made', 'Feature requests to BlueStep', 'Your own AI tools, on the platform'],
-  ['Getting started', 'Configured and trained by us', 'Our EHR template, or a blank slate'],
+  ['Getting started', 'Configured and trained by us', 'Our full EHR, or Slate: a blank slate'],
   ['Support', 'Clinical, training, and technical', 'Technical. Build help is hourly.'],
   ['New features', 'Built and rolled out by us', 'Take them from the marketplace'],
   ['Starting price', `${price('full-service')} per program / month`, `${price('blank-slate')} per program / month`],
@@ -100,7 +100,7 @@ function Fork() {
                   Our EHR. Yours to change.
                 </h2>
                 <ul className="mt-6 space-y-3">
-                  {['Describe a change. Your AI builds it the same day.', 'Take features other programs built from the marketplace', 'Or start from a blank canvas and build anything'].map((b) => (
+                  {['Describe a change. Your AI builds it the same day.', 'Take features other programs built from the marketplace', 'Or start with Slate, a blank slate to build anything'].map((b) => (
                     <li key={b} className="flex gap-3 text-[15px] opacity-90">
                       <Check size={18} weight="bold" className="mt-0.5 shrink-0 text-[#60a5eb]" />
                       {b}

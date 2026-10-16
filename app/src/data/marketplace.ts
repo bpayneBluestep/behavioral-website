@@ -12,7 +12,7 @@ export interface Listing {
   publisher: string
   price: 'Free' | string
   /** Which starting point the listing was built on. Your AI adapts it to either. */
-  builtOn: 'EHR template' | 'Blank Slate'
+  builtOn: 'EHR template' | 'Slate'
   uses: string[]
 }
 
@@ -86,7 +86,7 @@ export const LISTINGS: Listing[] = [
     category: 'Family',
     publisher: 'BlueStep',
     price: 'Free',
-    builtOn: 'Blank Slate',
+    builtOn: 'Slate',
     uses: ['Parent sign-in', 'Shared documents', 'Scoped access'],
   },
   {
@@ -96,7 +96,7 @@ export const LISTINGS: Listing[] = [
     category: 'Family',
     publisher: 'BlueStep',
     price: 'Free',
-    builtOn: 'Blank Slate',
+    builtOn: 'Slate',
     uses: ['Gradebook', 'Credit tracking', 'Printable transcript'],
   },
   {
@@ -132,11 +132,11 @@ export const LISTINGS: Listing[] = [
   {
     slug: 'eos',
     name: 'Leadership Scorecard',
-    summary: 'Rocks, issues, and a weekly scorecard for the leadership team. Built on a blank slate.',
+    summary: 'Rocks, issues, and a weekly scorecard for the leadership team. Built on Slate.',
     category: 'Operations',
     publisher: 'BlueStep',
     price: 'Free',
-    builtOn: 'Blank Slate',
+    builtOn: 'Slate',
     uses: ['Weekly scorecard', 'Quarterly rocks', 'Issue tracking'],
   },
 ]

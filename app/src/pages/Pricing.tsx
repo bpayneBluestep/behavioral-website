@@ -205,7 +205,7 @@ function Extras() {
             <span className="text-base font-normal text-muted"> / hour</span>
           </p>
           <p className="mt-4 leading-relaxed text-muted">
-            For Builder and Blank Slate plans. When you want our team to fix, finish, or build something for you.
+            For Builder and Slate plans. When you want our team to fix, finish, or build something for you.
             Platform issues are always on us.
           </p>
           <Link to="/build" className="mt-6 inline-block text-sm font-medium text-accent">
@@ -246,7 +246,7 @@ const FAQ = [
   ],
   [
     'Why is it pilot pricing?',
-    'Builder and Blank Slate are new. We are starting with a small group of programs, and pricing may change as we learn.',
+    'Builder and Slate are new. We are starting with a small group of programs, and pricing may change as we learn.',
   ],
 ]
 

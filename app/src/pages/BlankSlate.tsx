@@ -14,7 +14,7 @@ import PathSwitch from '../components/PathSwitch'
 import { CTA } from '../site'
 import { Button, ClosingCTA, Container, Heading, OnAccentButton, PageHero, Reveal, asset, useTitle } from '../ui'
 
-// Blank Slate is a blank canvas: a HIPAA-ready workspace with nothing in it yet.
+// Slate is a blank slate: a HIPAA-ready workspace with nothing in it yet.
 // The pitch is "build anything", never positioned against an EHR.
 
 const IDEAS = [
@@ -33,17 +33,17 @@ const IN_THE_BOX = [
 ]
 
 export default function BlankSlate() {
-  useTitle('Blank Slate')
+  useTitle('Slate')
   return (
     <>
       <PathSwitch current="build" />
       <PageHero
-        kicker="Blank Slate"
-        title="A blank canvas. Build anything."
+        kicker="Slate"
+        title="A blank slate. Build anything."
         sub="A HIPAA-ready workspace with nothing in it yet. Describe what your program needs, and your AI builds it."
       >
         <Button to="/demo?path=blank-slate" arrow>
-          Start a blank slate
+          Start with Slate
         </Button>
         <Button to={CTA.pricing.href} variant="ghost">
           {CTA.pricing.label}
@@ -88,7 +88,7 @@ export default function BlankSlate() {
 
       <section className="border-y border-line bg-surface py-24 md:py-32">
         <Container>
-          <Heading title="Empty, but not bare." sub="A blank slate starts with no apps. It comes with everything you need to build them." />
+          <Heading title="Empty, but not bare." sub="Slate starts with no apps. It comes with everything you need to build them." />
           <div className="mt-14 grid gap-x-12 gap-y-10 md:grid-cols-2">
             {IN_THE_BOX.map((k, i) => (
               <Reveal key={k.t} delay={i * 60} className="flex gap-5">
@@ -125,9 +125,9 @@ export default function BlankSlate() {
         </Container>
       </section>
 
-      <ClosingCTA title="What would your team stop doing on paper?" sub="Tell us the first thing you'd build. We'll set up your blank slate.">
+      <ClosingCTA title="What would your team stop doing on paper?" sub="Tell us the first thing you'd build. We'll set up your Slate.">
         <OnAccentButton to="/demo?path=blank-slate" solid>
-          Start a blank slate
+          Start with Slate
         </OnAccentButton>
         <OnAccentButton to={CTA.market.href}>{CTA.market.label}</OnAccentButton>
       </ClosingCTA>

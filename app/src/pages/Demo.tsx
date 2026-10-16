@@ -12,7 +12,7 @@ const ENDPOINT_READY = !FORM_ENDPOINT.startsWith('REPLACE_ME')
 const PATHS = [
   { id: 'full-service', label: 'A demo', hint: 'See the EHR, CRM, and outcomes', icon: UsersThree },
   { id: 'builder', label: 'Building on it', hint: 'Our EHR, shaped by your team', icon: Hammer },
-  { id: 'blank-slate', label: 'A blank slate', hint: 'A blank canvas to build anything', icon: SquaresFour },
+  { id: 'blank-slate', label: 'Slate', hint: 'A blank slate to build anything', icon: SquaresFour },
   { id: 'publish', label: 'Publishing', hint: 'Sell a feature in the marketplace', icon: Package },
 ] as const
 

@@ -75,9 +75,9 @@ const STARTS = [
     b: 'Features built for real programs. Your AI fits them to your system.',
   },
   {
-    to: '/blank-slate',
+    to: '/slate',
     icon: SquaresFour,
-    name: 'Blank Slate',
+    name: 'Slate',
     price: `${price('blank-slate')} per program / month`,
     t: 'Start from a blank canvas.',
     b: 'A HIPAA-ready workspace for dashboards, trackers, portals, anything.',
