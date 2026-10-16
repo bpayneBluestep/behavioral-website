@@ -100,7 +100,7 @@ function Fork() {
                   Our EHR. Yours to change.
                 </h2>
                 <ul className="mt-6 space-y-3">
-                  {['Describe a change. Your AI builds it the same day.', 'Take features other programs built from the marketplace', 'Or start with a blank slate next to your current EHR'].map((b) => (
+                  {['Describe a change. Your AI builds it the same day.', 'Take features other programs built from the marketplace', 'Or start from a blank canvas and build anything'].map((b) => (
                     <li key={b} className="flex gap-3 text-[15px] opacity-90">
                       <Check size={18} weight="bold" className="mt-0.5 shrink-0 text-[#60a5eb]" />
                       {b}

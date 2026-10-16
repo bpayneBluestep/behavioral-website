@@ -62,7 +62,7 @@ export const NAV: (NavGroup | NavLinkItem)[] = [
         items: [
           { href: '/build', label: 'Overview', hint: 'Change anything with your own AI tools' },
           { href: '/marketplace', label: 'Marketplace', hint: 'Features other programs built' },
-          { href: '/blank-slate', label: 'Blank Slate', hint: 'Apps next to your current EHR' },
+          { href: '/blank-slate', label: 'Blank Slate', hint: 'A blank canvas to build anything' },
         ],
       },
     ],

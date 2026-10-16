@@ -1,31 +1,46 @@
 import {
-  ArrowsClockwise,
-  ClipboardText,
+  BookOpenText,
+  ChartLineUp,
   GraduationCap,
   HouseLine,
-  ShieldWarning,
-  Signature,
+  PlugsConnected,
+  Presentation,
+  ShieldCheck,
+  Storefront,
+  Stack,
   UserList,
 } from '@phosphor-icons/react'
+import PathSwitch from '../components/PathSwitch'
 import { CTA } from '../site'
 import { Button, ClosingCTA, Container, Heading, OnAccentButton, PageHero, Reveal, asset, useTitle } from '../ui'
 
+// Blank Slate is a blank canvas: a HIPAA-ready workspace with nothing in it yet.
+// The pitch is "build anything", never positioned against an EHR.
+
 const IDEAS = [
-  { icon: ShieldWarning, t: 'Incident tracking', b: 'Report, review, and trend every incident by unit.', big: true },
-  { icon: UserList, t: 'Q15 rounds', b: 'Headcount checks on a tablet.' },
-  { icon: GraduationCap, t: 'Staff training', b: 'Certifications and expirations in one place.' },
+  { icon: ChartLineUp, t: 'Financial dashboards', b: 'Revenue, census, and length of stay on one live screen. No spreadsheet export.', big: true },
+  { icon: UserList, t: 'Q15 rounds', b: 'Headcount checks on a tablet, by unit.' },
+  { icon: GraduationCap, t: 'Staff training', b: 'Certifications and expirations, tracked.' },
   { icon: HouseLine, t: 'Family portal', b: 'What parents need, and nothing more.' },
-  { icon: Signature, t: 'E-signatures', b: 'Consents and agreements, signed anywhere.' },
+  { icon: Presentation, t: 'Leadership scorecard', b: 'The weekly numbers and quarterly goals.' },
+]
+
+const IN_THE_BOX = [
+  { icon: ShieldCheck, t: 'HIPAA hosting and a BAA', b: 'Store anything, including PHI, from day one.' },
+  { icon: PlugsConnected, t: 'An MCP connection', b: 'Point your own AI tools at it and start building.' },
+  { icon: BookOpenText, t: 'The BlueStep reference', b: 'Patterns and known traps, so your AI builds it right the first time.' },
+  { icon: Storefront, t: 'The marketplace', b: 'Start from a feature another program built instead of from zero.' },
 ]
 
 export default function BlankSlate() {
   useTitle('Blank Slate')
   return (
     <>
+      <PathSwitch current="build" />
       <PageHero
         kicker="Blank Slate"
-        title="Keep your EHR. Build everything around it."
-        sub="A HIPAA-ready workspace for the apps your EHR never got around to. Describe one, and your AI builds it."
+        title="A blank canvas. Build anything."
+        sub="A HIPAA-ready workspace with nothing in it yet. Describe what your program needs, and your AI builds it."
       >
         <Button to="/demo?path=blank-slate" arrow>
           Start a blank slate
@@ -38,20 +53,20 @@ export default function BlankSlate() {
       <section className="py-24 md:py-32">
         <Container>
           <Heading
-            title="What programs build first."
-            sub="Most start with the thing their staff track on paper or in a spreadsheet today."
+            title="What would you build?"
+            sub="Most programs start with whatever their team still tracks on paper or in a spreadsheet."
           />
           <div className="mt-14 grid auto-rows-[minmax(170px,auto)] gap-4 md:grid-cols-4">
             {IDEAS.map((idea, i) =>
               idea.big ? (
                 <Reveal key={idea.t} className="relative overflow-hidden rounded-2xl md:col-span-2 md:row-span-2">
                   <img
-                    src={asset('images/heroes/for-nurses.jpg')}
-                    alt="A nurse at a residential program"
+                    src={asset('images/heroes/for-executives.jpg')}
+                    alt="Leaders reviewing financial charts"
                     className="absolute inset-0 h-full w-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d12]/90 via-[#0a0d12]/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d12]/90 via-[#0a0d12]/35 to-transparent" />
                   <div className="relative flex h-full min-h-[340px] flex-col justify-end p-8 text-white">
                     <idea.icon size={30} />
                     <h3 className="mt-4 text-2xl font-semibold tracking-tight">{idea.t}</h3>
@@ -67,48 +82,39 @@ export default function BlankSlate() {
               ),
             )}
           </div>
+          <p className="mt-6 text-sm text-muted">Or anything else. If you can describe it, you can build it.</p>
         </Container>
       </section>
 
       <section className="border-y border-line bg-surface py-24 md:py-32">
-        <Container className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
-          <Heading
-            title="Works next to the EHR you already have."
-            sub="No rip and replace. Your clinical record stays where it is. BlueStep handles the work around it."
-          />
-          <Reveal className="card p-7 md:p-8">
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent">
-                <ArrowsClockwise size={20} weight="bold" />
-              </span>
-              <div>
-                <p className="font-semibold">Census sync</p>
-                <p className="text-sm text-muted">In development</p>
-              </div>
-            </div>
-            <p className="mt-6 leading-relaxed text-muted">
-              Your client roster and admissions sync in nightly from your current EHR. Nobody types a name twice, and
-              every app you build knows who is in which program today.
-            </p>
-            <div className="mt-6 grid grid-cols-[1fr_auto_1fr] items-center gap-3 rounded-xl bg-raised p-4 text-center text-sm">
-              <span className="rounded-lg bg-surface px-3 py-2 font-medium">Your EHR</span>
-              <ArrowsClockwise size={18} className="text-accent" />
-              <span className="rounded-lg bg-surface px-3 py-2 font-medium">Blank Slate</span>
-            </div>
-          </Reveal>
+        <Container>
+          <Heading title="Empty, but not bare." sub="A blank slate starts with no apps. It comes with everything you need to build them." />
+          <div className="mt-14 grid gap-x-12 gap-y-10 md:grid-cols-2">
+            {IN_THE_BOX.map((k, i) => (
+              <Reveal key={k.t} delay={i * 60} className="flex gap-5">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
+                  <k.icon size={22} />
+                </span>
+                <div>
+                  <h3 className="text-lg font-semibold tracking-tight">{k.t}</h3>
+                  <p className="mt-2 leading-relaxed text-muted">{k.b}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </Container>
       </section>
 
       <section className="py-24 md:py-32">
         <Container className="max-w-3xl text-center">
           <Reveal>
-            <ClipboardText size={32} className="mx-auto text-accent" />
+            <Stack size={32} className="mx-auto text-accent" />
             <h2 className="mt-6 text-3xl font-semibold leading-[1.15] tracking-tightest md:text-5xl">
-              When you are ready, the EHR is right there.
+              Every app shares one secure database.
             </h2>
-            <p className="prose-body mx-auto mt-6 max-w-[52ch]">
-              Your apps, your data, and your builder already live on BlueStep. Moving your clinical record over is a
-              short step, not a migration project.
+            <p className="prose-body mx-auto mt-6 max-w-[54ch]">
+              The dashboard sees what the tracker records. The portal shows what the forms collect. And when you want
+              clinical documentation, the BlueStep EHR runs on the same platform.
             </p>
             <div className="mt-9 flex justify-center">
               <Button to="/products/ehr" variant="ghost" arrow>
@@ -119,10 +125,7 @@ export default function BlankSlate() {
         </Container>
       </section>
 
-      <ClosingCTA
-        title="What would your staff stop doing on paper?"
-        sub="Tell us the first thing you would build. We will set up your blank slate."
-      >
+      <ClosingCTA title="What would your team stop doing on paper?" sub="Tell us the first thing you'd build. We'll set up your blank slate.">
         <OnAccentButton to="/demo?path=blank-slate" solid>
           Start a blank slate
         </OnAccentButton>

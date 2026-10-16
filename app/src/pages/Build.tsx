@@ -79,8 +79,8 @@ const STARTS = [
     icon: SquaresFour,
     name: 'Blank Slate',
     price: `${price('blank-slate')} per program / month`,
-    t: 'Keep your current EHR.',
-    b: 'A HIPAA-ready workspace for the apps your EHR never got around to.',
+    t: 'Start from a blank canvas.',
+    b: 'A HIPAA-ready workspace for dashboards, trackers, portals, anything.',
   },
 ]
 

@@ -44,7 +44,7 @@ export const PLANS = [
     name: 'Blank Slate',
     price: 300,
     unit: 'per program / month',
-    pitch: "Keep your EHR. Build what it can't do.",
+    pitch: "A blank canvas. Build anything.",
     includes: [
       'HIPAA-ready workspace and BAA',
       'Builder access for your own AI tools',
