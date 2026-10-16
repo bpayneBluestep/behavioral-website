@@ -4,7 +4,7 @@ import { CheckCircle, Hammer, Package, SquaresFour, UsersThree } from '@phosphor
 import { BRAND } from '../site'
 import { Container, asset, useTitle } from '../ui'
 
-// While it is, the form opens a pre-filled email instead of failing silently.
+// If FORM_ENDPOINT is reset to a REPLACE_ME placeholder, the form opens a pre-filled email instead.
 // FormSubmit relays each request to this inbox. No account; the address is activated
 // once by clicking the confirmation link FormSubmit emails on the first submission.
 const FORM_ENDPOINT = 'https://formsubmit.co/ajax/bpayne@bluestep.net'
