@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import '@fontsource-variable/geist'
 import '@fontsource-variable/geist-mono'
 import App from './App'
+import { initAnalytics } from './analytics'
 import './styles.css'
 
 /*
@@ -16,6 +17,8 @@ import './styles.css'
  *   ASSETS  live under /spa/. Vite's `base` owns that at build time
  *           (import.meta.env.BASE_URL). Never read it back as a route prefix.
  */
+initAnalytics()
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>

@@ -11,6 +11,7 @@ import BlankSlate from './pages/BlankSlate'
 import Pricing from './pages/Pricing'
 import About from './pages/About'
 import Demo from './pages/Demo'
+import Privacy from './pages/Privacy'
 import NotFound from './pages/NotFound'
 
 // Short or retired URLs, kept alive so links and bookmarks still land.
@@ -27,6 +28,8 @@ const REDIRECTS: Record<string, string> = {
   '/products': '/full-service',
   '/supported': '/full-service',
   '/blank-slate': '/slate',
+  '/privacy-policy': '/privacy',
+  '/cookies': '/privacy',
   '/for-referral-partners': '/for-referring-professionals',
 }
 
@@ -46,6 +49,7 @@ export default function App() {
         <Route path="pricing" element={<Pricing />} />
         <Route path="about" element={<About />} />
         <Route path="demo" element={<Demo />} />
+        <Route path="privacy" element={<Privacy />} />
         {Object.entries(REDIRECTS).map(([from, to]) => (
           <Route key={from} path={from} element={<Navigate to={to} replace />} />
         ))}

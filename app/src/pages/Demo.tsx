@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { CheckCircle, Hammer, Package, SquaresFour, UsersThree } from '@phosphor-icons/react'
 import { BRAND } from '../site'
+import { track } from '../analytics'
 import { Container, asset, useTitle } from '../ui'
 
 // If FORM_ENDPOINT is reset to a REPLACE_ME placeholder, the form opens a pre-filled email instead.
@@ -111,7 +112,10 @@ export default function Demo() {
         }),
       })
       const data = await res.json().catch(() => ({}))
-      setStatus(res.ok && String(data.success) === 'true' ? 'sent' : 'error')
+      const ok = res.ok && String(data.success) === 'true'
+      setStatus(ok ? 'sent' : 'error')
+      // Only the chosen path goes to analytics, never what the visitor typed.
+      track(ok ? 'generate_lead' : 'lead_error', { interest: path })
     } catch {
       setStatus('error')
     }

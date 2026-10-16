@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Check, Minus, Plus } from '@phosphor-icons/react'
 import {
@@ -13,6 +13,7 @@ import {
   type Selection,
 } from '../data/pricing'
 import { CTA } from '../site'
+import { track } from '../analytics'
 import { ClosingCTA, Container, Heading, OnAccentButton, PageHero, Reveal, useTitle } from '../ui'
 
 type PlanId = 'blank-slate' | 'builder' | 'full-service'
@@ -86,6 +87,14 @@ function Calculator() {
 
   const toggle = (k: keyof Selection) => setSel((s) => ({ ...s, [k]: !s[k] }))
 
+  // One analytics event per visit to the page, on the first interaction.
+  const used = useRef(false)
+  const touched = () => {
+    if (used.current) return
+    used.current = true
+    track('calculator_use')
+  }
+
   return (
     <section className="py-24 md:py-32">
       <Container className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
@@ -94,6 +103,7 @@ function Calculator() {
           sub="Pick a plan and the number of programs. Volume discounts apply automatically."
         />
         <Reveal className="card p-6 md:p-8">
+          <div onClickCapture={touched} onChangeCapture={touched}>
           <fieldset>
             <legend className="text-sm font-medium">Plan</legend>
             <div className="mt-3 grid grid-cols-3 gap-1 rounded-full bg-raised p-1">
@@ -188,6 +198,7 @@ function Calculator() {
             </div>
           </div>
           <p className="mt-4 text-xs text-muted">Estimate only. Your quote confirms final pricing.</p>
+          </div>
         </Reveal>
       </Container>
     </section>

@@ -27,7 +27,7 @@ const COMPARE: [string, string, string][] = [
 
 function Fork() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden" data-track-section="home-fork">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-[460px] bg-[radial-gradient(50%_60%_at_50%_0%,rgb(var(--accent)/0.10),transparent_70%)]"

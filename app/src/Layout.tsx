@@ -4,6 +4,8 @@ import { CaretDown, List, X } from '@phosphor-icons/react'
 import { BRAND, CTA, NAV, isGroup, type NavGroup } from './site'
 import { Container, Logo } from './ui'
 import ThemeToggle from './components/ThemeToggle'
+import ConsentBanner from './components/ConsentBanner'
+import { analyticsEnabled, openConsent, track, trackPage } from './analytics'
 
 /** Desktop dropdown. Opens on hover or click, closes on outside click, Escape, or navigation. */
 function Dropdown({ group }: { group: NavGroup }) {
@@ -234,7 +236,17 @@ function Footer() {
         <span>
           &copy; {new Date().getFullYear()} {BRAND.legal}. All rights reserved.
         </span>
-        <span>HIPAA-ready hosting. We sign a BAA with every program.</span>
+        <span className="flex flex-wrap gap-x-5 gap-y-2">
+          <span>HIPAA-ready hosting. We sign a BAA with every program.</span>
+          <Link to="/privacy" className="transition-colors hover:text-ink">
+            Privacy
+          </Link>
+          {analyticsEnabled && (
+            <button type="button" onClick={openConsent} className="transition-colors hover:text-ink">
+              Cookie settings
+            </button>
+          )}
+        </span>
       </Container>
     </footer>
   )
@@ -256,6 +268,42 @@ function ScrollManager() {
   return null
 }
 
+/**
+ * Sends a GA page_view on every route change (the SPA never reloads), and a cta_click
+ * for buttons and demo links. Rendered after <main> so the page's useTitle effect has
+ * already run and document.title is the new page's. The ref drops StrictMode's dev-only
+ * second run.
+ */
+function RouteTracker() {
+  const { pathname, search } = useLocation()
+  const last = useRef('')
+  useEffect(() => {
+    const url = pathname + search
+    if (!analyticsEnabled || last.current === url) return
+    last.current = url
+    trackPage()
+  }, [pathname, search])
+
+  useEffect(() => {
+    if (!analyticsEnabled) return
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as Element | null)?.closest?.('a')
+      if (!a || a.origin !== window.location.origin) return
+      if (!a.matches('.btn, .btn-primary, .btn-ghost') && !a.pathname.startsWith('/demo')) return
+      track('cta_click', {
+        link_text: (a.textContent ?? '').trim().slice(0, 100),
+        link_url: a.pathname + a.search,
+        cta_section: a.closest<HTMLElement>('[data-track-section]')?.dataset.trackSection ?? 'page',
+        from_path: window.location.pathname,
+      })
+    }
+    // Capture phase: runs before the router navigates, so from_path is the page clicked on.
+    document.addEventListener('click', onClick, true)
+    return () => document.removeEventListener('click', onClick, true)
+  }, [])
+  return null
+}
+
 export default function Layout() {
   return (
     <>
@@ -271,6 +319,8 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <RouteTracker />
+      <ConsentBanner />
     </>
   )
 }
